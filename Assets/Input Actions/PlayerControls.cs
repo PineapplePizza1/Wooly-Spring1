@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/PlayerControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Input Actions/PlayerControls.inputactions'
 
 using System;
 using System.Collections;
@@ -62,6 +62,38 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""e96e35b0-f57b-4220-adf7-594ce75d79e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Primary"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae791797-9e51-453d-94ff-9d269b5a526e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Secondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""2fda0f0b-725a-4d22-9da8-dc8ab168132a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Utility"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a2215c8-ad0a-4a94-8b8d-43f74e4d62e1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Button"",
+                    ""id"": ""02230462-f842-4ec9-be64-e8558abfc5bd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -177,6 +209,50 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c49951ec-0580-468b-939e-f377e7f2a20c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Primary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2624e3a-231b-43c8-89ac-0b69cbe00724"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Secondary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b554408-6e2b-4e53-b59d-1c6f01f39645"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""713c9c80-03be-432b-b38e-71b84a5ff839"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -214,6 +290,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_MovementMK_Vertical = m_MovementMK.FindAction("Vertical", throwIfNotFound: true);
         m_MovementMK_Sprint = m_MovementMK.FindAction("Sprint", throwIfNotFound: true);
         m_MovementMK_Jump = m_MovementMK.FindAction("Jump", throwIfNotFound: true);
+        m_MovementMK_Primary = m_MovementMK.FindAction("Primary", throwIfNotFound: true);
+        m_MovementMK_Secondary = m_MovementMK.FindAction("Secondary", throwIfNotFound: true);
+        m_MovementMK_Utility = m_MovementMK.FindAction("Utility", throwIfNotFound: true);
+        m_MovementMK_Movement = m_MovementMK.FindAction("Movement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -269,6 +349,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_MovementMK_Vertical;
     private readonly InputAction m_MovementMK_Sprint;
     private readonly InputAction m_MovementMK_Jump;
+    private readonly InputAction m_MovementMK_Primary;
+    private readonly InputAction m_MovementMK_Secondary;
+    private readonly InputAction m_MovementMK_Utility;
+    private readonly InputAction m_MovementMK_Movement;
     public struct MovementMKActions
     {
         private @PlayerControls m_Wrapper;
@@ -279,6 +363,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Vertical => m_Wrapper.m_MovementMK_Vertical;
         public InputAction @Sprint => m_Wrapper.m_MovementMK_Sprint;
         public InputAction @Jump => m_Wrapper.m_MovementMK_Jump;
+        public InputAction @Primary => m_Wrapper.m_MovementMK_Primary;
+        public InputAction @Secondary => m_Wrapper.m_MovementMK_Secondary;
+        public InputAction @Utility => m_Wrapper.m_MovementMK_Utility;
+        public InputAction @Movement => m_Wrapper.m_MovementMK_Movement;
         public InputActionMap Get() { return m_Wrapper.m_MovementMK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +394,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnJump;
+                @Primary.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnPrimary;
+                @Primary.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnPrimary;
+                @Primary.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnPrimary;
+                @Secondary.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnSecondary;
+                @Secondary.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnSecondary;
+                @Secondary.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnSecondary;
+                @Utility.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnUtility;
+                @Utility.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnUtility;
+                @Utility.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnUtility;
+                @Movement.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnMovement;
             }
             m_Wrapper.m_MovementMKActionsCallbackInterface = instance;
             if (instance != null)
@@ -328,6 +428,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Primary.started += instance.OnPrimary;
+                @Primary.performed += instance.OnPrimary;
+                @Primary.canceled += instance.OnPrimary;
+                @Secondary.started += instance.OnSecondary;
+                @Secondary.performed += instance.OnSecondary;
+                @Secondary.canceled += instance.OnSecondary;
+                @Utility.started += instance.OnUtility;
+                @Utility.performed += instance.OnUtility;
+                @Utility.canceled += instance.OnUtility;
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
             }
         }
     }
@@ -358,5 +470,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnVertical(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPrimary(InputAction.CallbackContext context);
+        void OnSecondary(InputAction.CallbackContext context);
+        void OnUtility(InputAction.CallbackContext context);
+        void OnMovement(InputAction.CallbackContext context);
     }
 }

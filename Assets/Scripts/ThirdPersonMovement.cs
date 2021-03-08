@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,21 +12,24 @@ public class ThirdPersonMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
 
-    
+   
+//Cam vars
+    public float turnSmoothTime = 0.1f;
+    public Transform cam;
+    float turnSmoothVelocity;
+
+     //Speed vars
     public float baseSpeed = 6f;
     public float sprintMod = 2f;
     float currSpeed = 6f;
-
-    public float turnSmoothTime = 0.1f;
-    public Transform cam;
+    //Jump
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
 
-    public float yeetPower = 1f;
-
+//Physics
     public Vector3 velocity;
     public Vector3 moveDir;
-    float turnSmoothVelocity;
+    
     bool isGrounded;
 
     //Input System
@@ -58,7 +61,7 @@ public class ThirdPersonMovement : MonoBehaviour
         playerInput.MovementMK.Horizontal.performed += ctx => horizontal = ctx.ReadValue<float>();
         playerInput.MovementMK.Vertical.performed += ctx => vertical = ctx.ReadValue<float>();
         playerInput.MovementMK.Sprint.performed += ctx => Sprint(ctx.ReadValue<float>());
-        playerInput.MovementMK.Jump.performed += ctx => Jump(ctx.ReadValue<float>());
+        playerInput.MovementMK.Jump.performed += _ => Jump();
 
         controller = GetComponent<CharacterController>();
 
@@ -85,15 +88,17 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (direction.magnitude>=0.1f && started)
         {
+            //Find movement direction based on camera
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y; //Arctan the player's direction, then add the cam's y rotation.
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetangle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             moveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
             
+            //move forward
             moveDir = moveDir.normalized * currSpeed;
 
-
+            //Set velocity to movement
             velocity.x = moveDir.x;
             velocity.z = moveDir.z;
             
@@ -105,9 +110,10 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         
-
+        //Gravity
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime); //Cuz d_y = .5G *t^2
+        //Move
+        controller.Move(velocity * Time.deltaTime); //d_y = .5G *t^2
 
 
         //reset sprint
@@ -121,9 +127,9 @@ public class ThirdPersonMovement : MonoBehaviour
         //Reverse is set each frame, ugh.
     }
 
-    void Jump(float read)
+    void Jump()
     {
-        if(read>=1 && isGrounded && velocity.y <=0 && started)
+        if(isGrounded && velocity.y <=0 && started)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity );
         }

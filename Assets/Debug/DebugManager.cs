@@ -11,12 +11,16 @@ public class DebugManager : MonoBehaviour
 {
 
     [SerializeField] private SceneInjector sceneJect = null;
+    //Injectables
+    private DebugGlobal dbg_g = null;
+
+    //Debug Panel
+    [SerializeField] private GameObject DebugPanel = null;
     [SerializeField] private TextMeshProUGUI DebugText = null;
 
     //InputActions
     public PlayerControls playerInput;
-    private Vector2 looksies;
-    private Vector2 zoomies;
+
 
 #region Debug UI
 
@@ -26,53 +30,46 @@ public class DebugManager : MonoBehaviour
 
 #endregion
 
-    #region Framerate Counter
-    int m_frameCounter = 0;
-    float m_timeCounter = 0.0f;
-    float m_lastFramerate = 0.0f;
-    public float m_refreshTime = 0.5f;
-    #endregion
-
 
     void Awake()
     {
         
-        //playerInput = new PlayerControls();
-       // playerInput.MovementMK.MouseLook.performed += ctx => looksies = ctx.ReadValue<Vector2>();
-       // playerInput.MovementMK.MouseZoom.performed += ctx => zoomies = ctx.ReadValue<Vector2>();
+        playerInput = new PlayerControls();
+        playerInput.Debug.ToggleUI.performed += ctx => ToggleUI();
+
+        sceneJect.SceneJect += Injection;
+
+        DebugGUI("Testing GUI", 10f, "Dbg");
+
     }
 
+    #region Injection
+    public void Injection(InjectionDict ID)
+    {
+        //Injection
+        dbg_g = ID.Inject<DebugGlobal>();
+    }
+    #endregion
 
     // Update is called once per frame
     void Update()
     {
-        if (m_timeCounter < m_refreshTime)
-        {
-            m_timeCounter += Time.deltaTime;
-            m_frameCounter++;
-        }
-        else
-        {
-            //This code will break if you set your m_refreshTime to 0, which makes no sense.
-            m_lastFramerate = (float)m_frameCounter / m_timeCounter;
-            m_frameCounter = 0;
-            m_timeCounter = 0.0f;
-        }
-        //framerate
-        //Debug.Log("DBG: FPS: " + m_lastFramerate);
 
-        //Debug.Log("MouseLook: " + looksies );
+    }
+
+    void ToggleUI()
+    {
+        DebugPanel.SetActive(!DebugPanel.activeInHierarchy);
     }
 
     private void OnEnable() {
-        //playerInput.Enable();
+        playerInput.Enable();
 
     }
 
     private void OnDisable() {
-      //  playerInput.Disable();
+        playerInput.Disable();
     }
-
 
     public void DebugGUI(string stringDisp, float dispSecs, string dispObject)
     {
@@ -96,14 +93,6 @@ public class DebugManager : MonoBehaviour
 
         DebugText.text = "";
         DebugText.gameObject.SetActive(false);
-    }
-
-
-    public static void PrintDebugString(string val)
-    {
-        StreamWriter streamWrite = new StreamWriter(Application.dataPath + "/Debug/DebugOutput/DebugString.txt");
-        streamWrite.Write(val);
-        streamWrite.Close();
     }
 
 }

@@ -255,6 +255,52 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""bbcab9f8-3cac-4d58-9e3e-3dbfe44ca621"",
+            ""actions"": [
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""0fecf8e5-66c4-4d0a-a1a0-606913065d64"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""3bf40829-a3ef-44e7-b842-6c1cabf83342"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fd75ba6b-55e5-4d1d-93ec-b96ee158fe8a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""343c6860-d7d7-43bd-9ef6-6331eed33d92"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -294,6 +340,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_MovementMK_Secondary = m_MovementMK.FindAction("Secondary", throwIfNotFound: true);
         m_MovementMK_Utility = m_MovementMK.FindAction("Utility", throwIfNotFound: true);
         m_MovementMK_Movement = m_MovementMK.FindAction("Movement", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_Quit = m_Debug.FindAction("Quit", throwIfNotFound: true);
+        m_Debug_ToggleUI = m_Debug.FindAction("ToggleUI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -444,6 +494,47 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public MovementMKActions @MovementMK => new MovementMKActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_Quit;
+    private readonly InputAction m_Debug_ToggleUI;
+    public struct DebugActions
+    {
+        private @PlayerControls m_Wrapper;
+        public DebugActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Quit => m_Wrapper.m_Debug_Quit;
+        public InputAction @ToggleUI => m_Wrapper.m_Debug_ToggleUI;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @Quit.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnQuit;
+                @ToggleUI.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleUI;
+                @ToggleUI.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleUI;
+                @ToggleUI.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleUI;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
+                @ToggleUI.started += instance.OnToggleUI;
+                @ToggleUI.performed += instance.OnToggleUI;
+                @ToggleUI.canceled += instance.OnToggleUI;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -474,5 +565,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSecondary(InputAction.CallbackContext context);
         void OnUtility(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnQuit(InputAction.CallbackContext context);
+        void OnToggleUI(InputAction.CallbackContext context);
     }
 }

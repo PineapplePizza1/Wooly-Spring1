@@ -9,8 +9,10 @@ public class SceneInjector : MonoBehaviour
 {
 
     //Injectables
-    //private AudioManager DiskJockey = null;
-    [SerializeField] private Pooler pooler = null;
+    private AudioManager DiskJockey = null;
+    private DebugGlobal dbg_g = null;
+    //[SerializeField] private Pooler pooler = null;
+    [SerializeField] private DebugManager dbg = null;
 
     private InjectionDict SceneScripts;
 
@@ -20,9 +22,13 @@ public class SceneInjector : MonoBehaviour
         SceneScripts = new InjectionDict();
 
         //GameManager Reg
-            //if (rpgdict == null) {  rpgdict = GameManager.Instance.RegisterInjection<RPGDictionaryGlobal>(); }
-        //Add private vars
-            SceneScripts.Add<Pooler>(pooler);
+            if (dbg_g == null) {  dbg_g = GameManager.Instance.RegisterInjection<DebugGlobal>(); }
+            if (DiskJockey == null) {  DiskJockey = GameManager.Instance.RegisterInjection<AudioManager>(); }
+        //Add Scripts to Dict
+            SceneScripts.Add<DebugGlobal>(dbg_g);
+            SceneScripts.Add<AudioManager>(DiskJockey);
+            SceneScripts.Add<DebugManager>(dbg);
+            //SceneScripts.Add<Pooler>(pooler);
 
         //Preloads
         onGameOver += GameOverQuit;
@@ -52,15 +58,32 @@ public class SceneInjector : MonoBehaviour
      * 
      * 
      */
+        //sceneJect.SceneJect += Injection; //Place in Awake
     
-    //Add event to Inject Scripts via Dictionary.
+    
     public event Action<InjectionDict> SceneJect;
-    //Sceneject.SceneJect += myFunction;
+    
     private void InjectScripts()
     {
         if (SceneJect != null)
             SceneJect(SceneScripts);
     }
+    #region EXAMPLE INJECTION
+    
+
+    /*
+    #region Injection
+    public void Injection(InjectionDict ID)
+    {
+        //Injection
+        rpgDict = ID.Inject<RPGDictionaryGlobal>();
+
+        BarManager = ID.Inject<UIManager>();
+        levelCam = ID.Inject<LevelCamera>();
+    }
+    #endregion
+    */
+    #endregion
 
 /*
     //EventReader
@@ -151,5 +174,5 @@ public class InjectionDict
 
 public interface ISceneInject
 {
-    void onSceneLoad();
+    void Injection( InjectionDict ID);
 }

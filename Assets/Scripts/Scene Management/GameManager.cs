@@ -2,42 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//LastUpdate: 3/8/21, D-Lynn Z
+//LastUpdate: 3/9/21, D-Lynn Z
 
 public class GameManager : MonoBehaviour
 {
 
+    //Singleton Instance
     private static GameManager _instance;
 
-    //Static accessor
+    private int DisplayID; //View in Debug Mode
+
+    //Static Guaranteed accessor
     public static GameManager Instance
     {
         get
         {
+            //Guarantees a return for Instance, but also creates errors later on; keep an eye out.
             if (_instance == null)
             {
                 _instance = FindObjectOfType<GameManager>();
                 if (_instance == null )
-                {
+                {   
                     _instance = new GameObject().AddComponent<GameManager>();
+                    Debug.Log("GM_CRIT: Instance Created via Accessor: " + _instance.GetInstanceID());
                 }
             }
             return _instance;
         }
     }
-    
+
 
     private void Awake()
     {
-        if (_instance != null)
+        #region SingletonCheck
+
+        if(_instance == null)
+        {
+            Debug.Log("GM: Registered Singleton " + this.GetInstanceID());
+            _instance = this;
+
+            SingleRegistration();
+        }
+        else if( this.GetInstanceID() != _instance.GetInstanceID())
         {
             Debug.Log("GM: Destroyed an Instance of GM; " + this.GetInstanceID() + " for instance = " + _instance.GetInstanceID());
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this);
 
+        #endregion
 
+        //DBG Variable
+        DisplayID = this.GetInstanceID();
+
+    }
+
+    private void SingleRegistration() //Register your injections
+    {
         //Add Scripts to prefab
+        RegisterInjection<DebugGlobal>();
         RegisterInjection<AudioManager>();
     }
 

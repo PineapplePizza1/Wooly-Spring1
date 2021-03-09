@@ -5,17 +5,16 @@ using UnityEngine;
 //LastUpdate: 3/8/21, D-Lynn Z
 
 [CreateAssetMenu(fileName = "New Melee", menuName = "Weapons")]
-public class BaseMelee : MonoBehaviour
+public class BaseMelee : BaseWeapon
 {
-    // Start is called before the first frame update
-    void Start()
+    public new void setPlayer(GameObject playa)
     {
-        
+        base.setPlayer(playa);
+        //playerpos = playa.transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    public override void Attack(Vector3 direct, Transform firePos) //try to switch to player rotation. Also, remove the Y bend.
     {
-        
     }
 }

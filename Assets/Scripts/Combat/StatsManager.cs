@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class StatsManager : MonoBehaviour
 {
@@ -13,27 +14,34 @@ public class StatsManager : MonoBehaviour
     */
 
     //Damage Types
-    public enum AtkType
+    public enum AtkType //MOVE TO COMBAT OR SOMETHING
     {
         Magic,
         Range,
-        Melee
+        Melee,
+        Base
     }
 
     //Player Stats
     //RPG
-    int Strength;
-    int Dexterity;
-    int Intelligence;
-    int Constitution;
+    public int Strength { get; private set;}
+    public int Dexterity { get; private set;}
+    public int Intelligence { get; private set;}
+    public int Constitution { get; private set;}
 
     //Overall health
-    float health;
-    float maxhealth;
+    public float health { get; private set;}
+    public float maxhealth { get; private set;}
+
+    //LevelStats
+    public int XP { get; private set;}
+    public int lvl { get; private set;}
+
+    //NOTE: need something to add status effects; will have to make a class probs, and more events? careful of event abuse.
 
     void Start()
     {
-        
+        setHealth();
     }
 
     // Update is called once per frame
@@ -41,6 +49,25 @@ public class StatsManager : MonoBehaviour
     {
         
     }
+
+    #region Set Stats Functions
+    private void setHealth()
+    {
+        //Base 80;
+        maxhealth = 80f;
+        health = maxhealth;
+
+        maxhealth += 5f * Constitution;
+
+        UpdateHealth();
+    }
+    public void LevelUp()
+    {
+        UpdateStats();
+    }
+    #endregion
+
+
 
     public float Attack(float wepDmg, AtkType wepType)
     {
@@ -71,8 +98,10 @@ public class StatsManager : MonoBehaviour
                 dmg = dmg / Intelligence;
                 break;
             case AtkType.Range:
+                dmg = dmg / Dexterity;
                 break;
             case AtkType.Melee:
+                dmg = dmg / Strength;
                 break;
             default:
                 Debug.Log("STAT: Took damage of no type");
@@ -80,9 +109,37 @@ public class StatsManager : MonoBehaviour
         }
 
         health -= dmg;
+        UpdateHealth();
+        if (health <= 0)
+            Died();
     }
 
+    #region Update Actions
+    //Subscribe to  get updates.
+    public event Action HealthUpdate;
+    public event Action StatUpdate;
+    public event Action Death;
 
+    private void Died()
+    {
+        if (Death!=null)
+            Death();
+    }
+
+    private void UpdateHealth()
+    {
+        if (HealthUpdate != null)
+            HealthUpdate();
+    }
+    private void UpdateStats()
+    {
+        if (StatUpdate != null)
+            StatUpdate();
+    }
+
+    #endregion
+
+/*
     public void GenerateStats()
     {
         
@@ -93,6 +150,6 @@ public class StatsManager : MonoBehaviour
 
     }
 
-
+*/
 
 }

@@ -13,6 +13,7 @@ public class SceneInjector : MonoBehaviour
     private DebugGlobal dbg_g = null;
     //[SerializeField] private Pooler pooler = null;
     [SerializeField] private DebugManager dbg = null;
+    [SerializeField] private LevelManagement LevMan = null;
 
     private InjectionDict SceneScripts;
 
@@ -28,6 +29,7 @@ public class SceneInjector : MonoBehaviour
             SceneScripts.Add<DebugGlobal>(dbg_g);
             SceneScripts.Add<AudioManager>(DiskJockey);
             SceneScripts.Add<DebugManager>(dbg);
+            SceneScripts.Add<LevelManagement>(LevMan);
             //SceneScripts.Add<Pooler>(pooler);
 
         //Preloads

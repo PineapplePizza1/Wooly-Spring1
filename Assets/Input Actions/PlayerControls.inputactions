@@ -262,6 +262,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "DieBind",
+                    "type": "Button",
+                    "id": "14c86142-bb36-4bb8-9000-3dceca2cc92c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "DBGdmg",
+                    "type": "Button",
+                    "id": "7d16247c-4c1b-477b-af7d-4f30caf396c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -284,6 +300,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55ec9675-bc4d-4ba5-8509-71cdf0a9f3ac",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DieBind",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7609f46-4041-4d0a-9bf7-347a9ac94c3a",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DBGdmg",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

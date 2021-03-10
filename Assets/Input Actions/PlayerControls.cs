@@ -275,6 +275,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DieBind"",
+                    ""type"": ""Button"",
+                    ""id"": ""14c86142-bb36-4bb8-9000-3dceca2cc92c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DBGdmg"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d16247c-4c1b-477b-af7d-4f30caf396c4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -297,6 +313,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55ec9675-bc4d-4ba5-8509-71cdf0a9f3ac"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DieBind"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7609f46-4041-4d0a-9bf7-347a9ac94c3a"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DBGdmg"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -344,6 +382,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_Quit = m_Debug.FindAction("Quit", throwIfNotFound: true);
         m_Debug_ToggleUI = m_Debug.FindAction("ToggleUI", throwIfNotFound: true);
+        m_Debug_DieBind = m_Debug.FindAction("DieBind", throwIfNotFound: true);
+        m_Debug_DBGdmg = m_Debug.FindAction("DBGdmg", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -500,12 +540,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IDebugActions m_DebugActionsCallbackInterface;
     private readonly InputAction m_Debug_Quit;
     private readonly InputAction m_Debug_ToggleUI;
+    private readonly InputAction m_Debug_DieBind;
+    private readonly InputAction m_Debug_DBGdmg;
     public struct DebugActions
     {
         private @PlayerControls m_Wrapper;
         public DebugActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Quit => m_Wrapper.m_Debug_Quit;
         public InputAction @ToggleUI => m_Wrapper.m_Debug_ToggleUI;
+        public InputAction @DieBind => m_Wrapper.m_Debug_DieBind;
+        public InputAction @DBGdmg => m_Wrapper.m_Debug_DBGdmg;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -521,6 +565,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @ToggleUI.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleUI;
                 @ToggleUI.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleUI;
                 @ToggleUI.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleUI;
+                @DieBind.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDieBind;
+                @DieBind.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDieBind;
+                @DieBind.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDieBind;
+                @DBGdmg.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDBGdmg;
+                @DBGdmg.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDBGdmg;
+                @DBGdmg.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDBGdmg;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
@@ -531,6 +581,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @ToggleUI.started += instance.OnToggleUI;
                 @ToggleUI.performed += instance.OnToggleUI;
                 @ToggleUI.canceled += instance.OnToggleUI;
+                @DieBind.started += instance.OnDieBind;
+                @DieBind.performed += instance.OnDieBind;
+                @DieBind.canceled += instance.OnDieBind;
+                @DBGdmg.started += instance.OnDBGdmg;
+                @DBGdmg.performed += instance.OnDBGdmg;
+                @DBGdmg.canceled += instance.OnDBGdmg;
             }
         }
     }
@@ -570,5 +626,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnQuit(InputAction.CallbackContext context);
         void OnToggleUI(InputAction.CallbackContext context);
+        void OnDieBind(InputAction.CallbackContext context);
+        void OnDBGdmg(InputAction.CallbackContext context);
     }
 }

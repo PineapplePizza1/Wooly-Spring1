@@ -37,9 +37,6 @@ public class SceneInjector : MonoBehaviour
 
         //Subscriptions
         LevMan.onGameOver += GameOverQuit;
-
-
-
         
     }
 
@@ -47,8 +44,6 @@ public class SceneInjector : MonoBehaviour
     {
         //Start Routine
         InjectScripts();
-
-        //onEventLoad(); //Probably no longer advisable, with this many detailed Events. Have each run their own events.
 
         onFixedSceneLoad();
 
@@ -72,7 +67,6 @@ public class SceneInjector : MonoBehaviour
 
     /*LIST OF SUBSCRIBABLE EVENTS:
      * SceneJect
-     * //onEventLoad
      * FixedSceneLoad
      * onSceneLoaded
      * onUnloadScene
@@ -101,16 +95,6 @@ public class SceneInjector : MonoBehaviour
         #endregion
         */
     #endregion
-
-/*
-    //EventReader
-    public event Action<EventReader> EventLoad;
-    private void onEventLoad()
-    {
-        if (EventLoad != null)
-            EventLoad(eReader);
-    }
-*/
 
     public event Action FixedSceneLoad;
     private void onFixedSceneLoad()

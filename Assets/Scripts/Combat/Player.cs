@@ -89,7 +89,8 @@ public class Player : MonoBehaviour
         //Send message to LM,
         Debug.Log("PLY: The Player is Dead!");
         //Game over.
-
+        LM.GameOver();
+            //CAUTION: Where do I handle Lives? either this script, stats handler, or LevelMan. Probably Stats handler.
     }
 
 
@@ -100,7 +101,7 @@ public class Player : MonoBehaviour
 
     private void OnDisable() {
         playerInput.Disable();
-        playerStats.Death += PlayerDeath;
+        playerStats.Death -= PlayerDeath;
 
     }
     

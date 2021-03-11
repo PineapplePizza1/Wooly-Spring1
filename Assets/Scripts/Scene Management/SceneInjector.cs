@@ -33,7 +33,26 @@ public class SceneInjector : MonoBehaviour
             //SceneScripts.Add<Pooler>(pooler);
 
         //Preloads
-        onGameOver += GameOverQuit;
+
+
+        //Subscriptions
+        LevMan.onGameOver += GameOverQuit;
+
+
+
+        
+    }
+
+    void Start()
+    {
+        //Start Routine
+        InjectScripts();
+
+        //onEventLoad(); //Probably no longer advisable, with this many detailed Events. Have each run their own events.
+
+        onFixedSceneLoad();
+
+        onSceneLoaded();
     }
 
 
@@ -46,45 +65,41 @@ public class SceneInjector : MonoBehaviour
         //CURRENTLY EMPTY
         onUnloadScene();
 
-        //Should load main menu
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
 
-    #region Scene Events
+    #region Scene Loading/Injecting Events
 
     /*LIST OF SUBSCRIBABLE EVENTS:
      * SceneJect
+     * //onEventLoad
+     * FixedSceneLoad
      * onSceneLoaded
-     * onGameOver
-     * 
+     * onUnloadScene
      * 
      */
         //sceneJect.SceneJect += Injection; //Place in Awake
     
     
     public event Action<InjectionDict> SceneJect;
-    
     private void InjectScripts()
     {
         if (SceneJect != null)
             SceneJect(SceneScripts);
     }
     #region EXAMPLE INJECTION
-    
+        /*
+        #region Injection
+        public void Injection(InjectionDict ID)
+        {
+            //Injection
+            rpgDict = ID.Inject<RPGDictionaryGlobal>();
 
-    /*
-    #region Injection
-    public void Injection(InjectionDict ID)
-    {
-        //Injection
-        rpgDict = ID.Inject<RPGDictionaryGlobal>();
-
-        BarManager = ID.Inject<UIManager>();
-        levelCam = ID.Inject<LevelCamera>();
-    }
-    #endregion
-    */
+            BarManager = ID.Inject<UIManager>();
+            levelCam = ID.Inject<LevelCamera>();
+        }
+        #endregion
+        */
     #endregion
 
 /*
@@ -104,18 +119,11 @@ public class SceneInjector : MonoBehaviour
             FixedSceneLoad();
     }
 
-    public event Action onSceneLoaded;
-    private void SceneLoaded()
+    public event Action SceneLoaded;
+    private void onSceneLoaded()
     {
-        if (onSceneLoaded != null)
-            onSceneLoaded();
-    }
-
-    public event Action onGameOver;
-    public void GameOver()
-    {
-        if (onGameOver != null)
-            onGameOver();
+        if (SceneLoaded != null)
+            SceneLoaded();
     }
 
     //BUG: Some objects set inactive after scene ends, possibly reactivate on scene gone?
@@ -124,16 +132,6 @@ public class SceneInjector : MonoBehaviour
     {
         if (unloadScene != null)
             unloadScene();
-    }
-
-    #endregion
-
-
-    #region Debug
-
-    public static void PrintDebugString(string val)
-    {
-        
     }
 
     #endregion

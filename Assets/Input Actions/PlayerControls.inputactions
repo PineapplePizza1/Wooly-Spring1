@@ -78,7 +78,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Movement",
+                    "name": "Ability",
                     "type": "Button",
                     "id": "02230462-f842-4ec9-be64-e8558abfc5bd",
                     "expectedControlType": "Button",
@@ -237,7 +237,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

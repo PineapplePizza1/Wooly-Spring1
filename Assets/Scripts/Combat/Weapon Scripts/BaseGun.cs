@@ -21,15 +21,30 @@ public class BaseGun : BaseWeapon
         playerpos = playa.transform;
     }
 
+    private void Update() {
+        
+    }
     
-    public override void Attack(Vector3 direct, Transform firePos) //try to switch to player rotation. Also, remove the Y bend.
+    public void Shoot(Vector3 direct) 
     {
-        Debug.Log("Gun Fire");
+        Transform firePos = playerpos.transform; // UPDATE LATER
+
+        Debug.Log("Gun Fire"); //try to switch to player rotation. Also, remove the Y bend.
         Quaternion rotato = Quaternion.Euler(rotater); //Quaternion.LookRotation(playerpos.rotation.eulerAngles, Vector3.up);
         rotato = Quaternion.AngleAxis(playerpos.rotation.eulerAngles.y, Vector3.up) * rotato;
         //GameObject bullet = poolDict.SpawnFromPool(bulletType, firePos.position, rotato);
         Rigidbody bulletrigid = bullet.GetComponent<Rigidbody>();
         direct.y = 0;
         bulletrigid.AddForce(direct * bulletSpeed, ForceMode.VelocityChange);
+    }
+
+    public override void LoadWeapon(Attack atk)
+    {
+        atk.AtkPerformed += Shoot;
+    }
+
+    public override void unloadWeapon(Attack atk)
+    {
+        atk.AtkPerformed -= Shoot;
     }
 }

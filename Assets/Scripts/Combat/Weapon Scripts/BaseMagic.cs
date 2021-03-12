@@ -13,8 +13,18 @@ public class BaseMagic : BaseWeapon
         //playerpos = playa.transform;
     }
 
-    
-    public override void Attack(Vector3 direct, Transform firePos) //try to switch to player rotation. Also, remove the Y bend.
+    void Cast(Vector3 direct)
     {
+
+    }
+    
+    public override void LoadWeapon(Attack atk)
+    {
+        atk.AtkPerformed += Cast;
+    }
+
+    public override void unloadWeapon(Attack atk)
+    {
+        atk.AtkPerformed -= Cast;
     }
 }

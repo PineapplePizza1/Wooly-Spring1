@@ -91,7 +91,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Movement"",
+                    ""name"": ""Ability"",
                     ""type"": ""Button"",
                     ""id"": ""02230462-f842-4ec9-be64-e8558abfc5bd"",
                     ""expectedControlType"": ""Button"",
@@ -250,7 +250,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -377,7 +377,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_MovementMK_Primary = m_MovementMK.FindAction("Primary", throwIfNotFound: true);
         m_MovementMK_Secondary = m_MovementMK.FindAction("Secondary", throwIfNotFound: true);
         m_MovementMK_Utility = m_MovementMK.FindAction("Utility", throwIfNotFound: true);
-        m_MovementMK_Movement = m_MovementMK.FindAction("Movement", throwIfNotFound: true);
+        m_MovementMK_Ability = m_MovementMK.FindAction("Ability", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_Quit = m_Debug.FindAction("Quit", throwIfNotFound: true);
@@ -442,7 +442,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_MovementMK_Primary;
     private readonly InputAction m_MovementMK_Secondary;
     private readonly InputAction m_MovementMK_Utility;
-    private readonly InputAction m_MovementMK_Movement;
+    private readonly InputAction m_MovementMK_Ability;
     public struct MovementMKActions
     {
         private @PlayerControls m_Wrapper;
@@ -456,7 +456,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Primary => m_Wrapper.m_MovementMK_Primary;
         public InputAction @Secondary => m_Wrapper.m_MovementMK_Secondary;
         public InputAction @Utility => m_Wrapper.m_MovementMK_Utility;
-        public InputAction @Movement => m_Wrapper.m_MovementMK_Movement;
+        public InputAction @Ability => m_Wrapper.m_MovementMK_Ability;
         public InputActionMap Get() { return m_Wrapper.m_MovementMK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -493,9 +493,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Utility.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnUtility;
                 @Utility.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnUtility;
                 @Utility.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnUtility;
-                @Movement.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnMovement;
+                @Ability.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnAbility;
+                @Ability.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnAbility;
+                @Ability.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnAbility;
             }
             m_Wrapper.m_MovementMKActionsCallbackInterface = instance;
             if (instance != null)
@@ -527,9 +527,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Utility.started += instance.OnUtility;
                 @Utility.performed += instance.OnUtility;
                 @Utility.canceled += instance.OnUtility;
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
+                @Ability.started += instance.OnAbility;
+                @Ability.performed += instance.OnAbility;
+                @Ability.canceled += instance.OnAbility;
             }
         }
     }
@@ -620,7 +620,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnPrimary(InputAction.CallbackContext context);
         void OnSecondary(InputAction.CallbackContext context);
         void OnUtility(InputAction.CallbackContext context);
-        void OnMovement(InputAction.CallbackContext context);
+        void OnAbility(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

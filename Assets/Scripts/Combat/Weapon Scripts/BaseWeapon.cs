@@ -10,20 +10,33 @@ public abstract class BaseWeapon : ScriptableObject
     //Add ammo count later.
     protected GameObject Player;
 
+    public Attack Atk;
+
     //Pass in Information
     //Vector3 direction; // Pass in direction from Player. Firing direction. sending direction to attack?
 
     //private Attack LoadedAtk; //Use this for loading/referecing attacks, and OnDisable
+
 
     public virtual void setPlayer(GameObject playa)
     {
         Player = playa;
     }
 
+    //Set method for main attack, PlayerCombat will then call your attack, your weapon itself will handle cooldown logic. I think?
+        //If need, can always inherit from the Baseweapon details.
 
+    public virtual void LoadWeapon()
+    {
+        Atk = new Attack();
 
-    public abstract void LoadWeapon(Attack atk);
+    }
 
-    public abstract void unloadWeapon(Attack atk);
+    public abstract void unloadWeapon();
+
+    public virtual void Attack(Vector3 direct)
+    {
+        Atk.Atk(direct);
+    }
     
 }

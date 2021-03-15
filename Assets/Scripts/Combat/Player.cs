@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     //Stats
     private StatsManager playerStats;
 
+    private PlayerCombat PC;
+
     private void Awake() {
 
         //Input
@@ -67,7 +69,8 @@ public class Player : MonoBehaviour
 
     void DebugDMG()
     {
-        playerStats.Damage(60f, StatsManager.AtkType.Base); //maybe switch enum to later class; attacks might become a class.
+        
+        //playerStats.Damage(60f, StatsManager.AtkType.Base); //maybe switch enum to later class; attacks might become a class.
     }
 
 

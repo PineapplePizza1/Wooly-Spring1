@@ -19,14 +19,15 @@ public class BaseMelee : BaseWeapon
     }
 
 
-    public override void LoadWeapon(Attack atk)
+    public override void LoadWeapon()
     {
-        atk.AtkPerformed += Swing;
+        base.LoadWeapon();
+        Atk.AtkPerformed += Swing;
     }
 
-    public override void unloadWeapon(Attack atk)
+    public override void unloadWeapon()
     {
-        atk.AtkPerformed -= Swing;
+        Atk.AtkPerformed -= Swing;
     }
 
 }

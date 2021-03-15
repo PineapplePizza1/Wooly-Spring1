@@ -18,13 +18,14 @@ public class BaseMagic : BaseWeapon
 
     }
     
-    public override void LoadWeapon(Attack atk)
+    public override void LoadWeapon()
     {
-        atk.AtkPerformed += Cast;
+        base.LoadWeapon();
+        Atk.AtkPerformed += Cast;
     }
 
-    public override void unloadWeapon(Attack atk)
+    public override void unloadWeapon()
     {
-        atk.AtkPerformed -= Cast;
+        Atk.AtkPerformed -= Cast;
     }
 }

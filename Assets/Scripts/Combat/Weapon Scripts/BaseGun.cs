@@ -14,19 +14,16 @@ public class BaseGun : BaseWeapon
     public float spacing = 1f;
     public Vector3 rotater;
 
-
     public new void setPlayer(GameObject playa)
     {
         base.setPlayer(playa);
         playerpos = playa.transform;
     }
-
-    private void Update() {
-        
-    }
     
     public void Shoot(Vector3 direct) 
     {
+        
+        /*
         Transform firePos = playerpos.transform; // UPDATE LATER
 
         Debug.Log("Gun Fire"); //try to switch to player rotation. Also, remove the Y bend.
@@ -36,15 +33,19 @@ public class BaseGun : BaseWeapon
         Rigidbody bulletrigid = bullet.GetComponent<Rigidbody>();
         direct.y = 0;
         bulletrigid.AddForce(direct * bulletSpeed, ForceMode.VelocityChange);
+        */
+        Debug.Log("BaseGun: Fired Gun!");
+        
     }
 
-    public override void LoadWeapon(Attack atk)
+    public override void LoadWeapon()
     {
-        atk.AtkPerformed += Shoot;
+        base.LoadWeapon();
+        Atk.AtkPerformed += Shoot;
     }
 
-    public override void unloadWeapon(Attack atk)
+    public override void unloadWeapon()
     {
-        atk.AtkPerformed -= Shoot;
+        Atk.AtkPerformed -= Shoot;
     }
 }

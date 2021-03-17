@@ -11641,6 +11641,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3819969658572891334, guid: 4b518ff903d52ee4886e7c25d4ad725d,
+        type: 3}
+      propertyPath: lvl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819969658572891334, guid: 4b518ff903d52ee4886e7c25d4ad725d,
+        type: 3}
+      propertyPath: Strength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819969658572891334, guid: 4b518ff903d52ee4886e7c25d4ad725d,
+        type: 3}
+      propertyPath: Dexterity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819969658572891334, guid: 4b518ff903d52ee4886e7c25d4ad725d,
+        type: 3}
+      propertyPath: Constitution
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819969658572891334, guid: 4b518ff903d52ee4886e7c25d4ad725d,
+        type: 3}
+      propertyPath: Intelligence
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3819969658572891335, guid: 4b518ff903d52ee4886e7c25d4ad725d,
         type: 3}
       propertyPath: sceneject

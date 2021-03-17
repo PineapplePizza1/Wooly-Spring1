@@ -8,17 +8,31 @@ using UnityEngine;
 public class PlayerLoadout : Loadout
 {
 
+    private Player PM;
+    private StatsManager pstats;
     public BaseWeapon primW;
     public BaseWeapon secoW;
     public BaseWeapon utilW;
     public BaseWeapon moveW;
 
-   
+   void Awake() {
+       PM = GetComponent<Player>();
+
+       
+   }
+   void Start() {
+       pstats = PM.playerstat;
+   }
+
+
+
     //Augmentations: To be added.
 
     public void LoadPrimary(Attack loadtk)
     {
         primW.LoadWeapon(loadtk);
+        loadtk.dmgStats.Dmg = pstats.GetDamage(primW.WeaponDamage, primW.WeaponType);
+        loadtk.Cooldown = primW.cooldown;
     }
     
     public void LoadSecondary(Attack loadtk)

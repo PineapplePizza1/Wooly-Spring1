@@ -7,8 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Melee", menuName = "Weapons")]
 public class BaseMelee : BaseWeapon
 {
+    //preset
+    private void OnEnable() {
+        WeaponType = StatsManager.AtkType.Melee; //probably a better way to do this, but it'll work for now
+    }
 
-    void Swing(Vector3 direct)
+    void Swing(Vector3 direct, Hit dmg)
     {
 
     }

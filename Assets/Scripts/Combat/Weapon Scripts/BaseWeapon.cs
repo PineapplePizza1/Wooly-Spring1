@@ -11,6 +11,8 @@ public abstract class BaseWeapon : ScriptableObject
 {
     public string wepName;
     public float cooldown;
+    public float WeaponDamage;
+    public StatsManager.AtkType WeaponType;
 
     public abstract void LoadWeapon(Attack loadTK);
 

@@ -28,11 +28,14 @@ public float Cooldown; //in Seconds
 
 
 public event Action AtkStart;
-public event Action<Vector3> AtkPerformed;
+public event Action<Vector3, Hit> AtkPerformed;
 public event Action AtkEnd;
 public event Action AtkCanceled;
 
-
+public Attack() //Dunno if this is bestpractices yet, might just want to return a hit, but if It's gonna be there anyway, why not?
+{
+    dmgStats = new Hit();
+}
 
     public void Atk(Vector3 Direction)
     {
@@ -41,7 +44,7 @@ public event Action AtkCanceled;
             AtkStart();
         //If animation starts
         if (AtkPerformed!=null)
-            AtkPerformed(Direction);
+            AtkPerformed(Direction, dmgStats);
         //If animation over
         if (AtkEnd!=null)
             AtkEnd();

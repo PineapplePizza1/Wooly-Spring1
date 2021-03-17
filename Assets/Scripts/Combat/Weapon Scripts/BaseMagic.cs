@@ -8,7 +8,12 @@ using UnityEngine;
 public class BaseMagic : BaseWeapon
 {
 
-    void Cast(Vector3 direct)
+    //preset
+    private void OnEnable() {
+        WeaponType = StatsManager.AtkType.Magic; //probably a better way to do this, but it'll work for now
+    }
+
+    void Cast(Vector3 direct, Hit dmg)
     {
 
     }

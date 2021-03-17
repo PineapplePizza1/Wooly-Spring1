@@ -24,24 +24,27 @@ public class StatsManager : MonoBehaviour
 
     //Player Stats
     //RPG
-    public int Strength { get; private set;}
-    public int Dexterity { get; private set;}
-    public int Intelligence { get; private set;}
-    public int Constitution { get; private set;}
+    //public int BaseDamage {get; private set;}
+    public int Strength;
+    public int Dexterity;
+    public int Intelligence;
+    public int Constitution;
 
     //Overall health
     public float health { get; private set;}
-    public float maxhealth { get; private set;}
+    public float maxHealth { get; private set;}
 
     //LevelStats
     public int XP { get; private set;}
-    public int lvl { get; private set;}
+    public int lvl;
 
     //NOTE: need something to add status effects; will have to make a class probs, and more events? careful of event abuse.
 
     void Start()
     {
         setHealth();
+        //Debug
+        //BaseDamage = 5;
     }
 
     // Update is called once per frame
@@ -54,10 +57,10 @@ public class StatsManager : MonoBehaviour
     private void setHealth()
     {
         //Base 80;
-        maxhealth = 80f;
-        health = maxhealth;
+        maxHealth = 80f;
+        health = maxHealth;
 
-        maxhealth += 5f * Constitution;
+        maxHealth += 5f * Constitution;
 
         UpdateHealth();
     }
@@ -69,19 +72,19 @@ public class StatsManager : MonoBehaviour
 
 
 
-    public float SendDamage(float wepDmg, AtkType wepType) //change to work with playercombat and weapons. Base Damage.
+    public float GetDamage(float wepDmg, AtkType wepType) //change to work with playercombat and weapons. Base Damage.
     {
         float atkDMG = 0;
         switch (wepType)
         {
             case AtkType.Magic:
-                atkDMG= Intelligence * wepDmg;
+                atkDMG= wepDmg + (Intelligence * lvl); 
                 return atkDMG;
             case AtkType.Range:
-                atkDMG= Dexterity * wepDmg;
+                atkDMG= wepDmg + (Dexterity * lvl);
                 return atkDMG;
             case AtkType.Melee:
-                atkDMG= Strength * wepDmg;
+                atkDMG= wepDmg + (Strength * lvl);
                 return atkDMG;
             default:
                 Debug.Log("STAT: Attack of no type");
@@ -91,21 +94,21 @@ public class StatsManager : MonoBehaviour
 
     public void TakeAttack(Hit hit)
     {
-        
+        Damaged(hit);
     }
-    public void TakeDamage(Hit hit) //takes hit
+    private void Damaged(Hit hit) //takes hit
     {
         float dmg = hit.Dmg;
         switch (hit.atkType)
         {
             case AtkType.Magic:
-                dmg = dmg / Intelligence;
+                dmg = dmg - (Intelligence * lvl);
                 break;
             case AtkType.Range:
-                dmg = dmg / Dexterity;
+                dmg = dmg - (Dexterity * lvl);
                 break;
             case AtkType.Melee:
-                dmg = dmg / Strength;
+                dmg = dmg - (Strength * lvl);
                 break;
             default:
                 Debug.Log("STAT: Took damage of no type");

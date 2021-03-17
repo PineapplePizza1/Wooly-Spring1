@@ -14,8 +14,12 @@ public class BaseGun : BaseWeapon
     public float spacing = 1f;
     public Vector3 rotater;
 
+    //preset
+    private void OnEnable() {
+        WeaponType = StatsManager.AtkType.Range; //probably a better way to do this, but it'll work for now
+    }
     
-    public void Shoot(Vector3 direct) 
+    public void Shoot(Vector3 direct, Hit dmgStat) 
     {
         
         /*
@@ -29,7 +33,8 @@ public class BaseGun : BaseWeapon
         direct.y = 0;
         bulletrigid.AddForce(direct * bulletSpeed, ForceMode.VelocityChange);
         */
-        Debug.Log("BaseGun: Fired Gun!");
+
+        Debug.Log("BaseGun: Fired Gun! Dmg:" + dmgStat.Dmg);
         
     }
 

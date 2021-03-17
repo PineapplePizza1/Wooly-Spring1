@@ -31,8 +31,9 @@ public event Action AtkStart;
 public event Action<Vector3, Hit> AtkPerformed;
 public event Action AtkEnd;
 public event Action AtkCanceled;
+public event Action<Hit> HitEvent; //used to actually send in hitcode, triggered by playercombat.
 
-public Attack() //Dunno if this is bestpractices yet, might just want to return a hit, but if It's gonna be there anyway, why not?
+public Attack(GameObject owner) //Dunno if this is bestpractices yet, might just want to return a hit, but if It's gonna be there anyway, why not?
 {
     dmgStats = new Hit();
 }
@@ -55,6 +56,12 @@ public Attack() //Dunno if this is bestpractices yet, might just want to return 
             AtkCanceled();
 
     }
+
+    public void OnHit()
+    {
+        if (HitEvent!=null)
+            HitEvent(dmgStats);
+    }
 }
 
 public class Hit //call damage data?
@@ -63,7 +70,6 @@ public class Hit //call damage data?
     public StatsManager.AtkType atkType;
     //public List<StatusEffects> FX
 
+    public GameObject Owner;
     //Transfer hit and effects to statshandler to process.
-
-
 }

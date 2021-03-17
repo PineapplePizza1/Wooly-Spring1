@@ -7,7 +7,7 @@ using UnityEngine;
 //two ways to do this. Particle system, or projectiles. I vote particles/projectiles, depending on effect. having real physics bullets is interesting, but idk.
     //maybe we leave the cool projectiles to magic.
 
-[CreateAssetMenu(fileName = "New Gun", menuName = "Weapons")]
+[CreateAssetMenu(fileName = "New Gun", menuName = "Weapons/Gun")]
 public class BaseGun : BaseWeapon
 {
     public GameObject bullet; //Temp, may need to load

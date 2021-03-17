@@ -30,6 +30,8 @@ public class PlayerCombat : MonoBehaviour
     private ThirdPersonMovement pmove;
     private PlayerLoadout pload;
 
+    private Animator pAnim;
+
 
     public Attack Prim;
     public Attack Seco;
@@ -47,13 +49,14 @@ public class PlayerCombat : MonoBehaviour
         playerInput.MovementMK.Ability.performed += _ => Ability();
 
         PM = GetComponent<Player>();
+        pAnim = GetComponentInChildren<Animator>();
 
 
         //create attacks
-        Prim = new Attack();
-        Seco = new Attack();
-        Util = new Attack();
-        Move = new Attack();
+        Prim = new Attack(this.gameObject);
+        Seco = new Attack(this.gameObject);
+        Util = new Attack(this.gameObject);
+        Move = new Attack(this.gameObject);
         
     }
 
@@ -79,7 +82,14 @@ public class PlayerCombat : MonoBehaviour
         if (Prim ==null)
             pload.LoadPrimary(Prim);
         Prim.Atk(PM.playerMove.moveDir);
+        pAnim.SetInteger("AtkType", 0);
+        pAnim.SetTrigger("AtkTrigger");
         
+    }
+
+    public void PrimOnHit()
+    {
+        Prim.OnHit();
     }
 
     void Secondary()

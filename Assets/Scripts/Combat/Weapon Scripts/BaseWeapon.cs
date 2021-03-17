@@ -9,6 +9,8 @@ using UnityEngine;
     //Loadout will handle attaching augments based on the type of weapons.
 public abstract class BaseWeapon : ScriptableObject
 {
+    protected GameObject player; //DO NOT USE YET
+    public LayerMask enemies;
     public string wepName;
     public float cooldown;
     public float WeaponDamage;

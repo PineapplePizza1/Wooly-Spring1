@@ -14,7 +14,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
 
         //Animations
-    public Animator pAnim;
+    private Animator pAnim;
 
 
    
@@ -69,6 +69,7 @@ public class ThirdPersonMovement : MonoBehaviour
         playerInput.MovementMK.Jump.performed += _ => Jump();
 
         controller = GetComponent<CharacterController>();
+        pAnim = GetComponentInChildren<Animator>();
 
         //Debug
         started = true;
@@ -78,7 +79,7 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         //Anim: Grounded
-            pAnim.SetBool("Grounded", isGrounded); Debug.Log("TPM: Ground: " + isGrounded);
+        pAnim.SetBool("Grounded", isGrounded);
 
         if(isGrounded && velocity.y <0)
         {

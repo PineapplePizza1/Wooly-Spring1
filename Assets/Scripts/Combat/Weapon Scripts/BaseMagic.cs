@@ -6,7 +6,7 @@ using UnityEngine;
 
 //spawn damaging prefab.
 
-[CreateAssetMenu(fileName = "New Magic", menuName = "Weapons")]
+[CreateAssetMenu(fileName = "New Magic", menuName = "Weapons/Magic")]
 public class BaseMagic : BaseWeapon
 {
 

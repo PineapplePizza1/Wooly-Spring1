@@ -3087,12 +3087,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!95 &113959848 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 573305643399149884, guid: 4b518ff903d52ee4886e7c25d4ad725d,
-    type: 3}
-  m_PrefabInstance: {fileID: 3819969658292160834}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &127534893
 GameObject:
   m_ObjectHideFlags: 0
@@ -11535,6 +11529,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1083462485, guid: 4b518ff903d52ee4886e7c25d4ad725d, type: 3}
+      propertyPath: primW
+      value: 
+      objectReference: {fileID: 11400000, guid: a73931f670d560245b6444ef72129986,
+        type: 2}
+    - target: {fileID: 1083462485, guid: 4b518ff903d52ee4886e7c25d4ad725d, type: 3}
+      propertyPath: utilW
+      value: 
+      objectReference: {fileID: 11400000, guid: a73931f670d560245b6444ef72129986,
+        type: 2}
     - target: {fileID: 573305643392210560, guid: 4b518ff903d52ee4886e7c25d4ad725d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13334,7 +13338,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pAnim
       value: 
-      objectReference: {fileID: 113959848}
+      objectReference: {fileID: 0}
     - target: {fileID: 3819969658572891329, guid: 4b518ff903d52ee4886e7c25d4ad725d,
         type: 3}
       propertyPath: StartingPos

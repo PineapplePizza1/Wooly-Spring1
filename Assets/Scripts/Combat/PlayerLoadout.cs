@@ -33,6 +33,7 @@ public class PlayerLoadout : Loadout
         primW.LoadWeapon(loadtk);
         loadtk.dmgStats.Dmg = pstats.GetDamage(primW.WeaponDamage, primW.WeaponType);
         loadtk.Cooldown = primW.cooldown;
+        loadtk.dmgStats.Owner = this.gameObject;
     }
     
     public void LoadSecondary(Attack loadtk)

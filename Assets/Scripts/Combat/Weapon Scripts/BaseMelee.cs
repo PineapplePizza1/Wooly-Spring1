@@ -7,11 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Melee", menuName = "Weapons")]
 public class BaseMelee : BaseWeapon
 {
-    public new void setPlayer(GameObject playa)
-    {
-        base.setPlayer(playa);
-        //playerpos = playa.transform;
-    }
 
     void Swing(Vector3 direct)
     {
@@ -19,15 +14,14 @@ public class BaseMelee : BaseWeapon
     }
 
 
-    public override void LoadWeapon()
+    public override void LoadWeapon(Attack loadTK)
     {
-        base.LoadWeapon();
-        Atk.AtkPerformed += Swing;
+        loadTK.AtkPerformed += Swing;
     }
 
-    public override void unloadWeapon()
+    public override void unloadWeapon(Attack loadTK)
     {
-        Atk.AtkPerformed -= Swing;
+        loadTK.AtkPerformed -= Swing;
     }
 
 }

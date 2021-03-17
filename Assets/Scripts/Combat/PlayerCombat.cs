@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 
 //player combat state script, might be redundant; possibly try with just Combat first?
+//input, trigger attacks.
 public class PlayerCombat : MonoBehaviour
 {
 
@@ -24,19 +25,20 @@ public class PlayerCombat : MonoBehaviour
 
     private PlayerControls playerInput;
 
-    [SerializeField] private ThirdPersonMovement ThirdRef;
+    private Player PM;
+    //private locals
+    private ThirdPersonMovement pmove;
+    private PlayerLoadout pload;
 
 
-    public BaseWeapon Prim;
-    public BaseWeapon Seco;
-    public BaseWeapon Util;
-    public BaseWeapon Move;
+    public Attack Prim;
+    public Attack Seco;
+    public Attack Util;
+    public Attack Move;
 
     void Awake()
     {
-        ThirdRef = this.GetComponent<ThirdPersonMovement>();
         
-
         playerInput = new PlayerControls();
         playerInput.MovementMK.Primary.performed += ctx => Primary();
         playerInput.MovementMK.Secondary.performed += _ => Secondary();
@@ -44,42 +46,67 @@ public class PlayerCombat : MonoBehaviour
         playerInput.MovementMK.Utility.performed += _ => Utility();
         playerInput.MovementMK.Ability.performed += _ => Ability();
 
-        Prim.LoadWeapon();
+        PM = GetComponent<Player>();
+
+
+        //create attacks
+        Prim = new Attack();
+        Seco = new Attack();
+        Util = new Attack();
+        Move = new Attack();
+        
+    }
+
+    void Start()
+    {
+        pmove = PM.playerMove;
+        pload = PM.playerload;
+
+        //load all weps
+        pload.LoadPrimary(Prim);
+        pload.LoadSecondary(Seco);
+        pload.LoadUtility(Util);
+        pload.LoadMovement(Move);
+        
     }
 
 
     void Primary()
     {
-        if (Prim.Atk ==null)
-            Prim.LoadWeapon();
-        Prim.Attack(ThirdRef.moveDir);
+        
+            //LOADWEP returns null atm, might wanna make new attacks or something.
+                //really, the attacks should be here, just delegates triggered by the playercombat. but ??? shruggies.
+        if (Prim ==null)
+            pload.LoadPrimary(Prim);
+        Prim.Atk(PM.playerMove.moveDir);
+        
     }
 
     void Secondary()
     {
-        Seco.Attack(ThirdRef.moveDir);
+        //Seco.Attack(ThirdRef.moveDir);
     
     }
 
     void Utility()
     {
-        Util.Attack(ThirdRef.moveDir);
+        //Util.Attack(ThirdRef.moveDir);
     }
 
     void Ability()
     {
-        Move.Attack(ThirdRef.moveDir);
+        //Move.Attack(ThirdRef.moveDir);
     }
     
     
     public void LoadAttack(BaseWeapon weapon)
     {
-        weapon.LoadWeapon();
+        //weapon.LoadWeapon();
     }
     
     public void UnloadAttack(BaseWeapon weapon)
     {
-        weapon.LoadWeapon();
+        //weapon.LoadWeapon();
     }
 
 

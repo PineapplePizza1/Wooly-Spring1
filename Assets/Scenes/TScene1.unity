@@ -3615,23 +3615,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b90708fabba41438be2b1ff9038556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThirdRef: {fileID: 1083462485}
-  Prim: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
-  Seco: {fileID: 0}
-  Util: {fileID: 0}
-  Move: {fileID: 0}
---- !u!114 &1083462485 stripped
+  Prim:
+    Cooldown: 0
+  Seco:
+    Cooldown: 0
+  Util:
+    Cooldown: 0
+  Move:
+    Cooldown: 0
+--- !u!114 &1083462485
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3819969658572891329, guid: 4b518ff903d52ee4886e7c25d4ad725d,
-    type: 3}
-  m_PrefabInstance: {fileID: 3819969658292160834}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083462483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad33ce52cfdf6b439f97498ab8a8c80, type: 3}
+  m_Script: {fileID: 11500000, guid: 053e95fbb42816e4ba82485879f0227d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  primW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
+  secoW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
+  utilW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
+  moveW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
 --- !u!1 &1083873820
 GameObject:
   m_ObjectHideFlags: 0

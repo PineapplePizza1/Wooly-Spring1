@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    //Input
-    private PlayerControls playerInput;
+    //playercontrols map
+    public PlayerControls playerInput;
 
     #region Basic Input State
     private InputState inputState;
@@ -35,11 +35,16 @@ public class Player : MonoBehaviour
 
     //send health to health UI
         //Subscriber based system
+    
 
-    //Stats
-    private StatsManager playerStats;
+    //COMPONENTS: local
+    
+    public ThirdPersonMovement playerMove {get; private set;}
+    public StatsManager playerstat {get; private set;}
+    public PlayerCombat playercomb {get; private set;}
+    public PlayerLoadout playerload {get; private set;}
 
-    private PlayerCombat PC;
+
 
     private void Awake() {
 
@@ -56,10 +61,17 @@ public class Player : MonoBehaviour
 
 
         //Stats Subscription
-        playerStats = this.GetComponent<StatsManager>(); //get player stats
-        playerStats.Death += PlayerDeath;
-        playerStats.HealthUpdate += UpdateHealth;
-        playerStats.StatUpdate += UpdateStats;
+        playerstat = this.GetComponent<StatsManager>(); //get player stats
+        playerstat.Death += PlayerDeath;
+        playerstat.HealthUpdate += UpdateHealth;
+        playerstat.StatUpdate += UpdateStats;
+
+
+        //load local.
+        playerMove = this.GetComponent<ThirdPersonMovement>();
+        playerstat = this.GetComponent<StatsManager>();
+        playercomb = this.GetComponent<PlayerCombat>();
+        playerload = this.GetComponent<PlayerLoadout>();
     }
 
     void PlayerPause()
@@ -77,7 +89,7 @@ public class Player : MonoBehaviour
     void UpdateHealth()
     {
         //UI goes here
-        Debug.Log("PLY: Health = " + playerStats.health);
+        Debug.Log("PLY: Health = " + playerstat.health);
     }
     void UpdateStats()
     {
@@ -104,7 +116,7 @@ public class Player : MonoBehaviour
 
     private void OnDisable() {
         playerInput.Disable();
-        playerStats.Death -= PlayerDeath;
+        playerstat.Death -= PlayerDeath;
 
     }
     

@@ -22,9 +22,11 @@ public class Attack
         //So Weapon sends one detail, then it can get altered by items!
         //#return an attack and run it, as weapon event trigger, vs just actually running it. ATTACK PROCESSING
         
-public StatsManager.AtkType DmgType;
+public Hit dmgStats;
 
-public float atkDmg;
+public float Cooldown; //in Seconds
+
+
 public event Action AtkStart;
 public event Action<Vector3> AtkPerformed;
 public event Action AtkEnd;
@@ -34,6 +36,7 @@ public event Action AtkCanceled;
 
     public void Atk(Vector3 Direction)
     {
+
         if (AtkStart!=null)
             AtkStart();
         //If animation starts
@@ -49,4 +52,15 @@ public event Action AtkCanceled;
             AtkCanceled();
 
     }
+}
+
+public class Hit //call damage data?
+{
+    public float Dmg;
+    public StatsManager.AtkType atkType;
+    //public List<StatusEffects> FX
+
+    //Transfer hit and effects to statshandler to process.
+
+
 }

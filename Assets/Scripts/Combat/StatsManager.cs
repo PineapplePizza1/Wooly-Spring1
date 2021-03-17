@@ -69,7 +69,7 @@ public class StatsManager : MonoBehaviour
 
 
 
-    public float Attack(float wepDmg, AtkType wepType)
+    public float SendDamage(float wepDmg, AtkType wepType) //change to work with playercombat and weapons. Base Damage.
     {
         float atkDMG = 0;
         switch (wepType)
@@ -89,10 +89,14 @@ public class StatsManager : MonoBehaviour
         }
     }
 
-    public void Damage(float dmg, AtkType atkType)
+    public void TakeAttack(Hit hit)
     {
         
-        switch (atkType)
+    }
+    public void TakeDamage(Hit hit) //takes hit
+    {
+        float dmg = hit.Dmg;
+        switch (hit.atkType)
         {
             case AtkType.Magic:
                 dmg = dmg / Intelligence;

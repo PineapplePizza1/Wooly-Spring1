@@ -7,25 +7,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Magic", menuName = "Weapons")]
 public class BaseMagic : BaseWeapon
 {
-    public new void setPlayer(GameObject playa)
-    {
-        base.setPlayer(playa);
-        //playerpos = playa.transform;
-    }
 
     void Cast(Vector3 direct)
     {
 
     }
     
-    public override void LoadWeapon()
+    public override void LoadWeapon(Attack loadTK)
     {
-        base.LoadWeapon();
-        Atk.AtkPerformed += Cast;
+        loadTK.AtkPerformed += Cast;
     }
 
-    public override void unloadWeapon()
+    public override void unloadWeapon(Attack loadTK)
     {
-        Atk.AtkPerformed -= Cast;
+        loadTK.AtkPerformed -= Cast;
     }
 }

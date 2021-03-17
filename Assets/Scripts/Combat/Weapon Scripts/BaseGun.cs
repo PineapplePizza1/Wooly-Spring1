@@ -14,11 +14,6 @@ public class BaseGun : BaseWeapon
     public float spacing = 1f;
     public Vector3 rotater;
 
-    public new void setPlayer(GameObject playa)
-    {
-        base.setPlayer(playa);
-        playerpos = playa.transform;
-    }
     
     public void Shoot(Vector3 direct) 
     {
@@ -38,14 +33,13 @@ public class BaseGun : BaseWeapon
         
     }
 
-    public override void LoadWeapon()
+    public override void LoadWeapon(Attack loadTK)
     {
-        base.LoadWeapon();
-        Atk.AtkPerformed += Shoot;
+        loadTK.AtkPerformed += Shoot;
     }
 
-    public override void unloadWeapon()
+    public override void unloadWeapon(Attack loadTK)
     {
-        Atk.AtkPerformed -= Shoot;
+        loadTK.AtkPerformed -= Shoot;
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 //LastUpdate: 3/8/21, D-Lynn Z
 
+//Likely, the method for this will be to trigger a hitbox around an animation event, so animations come soon.
+//ADD ANIMATOR NEXT (3/17)
+
 [CreateAssetMenu(fileName = "New Melee", menuName = "Weapons")]
 public class BaseMelee : BaseWeapon
 {

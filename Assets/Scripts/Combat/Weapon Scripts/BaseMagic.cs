@@ -4,6 +4,8 @@ using UnityEngine;
 
 //LastUpdate: 3/8/21, D-Lynn Z
 
+//spawn damaging prefab.
+
 [CreateAssetMenu(fileName = "New Magic", menuName = "Weapons")]
 public class BaseMagic : BaseWeapon
 {

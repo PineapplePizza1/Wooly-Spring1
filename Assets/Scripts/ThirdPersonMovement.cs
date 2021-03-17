@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 
 //maybe sprint to help with gameplay speed.
@@ -11,6 +12,10 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     public float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
+
+        //Animations
+    public Animator pAnim;
+
 
    
 //Cam vars
@@ -72,9 +77,13 @@ public class ThirdPersonMovement : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //Anim: Grounded
+            pAnim.SetBool("Grounded", isGrounded); Debug.Log("TPM: Ground: " + isGrounded);
 
         if(isGrounded && velocity.y <0)
         {
+            
+
             velocity.y = -2f;
         }
 
@@ -88,6 +97,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (direction.magnitude>=0.1f && started)
         {
+            //Animation
+            pAnim.SetBool("Moving", true);
+
             //Find movement direction based on camera
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y; //Arctan the player's direction, then add the cam's y rotation.
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetangle, ref turnSmoothVelocity, turnSmoothTime);
@@ -102,19 +114,28 @@ public class ThirdPersonMovement : MonoBehaviour
             velocity.x = moveDir.x;
             velocity.z = moveDir.z;
             
+            //Anim: Speed
+            pAnim.SetFloat("Speed", moveDir.magnitude/baseSpeed);
+            pAnim.SetFloat("Animation Speed", moveDir.magnitude/baseSpeed);
         }
         else
         {
+            //Animation
+            pAnim.SetBool("Moving", false);
+
             velocity.x = 0f;
             velocity.z = 0f;
         }
 
+
         
+
         //Gravity
         velocity.y += gravity * Time.deltaTime;
         //Move
         controller.Move(velocity * Time.deltaTime); //d_y = .5G *t^2
 
+        pAnim.SetFloat("FallSpeed", velocity.y);
 
         //reset sprint
             currSpeed = baseSpeed;
@@ -131,8 +152,12 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if(isGrounded && velocity.y <=0 && started)
         {
+            //animation
+            pAnim.SetTrigger("Jumping");
+
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity );
         }
+        
     }
 
      void OnControllerColliderHit(ControllerColliderHit other) 

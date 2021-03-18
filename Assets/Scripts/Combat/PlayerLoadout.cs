@@ -22,6 +22,7 @@ public class PlayerLoadout : Loadout
    }
    void Start() {
        pstats = PM.playerstat;
+       Debug.Log("Loadout: Prim Owner " + pstats.name);
    }
 
 
@@ -30,10 +31,15 @@ public class PlayerLoadout : Loadout
 
     public void LoadPrimary(Attack loadtk)
     {
+        
+
         primW.LoadWeapon(loadtk);
+        if (pstats == null)
+            pstats = PM.playerstat; //redundant, probably see if there's an easy injectable fix?
         loadtk.dmgStats.Dmg = pstats.GetDamage(primW.WeaponDamage, primW.WeaponType);
         loadtk.Cooldown = primW.cooldown;
         loadtk.dmgStats.Owner = this.gameObject;
+        
     }
     
     public void LoadSecondary(Attack loadtk)

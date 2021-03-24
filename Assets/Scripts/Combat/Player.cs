@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
         playerInput = new PlayerControls();
         playerInput.Debug.DieBind.performed += _ => PlayerDeath();
         playerInput.Debug.DBGdmg.performed += _ => DebugDMG();
+        playerInput.MovementMK.Interact.performed += _ => Interact();
 
         //Injection
         sceneject.SceneJect += Injection;
@@ -74,6 +75,41 @@ public class Player : MonoBehaviour
         playerload = this.GetComponent<PlayerLoadout>();
     }
 
+    //DEBUG: Putting player interaction here for now, cuz I can't come up with anythign right now I'll split it later if needed
+    #region Interactables
+    private Interactable target;
+    private Interactable focus;
+
+    public void NearInteract(Interactable youu)
+    {
+        target = youu;
+    }
+    public void LeaveInteract(Interactable youu)
+    {
+        if (target == youu)
+            target = null;
+    }
+    
+    private void Interact()
+    {
+        //take in interactable
+        if (target!=null)
+        {
+            focus = target;
+            Debug.Log("PLY: I focused on " + focus.gameObject.name); //find a better way to do this. 
+            if (focus.tag == "Distaff")
+            {
+                 DistaffInteractable dsf = focus as DistaffInteractable;
+                 dsf.ActivateStaff();
+            }
+        }
+
+    }
+
+    //OTHER OPTIONS:
+        //METHODS FROM INTERACTABLE Inject into this one, via methods.
+        
+    #endregion
     void PlayerPause()
     {
         

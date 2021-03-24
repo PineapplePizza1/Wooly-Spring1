@@ -9,7 +9,7 @@ public class LoadLevel : MonoBehaviour
     [SerializeField] private GameObject loadingPanel;
     [SerializeField] private Slider slider;
     [SerializeField] private TextMeshProUGUI progressText;
-    public void Loadlevel( int sceneIndex)
+    public void Loadlevel(int sceneIndex)
     {
         StartCoroutine(LoadAsync(sceneIndex));        
     }

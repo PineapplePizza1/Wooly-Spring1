@@ -11606,6 +11606,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3943959821520928895, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
+        type: 3}
+      propertyPath: ScriptList.Array.data[1]
+      value: 
+      objectReference: {fileID: 1816134183}
     - target: {fileID: 7420801224551678524, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
       propertyPath: m_Name
@@ -16324,17 +16329,17 @@ PrefabInstance:
     - target: {fileID: 2995590285441924929, guid: 9c74ed28eb86b154fa42834f077407af,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15124145
+      value: 0.15124144
       objectReference: {fileID: 0}
     - target: {fileID: 2995590285441924929, guid: 9c74ed28eb86b154fa42834f077407af,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.45659757
+      value: 0.45659754
       objectReference: {fileID: 0}
     - target: {fileID: 2995590285441924929, guid: 9c74ed28eb86b154fa42834f077407af,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.07908897
+      value: -0.079088956
       objectReference: {fileID: 0}
     - target: {fileID: 2995590286159255515, guid: 9c74ed28eb86b154fa42834f077407af,
         type: 3}

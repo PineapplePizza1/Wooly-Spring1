@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 0a31d21e58473544db4d9ce701a0a31b
   - enabled: 1
+    path: Assets/Scenes/Hubworld1.unity
+    guid: a57d9d32b95042f4c9d6d75c3130604f
+  - enabled: 1
+    path: Assets/Scenes/TScene2.unity
+    guid: f862c4714e2a5074d8888b1e00ac0416
+  - enabled: 1
     path: Assets/Scenes/TScene1.unity
     guid: 20bb1cea229b3924ca139d5b53f13ffd
   m_configObjects: {}

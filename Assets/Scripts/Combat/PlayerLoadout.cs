@@ -39,6 +39,8 @@ public class PlayerLoadout : Loadout
         loadtk.dmgStats.Dmg = pstats.GetDamage(primW.WeaponDamage, primW.WeaponType);
         loadtk.Cooldown = primW.cooldown;
         loadtk.dmgStats.Owner = this.gameObject;
+
+        //Apply items here, or like, in the load function.
         
     }
     

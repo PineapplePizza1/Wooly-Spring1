@@ -97,6 +97,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""07f95b5c-0da5-4fcb-96cb-7200be34f67a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -253,6 +261,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e97d57a7-5b62-4eca-a7ea-f7b649f58680"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -378,6 +397,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_MovementMK_Secondary = m_MovementMK.FindAction("Secondary", throwIfNotFound: true);
         m_MovementMK_Utility = m_MovementMK.FindAction("Utility", throwIfNotFound: true);
         m_MovementMK_Ability = m_MovementMK.FindAction("Ability", throwIfNotFound: true);
+        m_MovementMK_Interact = m_MovementMK.FindAction("Interact", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_Quit = m_Debug.FindAction("Quit", throwIfNotFound: true);
@@ -443,6 +463,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_MovementMK_Secondary;
     private readonly InputAction m_MovementMK_Utility;
     private readonly InputAction m_MovementMK_Ability;
+    private readonly InputAction m_MovementMK_Interact;
     public struct MovementMKActions
     {
         private @PlayerControls m_Wrapper;
@@ -457,6 +478,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Secondary => m_Wrapper.m_MovementMK_Secondary;
         public InputAction @Utility => m_Wrapper.m_MovementMK_Utility;
         public InputAction @Ability => m_Wrapper.m_MovementMK_Ability;
+        public InputAction @Interact => m_Wrapper.m_MovementMK_Interact;
         public InputActionMap Get() { return m_Wrapper.m_MovementMK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -496,6 +518,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Ability.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnAbility;
                 @Ability.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnAbility;
                 @Ability.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnAbility;
+                @Interact.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_MovementMKActionsCallbackInterface = instance;
             if (instance != null)
@@ -530,6 +555,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Ability.started += instance.OnAbility;
                 @Ability.performed += instance.OnAbility;
                 @Ability.canceled += instance.OnAbility;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -621,6 +649,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSecondary(InputAction.CallbackContext context);
         void OnUtility(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

@@ -22,7 +22,6 @@ public class BaseMelee : BaseWeapon
     }
     void Cut(Hit dmg)
     {
-        Debug.Log("BaseMelee: Cut!" + dmg.Owner.name);
 
         Collider[] hitEnemies = Physics.OverlapSphere(dmg.Owner.transform.position, 10f, enemies); //position either from dmg, or from Swing attack up front.
 

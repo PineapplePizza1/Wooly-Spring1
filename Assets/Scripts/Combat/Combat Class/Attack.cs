@@ -28,7 +28,7 @@ public float Cooldown; //in Seconds
 
 
 public event Action AtkStart;
-public event Action<Vector3, Hit> AtkPerformed;
+public event Action<Vector3, Transform, Hit> AtkPerformed;
 public event Action AtkEnd;
 public event Action AtkCanceled;
 public event Action<Hit> HitEvent; //used to actually send in hitcode, triggered by playercombat.
@@ -38,14 +38,14 @@ public Attack(GameObject owner) //Dunno if this is bestpractices yet, might just
     dmgStats = new Hit();
 }
 
-    public void Atk(Vector3 Direction)
+    public void Atk(Vector3 Direction, Transform playerpos)
     {
 
         if (AtkStart!=null)
             AtkStart();
         //If animation starts
         if (AtkPerformed!=null)
-            AtkPerformed(Direction, dmgStats);
+            AtkPerformed(Direction, playerpos, dmgStats);
         //If animation over
         if (AtkEnd!=null)
             AtkEnd();

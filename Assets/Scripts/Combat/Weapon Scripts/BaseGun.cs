@@ -7,37 +7,56 @@ using UnityEngine;
 //two ways to do this. Particle system, or projectiles. I vote particles/projectiles, depending on effect. having real physics bullets is interesting, but idk.
     //maybe we leave the cool projectiles to magic.
 
+//May need to change this into actual objects and use that to supplement. Can still use ScriptObj for gunstats, but base functionality probably needs to be on the actual object.
+//SO becomes container for data, since yknow, inherited monobehaviours.
+
 [CreateAssetMenu(fileName = "New Gun", menuName = "Weapons/Gun")]
 public class BaseGun : BaseWeapon
 {
-    public GameObject bullet; //Temp, may need to load
-    public float bulletSpeed;
+    //Temp, may need to load
+    private Pooler AmmoPool;
+    //public GameObject bullet; 
+    
+
     public string bulletType;
-    private Transform playerpos;
-    public float spacing = 1f;
+
+    public float bulletSpeed;
+
     public Vector3 rotater;
+    
 
     //preset
     private void OnEnable() {
         WeaponType = StatsManager.AtkType.Range; //probably a better way to do this, but it'll work for now
     }
+
+    public void FindAmmo(Pooler inPool)
+    {
+        //TEMP: use this to attach ammo pool.   
+        AmmoPool = inPool;
+        Debug.Log("BG: Ammo Pool " + AmmoPool.GetInstanceID());
+    }
     
-    public void Shoot(Vector3 direct, Hit dmgStat) 
+
+    public void Shoot(Vector3 direct, Transform playerpos, Hit dmgStat) 
     {
         
-        /*
-        Transform firePos = playerpos.transform; // UPDATE LATER
 
-        Debug.Log("Gun Fire"); //try to switch to player rotation. Also, remove the Y bend.
+        
+
+        //Add additional rotation 
         Quaternion rotato = Quaternion.Euler(rotater); //Quaternion.LookRotation(playerpos.rotation.eulerAngles, Vector3.up);
-        rotato = Quaternion.AngleAxis(playerpos.rotation.eulerAngles.y, Vector3.up) * rotato;
-        //GameObject bullet = poolDict.SpawnFromPool(bulletType, firePos.position, rotato);
+        rotato = Quaternion.AngleAxis(playerpos.rotation.eulerAngles.y, Vector3.up) * rotato; //NOTE: Attach rotater to actual ammo
+        
+         
+        GameObject bullet = AmmoPool.SpawnFromPool(bulletType, playerpos.position, rotato);  //NOTE: could pass in a specific fire position at another point.
         Rigidbody bulletrigid = bullet.GetComponent<Rigidbody>();
+        BaseBullet bulletScr = bullet.GetComponent<BaseBullet>();
         direct.y = 0;
-        bulletrigid.AddForce(direct * bulletSpeed, ForceMode.VelocityChange);
-        */
-
-        Debug.Log("BaseGun: Fired Gun! Dmg:" + dmgStat.Dmg);
+        
+        bulletrigid.AddForce(direct * bulletSpeed, ForceMode.VelocityChange); //try to switch to player's model rotation.= as direction
+        bulletScr.SetBullet(enemies, dmgStat, playerpos.gameObject); //Possibly find a better player reference?
+    
         
     }
 

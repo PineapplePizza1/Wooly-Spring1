@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   wepName: DBG Melee
   cooldown: 4
   WeaponDamage: 10

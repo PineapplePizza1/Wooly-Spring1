@@ -30,6 +30,8 @@ public class PlayerCombat : MonoBehaviour
     private ThirdPersonMovement pmove;
     private PlayerLoadout pload;
 
+    private Pooler pooler;
+
     private Animator pAnim;
 
 
@@ -60,16 +62,13 @@ public class PlayerCombat : MonoBehaviour
         
     }
 
-    void Start()
+    public void StartCombat()
     {
         pmove = PM.playerMove;
         pload = PM.playerload;
 
         //load all weps
-        pload.LoadPrimary(Prim);
-        pload.LoadSecondary(Seco);
-        pload.LoadUtility(Util);
-        pload.LoadMovement(Move);
+        pload.FirstLoad(Prim, Seco, Util, Move);
         
     }
 
@@ -81,7 +80,7 @@ public class PlayerCombat : MonoBehaviour
                 //really, the attacks should be here, just delegates triggered by the playercombat. but ??? shruggies.
         if (Prim ==null)
             pload.LoadPrimary(Prim);
-        Prim.Atk(PM.playerMove.moveDir);
+        Prim.Atk(PM.playerMove.moveDir, this.transform);  //Note: Posibly use direct input, vs Player rotation
         pAnim.SetInteger("AtkType", 0);
         pAnim.SetTrigger("AtkTrigger");
         

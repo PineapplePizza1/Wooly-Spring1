@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0577760f3174f9440b4f3b1f0709d91a, type: 3}
   m_Name: DBGgun1
   m_EditorClassIdentifier: 
-  wepName: Gumpter
+  enemies:
+    serializedVersion: 2
+    m_Bits: 1024
+  wepName: DBGArrow
   cooldown: 5
   WeaponDamage: 7
   WeaponType: 1
-  bullet: {fileID: 0}
-  bulletSpeed: 0
-  bulletType: 
-  spacing: 1
-  rotater: {x: 0, y: 0, z: 0}
+  bulletType: Arrow
+  bulletSpeed: 12
+  rotater: {x: 0, y: 90, z: 0}

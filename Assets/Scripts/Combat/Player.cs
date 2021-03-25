@@ -13,10 +13,13 @@ public class Player : MonoBehaviour
     [SerializeField] private SceneInjector sceneject;
     #region Injection
     private LevelManagement LM;
+    public Pooler pooler{get; private set;}
 
     public void Injection(InjectionDict ID)
     {
         LM = ID.Inject<LevelManagement>();
+        pooler = ID.Inject<Pooler>();
+        
     }
     #endregion
 
@@ -56,6 +59,7 @@ public class Player : MonoBehaviour
 
         //Injection
         sceneject.SceneJect += Injection;
+        sceneject.FixedSceneLoad += PlayerStart;
 
         //DEBUG: input state set, just for now. Eventually, legitimate start.
             inputState = InputState.Move;
@@ -73,6 +77,14 @@ public class Player : MonoBehaviour
         playerstat = this.GetComponent<StatsManager>();
         playercomb = this.GetComponent<PlayerCombat>();
         playerload = this.GetComponent<PlayerLoadout>();
+
+    }
+
+    //Fixed Scene start to Player
+    void PlayerStart() //Start all the scripts on player
+    {
+        playercomb.StartCombat();
+        //Start Loadout in Combat
     }
 
     //DEBUG: Putting player interaction here for now, cuz I can't come up with anythign right now I'll split it later if needed

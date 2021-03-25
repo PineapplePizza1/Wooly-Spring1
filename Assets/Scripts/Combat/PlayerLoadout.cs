@@ -4,11 +4,15 @@ using UnityEngine;
 
 //store, access, and *load* player loadout here.
 //Load Items
+
+//Note: Enemy combat will call scripts from their loadout; Loadout --> enemy loadout --> enemy combat (bespoke)
  
 public class PlayerLoadout : Loadout
 {
 
     private Player PM;
+
+    private Pooler pooler;
     private StatsManager pstats;
     public BaseWeapon primW;
     public BaseWeapon secoW;
@@ -17,28 +21,46 @@ public class PlayerLoadout : Loadout
 
    void Awake() {
        PM = GetComponent<Player>();
-
        
    }
-   void Start() {
+   public void StartPlayerLoadout()
+   {
        pstats = PM.playerstat;
-       Debug.Log("Loadout: Prim Owner " + pstats.name);
+        Debug.Log("Loadout: Prim Owner " + pstats.name);
+        pooler = PM.pooler;
+        Debug.Log("PL: Pooler " + pooler.GetInstanceID());
    }
-
-
-
+    public void FirstLoad(Attack atk1, Attack atk2, Attack atk3, Attack atk4)
+    {
+    
+        LoadPrimary(atk1);
+        LoadSecondary(atk2);
+        LoadUtility(atk3);
+        LoadMovement(atk4);
+    }
     //Augmentations: To be added.
 
     public void LoadPrimary(Attack loadtk)
     {
-        
-
         primW.LoadWeapon(loadtk);
+
         if (pstats == null)
             pstats = PM.playerstat; //redundant, probably see if there's an easy injectable fix?
+
         loadtk.dmgStats.Dmg = pstats.GetDamage(primW.WeaponDamage, primW.WeaponType);
         loadtk.Cooldown = primW.cooldown;
         loadtk.dmgStats.Owner = this.gameObject;
+
+        //TEMP_DEBUG: Weapon Load Pool
+        if(primW is BaseGun)
+            {
+                //Late check script
+                if (pooler ==null)
+                    pooler = PM.pooler;
+
+                BaseGun gun = primW as BaseGun;
+                gun.FindAmmo(pooler);
+            }
 
         //Apply items here, or like, in the load function.
         

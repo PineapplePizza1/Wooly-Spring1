@@ -15,14 +15,14 @@ public class BaseMelee : BaseWeapon
         WeaponType = StatsManager.AtkType.Melee; //probably a better way to do this, but it'll work for now
     }
 
-    void Swing(Vector3 direct, Hit dmg)
+    void Swing(Vector3 direct, Transform playerpos, Hit dmg)
     {
             //Play sound or something
             Debug.Log("BaseMelee: Swang!");
     }
     void Cut(Hit dmg)
     {
-
+            //DEBUG: update the actual hit location, to hit a specific part
         Collider[] hitEnemies = Physics.OverlapSphere(dmg.Owner.transform.position, 10f, enemies); //position either from dmg, or from Swing attack up front.
 
         if (hitEnemies != null)

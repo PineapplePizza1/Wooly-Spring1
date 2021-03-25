@@ -15,7 +15,7 @@ public class BaseMagic : BaseWeapon
         WeaponType = StatsManager.AtkType.Magic; //probably a better way to do this, but it'll work for now
     }
 
-    void Cast(Vector3 direct, Hit dmg)
+    void Cast(Vector3 direct, Transform playerpos, Hit dmg)
     {
 
     }

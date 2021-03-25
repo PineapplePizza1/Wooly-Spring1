@@ -11,6 +11,10 @@ public class StatsManager : MonoBehaviour
             * RPG Stats
             * damage and health
 
+
+        Notes/Todo:
+        - Add status effect events,
+            Update and Timer, and possibly Hud/bar update (diff for player vs enemy tho, so guess that's what up.)
     */
 
     //Damage Types
@@ -98,6 +102,9 @@ public class StatsManager : MonoBehaviour
     }
     private void Damaged(Hit hit) //takes hit
     {
+        //DBG:
+        Debug.Log("STAT: Took DMG. Health: " + health);
+        
         float dmg = hit.Dmg;
         switch (hit.atkType)
         {

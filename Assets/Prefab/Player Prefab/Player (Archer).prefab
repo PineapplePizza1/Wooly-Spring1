@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 8002333718132830190}
   m_Layer: 9
   m_Name: Player (Archer)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053e95fbb42816e4ba82485879f0227d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  primW: {fileID: 11400000, guid: a73931f670d560245b6444ef72129986, type: 2}
+  primW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
   secoW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
   utilW: {fileID: 11400000, guid: a73931f670d560245b6444ef72129986, type: 2}
   moveW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}

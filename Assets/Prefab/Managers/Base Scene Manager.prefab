@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7420801224551678527}
   - component: {fileID: 7420801224551678526}
+  - component: {fileID: 1950604014807025398}
   - component: {fileID: 7420801224551678513}
-  - component: {fileID: 3943959821520928895}
+  - component: {fileID: 7420801226037536603}
   m_Layer: 0
   m_Name: Base Scene Manager
   m_TagString: Untagged
@@ -45,6 +46,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c89a41fc5d30324a84b7bdf1c26d9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1950604014807025398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420801224551678524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079975da11622e4449dc9f4460cf21dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScriptList:
+  - Requirement: Level Manager
+    Script: {fileID: 7420801224551678513}
+  - Requirement: Debug Manager
+    Script: {fileID: 0}
+  - Requirement: Level Loader
+    Script: {fileID: 0}
+  - Requirement: Pooler
+    Script: {fileID: 7420801226037536603}
 --- !u!114 &7420801224551678513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneject: {fileID: 7420801224551678526}
   MainMenuScene: 1
---- !u!114 &3943959821520928895
+--- !u!114 &7420801226037536603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,14 +90,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7420801224551678524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 079975da11622e4449dc9f4460cf21dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e2973f6613aa9448bf624eca152b1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Requirements:
-  - Level Management
-  - Debug Manager
-  - Level Loader
-  ScriptList:
-  - {fileID: 7420801224551678513}
-  - {fileID: 0}
-  - {fileID: 0}
+  LoadPools:
+  - tag: Arrow
+    prefab: {fileID: 6541524630323536279, guid: b71e26783a90e5343bed9a509519bf45,
+      type: 3}
+    size: 50

@@ -34,7 +34,6 @@ public class BaseGun : BaseWeapon
     {
         //TEMP: use this to attach ammo pool.   
         AmmoPool = inPool;
-        Debug.Log("BG: Ammo Pool " + AmmoPool.GetInstanceID());
     }
     
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System;
 
 [System.Serializable]
@@ -24,18 +25,22 @@ public class Attack
         
 public Hit dmgStats;
 
+public InputAction ActionSlot;
 public float Cooldown; //in Seconds
 
 
 public event Action AtkStart;
 public event Action<Vector3, Transform, Hit> AtkPerformed;
 public event Action AtkEnd;
+public event Action<Vector3, Transform, Hit, InputAction> AtkUpdate;
 public event Action AtkCanceled;
 public event Action<Hit> HitEvent; //used to actually send in hitcode, triggered by playercombat.
 
 public Attack(GameObject owner) //Dunno if this is bestpractices yet, might just want to return a hit, but if It's gonna be there anyway, why not?
 {
-    dmgStats = new Hit();
+    dmgStats = new Hit(); 
+    //NOTE: Potentially, load player transform and Input Action in here, so we don't need so many inputs.
+    //But that's for next time, this works for now, we'll just have to have some intense refactors later down the line.
 }
 
     public void Atk(Vector3 Direction, Transform playerpos)
@@ -55,6 +60,12 @@ public Attack(GameObject owner) //Dunno if this is bestpractices yet, might just
         if (AtkCanceled!=null)
             AtkCanceled();
 
+    }
+
+    public void OnUpdate(Vector3 Direction, Transform playerpos)
+    {
+        if (AtkUpdate!=null)
+            AtkUpdate(Direction, playerpos, dmgStats, ActionSlot);
     }
 
     public void OnHit()

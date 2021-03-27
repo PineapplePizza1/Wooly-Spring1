@@ -69,9 +69,15 @@ public class PlayerCombat : MonoBehaviour
 
         //load all weps
         pload.FirstLoad(Prim, Seco, Util, Move);
+
+        //TEMP: LOAD PRIM'S ACTION; DO IT in playerloadout FOR REST LATER.
+        Prim.ActionSlot = playerInput.MovementMK.Primary;
         
     }
 
+    private void Update() {
+        PrimOnUpdate();
+    }
 
     void Primary()
     {
@@ -84,6 +90,11 @@ public class PlayerCombat : MonoBehaviour
         pAnim.SetInteger("AtkType", 0);
         pAnim.SetTrigger("AtkTrigger");
         
+    }
+
+    private void PrimOnUpdate()
+    {
+        Prim.OnUpdate(PM.playerMove.moveDir, this.transform);
     }
 
     public void PrimOnHit()

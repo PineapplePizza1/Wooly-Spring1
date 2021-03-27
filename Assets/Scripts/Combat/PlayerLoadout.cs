@@ -53,14 +53,23 @@ public class PlayerLoadout : Loadout
 
         //TEMP_DEBUG: Weapon Load Pool
         if(primW is BaseGun)
-            {
-                //Late check script
-                if (pooler ==null)
-                    pooler = PM.pooler;
+        {
+            //Late check script
+            if (pooler ==null)
+                pooler = PM.pooler;
 
-                BaseGun gun = primW as BaseGun;
-                gun.FindAmmo(pooler);
-            }
+            BaseGun gun = primW as BaseGun;
+            gun.FindAmmo(pooler);
+        }
+        else if(primW is BaseMagic)
+        {
+            //Late check script
+            if (pooler ==null)
+                pooler = PM.pooler;
+
+            BaseMagic spell = primW as BaseMagic;
+            spell.FindPool(pooler);
+        }
 
         //Apply items here, or like, in the load function.
         

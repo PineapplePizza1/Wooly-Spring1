@@ -65,6 +65,7 @@ public class DebugManager : MonoBehaviour
 
     void ResetGame()
     {
+        DebugGUI("Reset Game", 1f, "DbgMan");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

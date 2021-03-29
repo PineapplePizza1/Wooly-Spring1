@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
     [SerializeField] private SceneInjector sceneject;
     #region Injection
     private LevelManagement LM;
+    private DebugManager debugManager;
     public Pooler pooler{get; private set;}
 
     public void Injection(InjectionDict ID)
     {
         LM = ID.Inject<LevelManagement>();
         pooler = ID.Inject<Pooler>();
+        debugManager = ID.Inject<DebugManager>();
         
     }
     #endregion
@@ -148,10 +150,12 @@ public class Player : MonoBehaviour
 
     void DebugDMG()
     {
+        
         Hit debug = new Hit();
         debug.atkType = StatsManager.AtkType.Base;
         debug.Dmg = 50f;
         playerstat.TakeAttack(debug);
+        debugManager.DebugGUI("Player Health: " + playerstat.health, 1f, "Player");
     }
 
 
@@ -168,6 +172,7 @@ public class Player : MonoBehaviour
 
     void PlayerDeath()
     {
+        debugManager.DebugGUI("Killed Player", 1f, "Player");
         //Kill player, set death state,
         inputState = InputState.Dead;
         //Send message to LM,

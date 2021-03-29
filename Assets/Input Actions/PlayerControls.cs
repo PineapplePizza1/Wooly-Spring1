@@ -310,6 +310,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""12da3bfe-0d9f-4028-81ae-42eb8a8fbed8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -354,6 +362,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DBGdmg"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e4746e4-a441-48a0-8746-d94f28f62472"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -404,6 +423,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Debug_ToggleUI = m_Debug.FindAction("ToggleUI", throwIfNotFound: true);
         m_Debug_DieBind = m_Debug.FindAction("DieBind", throwIfNotFound: true);
         m_Debug_DBGdmg = m_Debug.FindAction("DBGdmg", throwIfNotFound: true);
+        m_Debug_Reset = m_Debug.FindAction("Reset", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -570,6 +590,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Debug_ToggleUI;
     private readonly InputAction m_Debug_DieBind;
     private readonly InputAction m_Debug_DBGdmg;
+    private readonly InputAction m_Debug_Reset;
     public struct DebugActions
     {
         private @PlayerControls m_Wrapper;
@@ -578,6 +599,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @ToggleUI => m_Wrapper.m_Debug_ToggleUI;
         public InputAction @DieBind => m_Wrapper.m_Debug_DieBind;
         public InputAction @DBGdmg => m_Wrapper.m_Debug_DBGdmg;
+        public InputAction @Reset => m_Wrapper.m_Debug_Reset;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -599,6 +621,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @DBGdmg.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDBGdmg;
                 @DBGdmg.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDBGdmg;
                 @DBGdmg.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDBGdmg;
+                @Reset.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnReset;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
@@ -615,6 +640,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @DBGdmg.started += instance.OnDBGdmg;
                 @DBGdmg.performed += instance.OnDBGdmg;
                 @DBGdmg.canceled += instance.OnDBGdmg;
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
             }
         }
     }
@@ -657,5 +685,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnToggleUI(InputAction.CallbackContext context);
         void OnDieBind(InputAction.CallbackContext context);
         void OnDBGdmg(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
 }

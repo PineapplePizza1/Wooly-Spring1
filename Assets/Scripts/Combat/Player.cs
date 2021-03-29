@@ -148,8 +148,10 @@ public class Player : MonoBehaviour
 
     void DebugDMG()
     {
-        
-        //playerStats.Damage(60f, StatsManager.AtkType.Base); //maybe switch enum to later class; attacks might become a class.
+        Hit debug = new Hit();
+        debug.atkType = StatsManager.AtkType.Base;
+        debug.Dmg = 50f;
+        playerstat.TakeAttack(debug);
     }
 
 

@@ -37,7 +37,7 @@ public class LevelManagement : MonoBehaviour
         onGameOver +=EndGame;
         
         //dbg spawn char. Pass this in through GM probably in actual game or something, or swap.
-        int choice = UnityEngine.Random.Range(0, PlayerPrefabs.Count-1);
+        int choice = UnityEngine.Random.Range(0, PlayerPrefabs.Count);
         GameObject chosen = Instantiate(PlayerPrefabs[choice], StartPos.position, StartPos.rotation);
         freeCam.Follow = chosen.transform;
         freeCam.LookAt = chosen.transform;

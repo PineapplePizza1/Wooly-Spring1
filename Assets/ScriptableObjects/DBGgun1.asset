@@ -17,7 +17,7 @@ MonoBehaviour:
     m_Bits: 1024
   wepName: DBGArrow
   cooldown: 5
-  WeaponDamage: 7
+  WeaponDamage: 25
   WeaponType: 1
   bulletType: Arrow
   bulletSpeed: 12

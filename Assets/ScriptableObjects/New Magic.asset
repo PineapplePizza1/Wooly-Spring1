@@ -20,6 +20,10 @@ MonoBehaviour:
   WeaponDamage: 25
   WeaponType: 0
   ChargeList:
-  - ChargeLvl: 1
+  - ChargeLvl: 0.5
     prefabType: dbgmagic
+  - ChargeLvl: 1
+    prefabType: dbgmagic2
+  - ChargeLvl: 1.5
+    prefabType: dbgmagic3
   rotater: {x: 0, y: 0, z: 0}

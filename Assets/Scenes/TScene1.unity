@@ -15953,11 +15953,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1950604014807025398, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
-      propertyPath: ScriptList.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950604014807025398, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
       propertyPath: ScriptList.Array.data[1].Script
       value: 
       objectReference: {fileID: 559733142}
@@ -15966,31 +15961,6 @@ PrefabInstance:
       propertyPath: ScriptList.Array.data[4].Script
       value: 
       objectReference: {fileID: 645451727}
-    - target: {fileID: 1950604014807025398, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: ScriptList.Array.data[0].Requirement
-      value: Level Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950604014807025398, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: ScriptList.Array.data[1].Requirement
-      value: Debug Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950604014807025398, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: ScriptList.Array.data[2].Requirement
-      value: Level Loader
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950604014807025398, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: ScriptList.Array.data[3].Requirement
-      value: Pooler
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950604014807025398, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: ScriptList.Array.data[4].Requirement
-      value: Level Generator
-      objectReference: {fileID: 0}
     - target: {fileID: 7420801224551678513, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
       propertyPath: MainCam
@@ -16008,33 +15978,9 @@ PrefabInstance:
       objectReference: {fileID: 348682093}
     - target: {fileID: 7420801224551678513, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
-      propertyPath: PlayerPrefabs.Array.size
-      value: 4
+      propertyPath: MainMenuScene
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 7420801224551678513, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: PlayerPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 3819969658572891330, guid: b9ed8839bb63aea4dadaf64a5822fd2f,
-        type: 3}
-    - target: {fileID: 7420801224551678513, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: PlayerPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 4819282097673912203, guid: c260e7f3a6592174892b2f078b0f6e3f,
-        type: 3}
-    - target: {fileID: 7420801224551678513, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: PlayerPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 3819969658572891330, guid: bcdf88ec1525ae643bc2897b02f5aefd,
-        type: 3}
-    - target: {fileID: 7420801224551678513, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
-        type: 3}
-      propertyPath: PlayerPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 8989208179551890341, guid: 54b4620e963cd404daeb1fb6f4994795,
-        type: 3}
     - target: {fileID: 7420801224551678524, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
       propertyPath: m_Name
@@ -16098,23 +16044,39 @@ PrefabInstance:
     - target: {fileID: 7420801226037536603, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
       propertyPath: LoadPools.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7420801226037536603, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
-      propertyPath: LoadPools.Array.data[1].tag
-      value: dbgmagic
+      propertyPath: LoadPools.Array.data[2].tag
+      value: dbgmagic2
       objectReference: {fileID: 0}
     - target: {fileID: 7420801226037536603, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
-      propertyPath: LoadPools.Array.data[1].size
+      propertyPath: LoadPools.Array.data[3].tag
+      value: dbgmagic3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7420801226037536603, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
+        type: 3}
+      propertyPath: LoadPools.Array.data[2].size
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7420801226037536603, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
-      propertyPath: LoadPools.Array.data[1].prefab
+      propertyPath: LoadPools.Array.data[3].size
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7420801226037536603, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
+        type: 3}
+      propertyPath: LoadPools.Array.data[2].prefab
       value: 
-      objectReference: {fileID: 517567308838058243, guid: e97e1e2fca4000e44941b9bccb2f2958,
+      objectReference: {fileID: 1308078363321414103, guid: c326c619dfdf3d642bc4c81687967804,
+        type: 3}
+    - target: {fileID: 7420801226037536603, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
+        type: 3}
+      propertyPath: LoadPools.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 8953540716060088820, guid: c3b69646eec565a459bef6899e08b54d,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea30f846b7b7de84a8a6fc43739ee8e3, type: 3}

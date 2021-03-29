@@ -67,6 +67,8 @@ MonoBehaviour:
     Script: {fileID: 0}
   - Requirement: Pooler
     Script: {fileID: 7420801226037536603}
+  - Requirement: Level Generator
+    Script: {fileID: 0}
 --- !u!114 &7420801224551678513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +83,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneject: {fileID: 7420801224551678526}
   MainMenuScene: 1
+  StartPos: {fileID: 0}
+  PlayerPrefabs:
+  - {fileID: 3819969658572891330, guid: b9ed8839bb63aea4dadaf64a5822fd2f, type: 3}
+  - {fileID: 4819282097673912203, guid: c260e7f3a6592174892b2f078b0f6e3f, type: 3}
+  - {fileID: 3819969658572891330, guid: bcdf88ec1525ae643bc2897b02f5aefd, type: 3}
+  - {fileID: 8989208179551890341, guid: 54b4620e963cd404daeb1fb6f4994795, type: 3}
+  freeCam: {fileID: 0}
+  MainCam: {fileID: 0}
 --- !u!114 &7420801226037536603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,4 +107,7 @@ MonoBehaviour:
   - tag: Arrow
     prefab: {fileID: 6541524630323536279, guid: b71e26783a90e5343bed9a509519bf45,
       type: 3}
+    size: 50
+  - tag: dbgmagic
+    prefab: {fileID: 517567308838058243, guid: e97e1e2fca4000e44941b9bccb2f2958, type: 3}
     size: 50

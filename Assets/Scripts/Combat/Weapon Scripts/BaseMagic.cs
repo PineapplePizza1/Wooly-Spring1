@@ -60,26 +60,33 @@ public class BaseMagic : BaseWeapon
         {
             if (chargeCounter >0f)
             {
-                foreach(MagicChargePair choggy in ChargeList) //could simplify so it's just one, but these should be short anyways.
+                string loadspell = null;
+                for(int i = 0; i<ChargeList.Count; i++) //(MagicChargePair choggy in ChargeList) //could simplify so it's just one, but these should be short anyways.
                 {
-                    if(chargeCounter >= choggy.ChargeLvl) 
+                    if(chargeCounter >= ChargeList[i].ChargeLvl) 
                     {
-                        //Cast Item!
-                        //Add additional rotation 
-                        Quaternion rotato = Quaternion.Euler(rotater); //Quaternion.LookRotation(playerpos.rotation.eulerAngles, Vector3.up);
-                        rotato = Quaternion.AngleAxis(playerpos.rotation.eulerAngles.y, Vector3.up) * rotato; //NOTE: Attach rotater to actual ammo
-                        
-                        
-                        GameObject bullet = pooler.SpawnFromPool(choggy.prefabType, playerpos.position, rotato);  //NOTE: could pass in a specific fire position at another point.
-                        //Rigidbody bulletrigid = bullet.GetComponent<Rigidbody>();
-                        //BaseBullet bulletScr = bullet.GetComponent<BaseBullet>();
-                        direct.y = 0;
-                        
-                        //Setup Magic Script, with directions and stuff.
-
-                        Debug.Log("BMag: Casted!");
-                        
+                       loadspell = ChargeList[i].prefabType;
                     }
+                }
+                
+                if (loadspell != null)
+                {
+                    //Cast Item!
+                    //Add additional rotation 
+                    Quaternion rotato = Quaternion.Euler(rotater); //Quaternion.LookRotation(playerpos.rotation.eulerAngles, Vector3.up);
+                    rotato = Quaternion.AngleAxis(playerpos.rotation.eulerAngles.y, Vector3.up) * rotato; //NOTE: Attach rotater to actual ammo
+                    
+                    
+                    GameObject bullet = pooler.SpawnFromPool(loadspell, playerpos.position, rotato);  //NOTE: could pass in a specific fire position at another point.
+                    //Rigidbody bulletrigid = bullet.GetComponent<Rigidbody>();
+                    //BaseBullet bulletScr = bullet.GetComponent<BaseBullet>();
+                    direct.y = 0;
+                    
+                    //Setup Magic Script, with directions and stuff.
+
+
+                    Debug.Log("BMag: Casted!");
+
                 }
             }
 

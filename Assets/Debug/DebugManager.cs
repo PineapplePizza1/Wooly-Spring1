@@ -36,6 +36,7 @@ public class DebugManager : MonoBehaviour
         
         playerInput = new PlayerControls();
         playerInput.Debug.ToggleUI.performed += ctx => ToggleUI();
+        playerInput.Debug.Reset.performed += ContextMenu => ResetGame();
 
         sceneJect.SceneJect += Injection;
 
@@ -60,6 +61,11 @@ public class DebugManager : MonoBehaviour
     void ToggleUI()
     {
         DebugPanel.SetActive(!DebugPanel.activeInHierarchy);
+    }
+
+    void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnEnable() {

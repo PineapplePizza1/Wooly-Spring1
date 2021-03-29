@@ -17,5 +17,5 @@ MonoBehaviour:
     m_Bits: 1024
   wepName: DBG Melee
   cooldown: 4
-  WeaponDamage: 10
+  WeaponDamage: 25
   WeaponType: 2

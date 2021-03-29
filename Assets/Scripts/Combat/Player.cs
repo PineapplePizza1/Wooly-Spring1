@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 //LU: 3/10/21 D-Lynn Z 
 
@@ -22,6 +23,9 @@ public class Player : MonoBehaviour
         
     }
     #endregion
+
+    //DEBUG: Could probably inject this, but hey, this also works, and is basically injection, soooo
+    public Transform MainCam {get; private set;}
 
     //playercontrols map
     public PlayerControls playerInput;
@@ -48,14 +52,28 @@ public class Player : MonoBehaviour
     public PlayerLoadout playerload {get; private set;}
 
 
+    public void InstantiatePlayer(SceneInjector passject, Transform incam)
+    {
+        sceneject = passject;
+        MainCam = incam;
+
+/* //DEBUG/WORKAROUND: I have no clue how I want to do this yet, but I guess here we gooo
+        //likely, the future practical answer is to make Sceneject not an event, but a real method that returns something like gamecomponent<>.
+    }
+
 
     private void Awake() {
+    */
 
         //Input
+        
         playerInput = new PlayerControls();
         playerInput.Debug.DieBind.performed += _ => PlayerDeath();
         playerInput.Debug.DBGdmg.performed += _ => DebugDMG();
         playerInput.MovementMK.Interact.performed += _ => Interact();
+
+    //DEBUG: originally in  onenable, but the spawn method is a little odd to be sure.
+        playerInput.Enable();
 
         //Injection
         sceneject.SceneJect += Injection;
@@ -84,6 +102,7 @@ public class Player : MonoBehaviour
     void PlayerStart() //Start all the scripts on player
     {
         playercomb.StartCombat();
+        playerMove.InitMovement(MainCam);
         //Start Loadout in Combat
     }
 
@@ -157,10 +176,13 @@ public class Player : MonoBehaviour
     }
 
 
+/* DEBUG/WORKAROUND: Don't know how to do this via enable yet, so I'll let the instantiation process run this method, I guess lol.
     private void OnEnable() {
-    playerInput.Enable();
+        playerInput.Enable();
 
     }
+
+*/
 
     private void OnDisable() {
         playerInput.Disable();

@@ -44,7 +44,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private CharacterController controller;
 
-
+    public void InitMovement(Transform incam) //Fill out later, but follows after Player initialization.
+    {
+        cam = incam;
+    }
     private bool started;
 
     public void startmove(){

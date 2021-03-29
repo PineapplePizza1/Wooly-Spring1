@@ -12,6 +12,8 @@ using Cinemachine;
 public class LevelManagement : MonoBehaviour
 {
     [SerializeField]private SceneInjector sceneject;
+
+    public bool debugMode;
     public int MainMenuScene;
 
     public Transform StartPos;
@@ -36,6 +38,8 @@ public class LevelManagement : MonoBehaviour
     void Awake() {
         onGameOver +=EndGame;
         
+        if (!debugMode)
+        {
         //dbg spawn char. Pass this in through GM probably in actual game or something, or swap.
         int choice = UnityEngine.Random.Range(0, PlayerPrefabs.Count);
         GameObject chosen = Instantiate(PlayerPrefabs[choice], StartPos.position, StartPos.rotation);
@@ -48,7 +52,7 @@ public class LevelManagement : MonoBehaviour
         //look into this later, too tired and too lazy.
         Player play = chosen.GetComponent<Player>();
         play.InstantiatePlayer(sceneject, MainCam);
-        
+        }
     }
 
     

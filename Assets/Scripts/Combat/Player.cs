@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public bool debugMode;
+
     //DEBUG: Could probably inject this, but hey, this also works, and is basically injection, soooo
     public Transform MainCam {get; private set;}
 
@@ -53,19 +55,24 @@ public class Player : MonoBehaviour
     public PlayerCombat playercomb {get; private set;}
     public PlayerLoadout playerload {get; private set;}
 
+private void Awake() {
+    /* //DEBUG/WORKAROUND: I have no clue how I want to do this yet, but I guess here we gooo
+        //likely, the future practical answer is to make Sceneject not an event, but a real method that returns something like gamecomponent<>.
+    */
+
+    if (debugMode)
+    {
+        playerMove = this.GetComponent<ThirdPersonMovement>();
+        InstantiatePlayer(sceneject, playerMove.cam);
+    }
+}
 
     public void InstantiatePlayer(SceneInjector passject, Transform incam)
     {
         sceneject = passject;
         MainCam = incam;
 
-/* //DEBUG/WORKAROUND: I have no clue how I want to do this yet, but I guess here we gooo
-        //likely, the future practical answer is to make Sceneject not an event, but a real method that returns something like gamecomponent<>.
-    }
 
-
-    private void Awake() {
-    */
 
         //Input
         

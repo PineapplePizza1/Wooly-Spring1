@@ -28,6 +28,19 @@ public class ChaseState : BaseState
         
     }
 
+    public Transform CheckAttack()
+    {
+        //_baseEnemy._agent.remainingDistance <= _baseEnemy._agent.stoppingDistance;
+        Collider[] hitEnemies = Physics.OverlapSphere(_baseEnemy.MeleePoint.position, _baseEnemy.MeleeDist, _baseEnemy._enemyMask);
+        if (hitEnemies?.Length > 0)
+        {
+            return hitEnemies[0].transform;
+        }
+        else{
+            return null;
+        }
+    }
+
     // Update is called once per frame
     public override Type Tick()
     {
@@ -47,7 +60,7 @@ public class ChaseState : BaseState
                     _baseEnemy._anim.SetBool("Moving", true);
 
                 //if within distance, attack
-                if (_baseEnemy._agent.remainingDistance <= _baseEnemy._agent.stoppingDistance) //NOTE: change to "Check Cone", for direction.
+                if (CheckAttack()!=null)
                 {
                     
                     //Attack animation.

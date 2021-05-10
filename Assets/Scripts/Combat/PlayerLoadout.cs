@@ -9,6 +9,8 @@ using UnityEngine;
  
 public class PlayerLoadout : Loadout
 {
+    //TEMP: Melee point, probably move to either combat or somethign else?
+    public Transform MeleePoint;
 
     private Player PM;
 
@@ -69,6 +71,11 @@ public class PlayerLoadout : Loadout
 
             BaseMagic spell = primW as BaseMagic;
             spell.FindPool(pooler);
+        }
+        else if(primW is BaseMelee)
+        {
+            BaseMelee smack = primW as BaseMelee;
+            smack.FindPoint(MeleePoint);
         }
 
         //Apply items here, or like, in the load function.

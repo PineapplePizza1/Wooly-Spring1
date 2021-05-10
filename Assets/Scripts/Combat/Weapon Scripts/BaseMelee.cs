@@ -11,8 +11,15 @@ using UnityEngine;
 public class BaseMelee : BaseWeapon
 {
     //preset
+    public float AttackRadius;
+    private Transform AtkPoint;
     private void OnEnable() {
         WeaponType = StatsManager.AtkType.Melee; //probably a better way to do this, but it'll work for now
+    }
+
+    public void FindPoint(Transform inpoint)
+    {
+        AtkPoint = inpoint;
     }
 
     void Swing(Vector3 direct, Transform playerpos, Hit dmg)
@@ -20,10 +27,11 @@ public class BaseMelee : BaseWeapon
             //Play sound or something
             Debug.Log("BaseMelee: Swang!");
     }
+    //cutland
     void Cut(Hit dmg)
     {
-            //DEBUG: update the actual hit location, to hit a specific part
-        Collider[] hitEnemies = Physics.OverlapSphere(dmg.Owner.transform.position, 10f, enemies); //position either from dmg, or from Swing attack up front.
+            //DEBUG: update the actual hit location, to hit a specific part. And eventually, adjust radius
+        Collider[] hitEnemies = Physics.OverlapSphere(AtkPoint.position, AttackRadius, enemies); //position either from dmg, or from Swing attack up front.
 
         if (hitEnemies?.Length > 0)
         {

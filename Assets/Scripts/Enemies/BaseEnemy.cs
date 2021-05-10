@@ -10,7 +10,9 @@ public class BaseEnemy : MonoBehaviour
 {
     private StatsManager myStats;
 
-    
+    //MELEE, probably remove/child for future implementations.
+    public Transform MeleePoint;
+    public float MeleeDist;
 
     //Add Target, get Private set;
     public Transform Target {get; private set;}
@@ -79,7 +81,7 @@ public class BaseEnemy : MonoBehaviour
     //Loadout Script attach here.
     public void PrimOnHit()
     {
-        
+
     }
     public void FootL()
     {

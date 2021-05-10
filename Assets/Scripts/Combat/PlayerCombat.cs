@@ -34,11 +34,12 @@ public class PlayerCombat : MonoBehaviour
 
     private Animator pAnim;
 
-
     public Attack Prim;
     public Attack Seco;
     public Attack Util;
     public Attack Move;
+
+
 
     void Awake()
     {

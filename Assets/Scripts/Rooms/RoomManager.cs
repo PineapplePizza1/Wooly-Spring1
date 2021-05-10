@@ -28,7 +28,7 @@ public class RoomManager : MonoBehaviour
         foreach(BaseEnemy _enem in enemies)
         {
             _enem.AddInject(sceneject);
-            _enem.gameObject.SetActive(true);
+            //_enem.gameObject.SetActive(true);
 
             //remember to replace inject with requests.
         }

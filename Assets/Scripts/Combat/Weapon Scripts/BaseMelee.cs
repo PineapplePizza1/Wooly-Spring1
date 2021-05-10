@@ -32,7 +32,7 @@ public class BaseMelee : BaseWeapon
     {
             //DEBUG: update the actual hit location, to hit a specific part. And eventually, adjust radius
         Collider[] hitEnemies = Physics.OverlapSphere(AtkPoint.position, AttackRadius, enemies); //position either from dmg, or from Swing attack up front.
-        Debug.Log("BaseMelee: POS: " + AtkPoint.position); //Debug: OMg. Every weapon needs its own instance, holy shit. 
+        //Debug.Log("BaseMelee: POS: " + AtkPoint.position); //Debug: OMg. Every weapon needs its own instance, holy shit. 
         if (hitEnemies?.Length > 0)
         {
              

@@ -57,8 +57,8 @@ public class BaseEnemy : MonoBehaviour
         Prim = new Attack(this.gameObject);
 
 
-        sceneject.SceneJect += Injection;
-        sceneject.FixedSceneLoad += EnemyStart;
+        //sceneject.SceneJect += Injection;
+        //sceneject.FixedSceneLoad += EnemyStart;
 
     }
 
@@ -69,9 +69,12 @@ public class BaseEnemy : MonoBehaviour
         
     }
 
+//TEMP: basically, spawn, with new start based on Room Manager.
     public void AddInject(SceneInjector _in)
     {
         sceneject = _in;
+        _pool = sceneject.Request<Pooler>(); 
+        EnemyStart();
     }
 
     private void EnemyDeath() //Enemy Defeat method

@@ -48,6 +48,18 @@ public class ChaseState : BaseState
 
         if(!_attacking)
         {
+            if((_baseEnemy._anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))) //if it isn't attacking anymore,
+            {
+                
+                    //Attack animation.
+                    _baseEnemy.Primary();
+                    _baseEnemy._agent.isStopped = true;
+                    
+                    _attacking =true;
+
+                return typeof(ChaseState);
+            }
+
             Transform chaseTarget = CheckforAggro();
 
             if (chaseTarget != null)
@@ -62,15 +74,10 @@ public class ChaseState : BaseState
                 //if within distance, attack
                 if (CheckAttack()!=null)
                 {
-                    
-                    //Attack animation.
-                    _baseEnemy._anim.SetTrigger("AtkTrigger");
                     _baseEnemy._anim.SetBool("Moving", false);
                     _baseEnemy._anim.SetFloat("Animation Speed", 1f); //Attack Speed
-                    _attacking =true;
-                    _baseEnemy._agent.isStopped = true;
-
-            
+                    _baseEnemy._anim.SetTrigger("AtkTrigger");
+                    
                 }
 
                 return typeof(ChaseState);
@@ -83,7 +90,6 @@ public class ChaseState : BaseState
             Debug.Log("AIChase: Attacking");
             if((_baseEnemy._anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))) //if it isn't attacking anymore,
             {
-                
             }
             else{
                 //start moving again.

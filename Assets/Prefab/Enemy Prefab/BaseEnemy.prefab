@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 1525598644620258982}
   - component: {fileID: 1328947837505225709}
   - component: {fileID: 1525598644620258976}
+  - component: {fileID: 2845330657491947357}
   - component: {fileID: 5629399087967400923}
   - component: {fileID: 4090258524382756545}
   - component: {fileID: 343914928987182690}
@@ -491,13 +492,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585d36fb05a56514ba171d2c8bef9510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneject: {fileID: 0}
   MeleePoint: {fileID: 4890064175868830724}
   MeleeDist: 1.5
   _enemyMask:
     serializedVersion: 2
     m_Bits: 512
   StateMachine: {fileID: 0}
-  _anim: {fileID: 0}
 --- !u!114 &1525598644620258976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +516,19 @@ MonoBehaviour:
   Intelligence: 5
   Constitution: 2
   lvl: 1
+--- !u!114 &2845330657491947357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525598644620258980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446b4caf370f4a6499c4fd28492f63d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primW: {fileID: 11400000, guid: 3f089bb8b43135f4e9f510e1c1f9b449, type: 2}
 --- !u!114 &5629399087967400923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1868,8 +1882,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6234801227988209342}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}

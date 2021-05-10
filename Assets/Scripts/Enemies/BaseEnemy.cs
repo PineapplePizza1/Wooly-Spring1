@@ -8,7 +8,17 @@ using System;
     //NOTE: need to figure a way to configure attacks animations for enemies.
 public class BaseEnemy : MonoBehaviour
 {
-    private StatsManager myStats;
+    [SerializeField] private SceneInjector sceneject;
+    #region Injection
+    public Pooler _pool{get; private set;}
+    public void Injection(InjectionDict ID)
+    {
+        _pool = ID.Inject<Pooler>(); 
+    }
+    #endregion
+    public StatsManager myStats{get; private set;}
+
+    
 
     //MELEE, probably remove/child for future implementations.
     public Transform MeleePoint;
@@ -24,13 +34,17 @@ public class BaseEnemy : MonoBehaviour
 
 
     //Animation
-    public Animator _anim;
+    public Animator _anim{get; private set;}
+
+    public Attack Prim{get; private set;}
+    private EnemyLoadout _loadout;
 
     
     private void Awake() {
         myStats = GetComponent<StatsManager>();
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
+        _loadout = GetComponent<EnemyLoadout>();
         StateMachine = GetComponent<AIStateMachine>();
 
 
@@ -39,6 +53,20 @@ public class BaseEnemy : MonoBehaviour
 
         myStats.Death += EnemyDeath;
 
+        //create attacks
+        Prim = new Attack(this.gameObject);
+
+
+        sceneject.SceneJect += Injection;
+        sceneject.FixedSceneLoad += EnemyStart;
+
+    }
+
+    public void EnemyStart() {
+        //load weapon.
+        _loadout.StartEnemyLoadout();
+        _loadout.LoadPrimary(Prim);
+        
     }
 
     private void EnemyDeath() //Enemy Defeat method
@@ -76,12 +104,20 @@ public class BaseEnemy : MonoBehaviour
 
     //Magic, similar to ranged, but likely, just take time to cast. but TBH, dunno if I'll get time for ranged.
 
+    public void Primary()
+    {
+        if (Prim ==null)
+            _loadout.LoadPrimary(Prim);
+        Prim.Atk(this.transform.rotation.eulerAngles, this.transform);  //Note: Posibly use direct input, vs Player rotation
+    }
+
 #region Attack Delegats
     //List Attack Delegates here.
     //Loadout Script attach here.
+    
     public void PrimOnHit()
     {
-
+        Prim.OnHit();
     }
     public void FootL()
     {

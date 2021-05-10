@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4b227935d4eec545a5c6da43a0f19f1, type: 3}
-  m_Name: New Melee
+  m_Name: EnemyGsword
   m_EditorClassIdentifier: 
   enemies:
     serializedVersion: 2
-    m_Bits: 1024
-  wepName: DBG Melee
+    m_Bits: 512
+  wepName: EGreatSword
   cooldown: 4
   WeaponDamage: 25
   WeaponType: 2
-  AttackRadius: 1.5
+  AttackRadius: 1000

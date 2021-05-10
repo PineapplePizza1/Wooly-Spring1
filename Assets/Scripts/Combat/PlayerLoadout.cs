@@ -23,6 +23,7 @@ public class PlayerLoadout : Loadout
 
    void Awake() {
        PM = GetComponent<Player>();
+
        
    }
    public void StartPlayerLoadout()
@@ -44,7 +45,8 @@ public class PlayerLoadout : Loadout
 
     public void LoadPrimary(Attack loadtk)
     {
-        primW.LoadWeapon(loadtk);
+        BaseWeapon temp = Instantiate(primW);
+        primW = temp;
 
         if (pstats == null)
             pstats = PM.playerstat; //redundant, probably see if there's an easy injectable fix?
@@ -78,6 +80,7 @@ public class PlayerLoadout : Loadout
             smack.FindPoint(MeleePoint);
         }
 
+        primW.LoadWeapon(loadtk);
         //Apply items here, or like, in the load function.
         
     }

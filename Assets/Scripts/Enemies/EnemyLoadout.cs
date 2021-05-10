@@ -33,6 +33,9 @@ public class EnemyLoadout : Loadout
 
     public void LoadPrimary(Attack loadtk)
     {
+        BaseWeapon temp = Instantiate(primW);
+        primW = temp;
+        
         primW.LoadWeapon(loadtk);
 
         if (_stats == null)

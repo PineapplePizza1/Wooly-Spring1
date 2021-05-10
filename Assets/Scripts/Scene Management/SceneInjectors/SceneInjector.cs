@@ -117,6 +117,13 @@ public class SceneInjector : MonoBehaviour
     }
 
 
+    //TEMP: gonna have to rework at later date, might replace inject Event.
+    public T Inject<T>() where T: Component
+    {
+        return SceneScripts.Inject<T>();
+    }
+
+
     #region Scene Loading/Injecting Events
 
     /*LIST OF SUBSCRIBABLE EVENTS:

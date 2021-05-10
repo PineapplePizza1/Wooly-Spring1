@@ -69,6 +69,11 @@ public class BaseEnemy : MonoBehaviour
         
     }
 
+    public void AddInject(SceneInjector _in)
+    {
+        sceneject = _in;
+    }
+
     private void EnemyDeath() //Enemy Defeat method
     {
         this.gameObject.SetActive(false);

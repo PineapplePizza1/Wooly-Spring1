@@ -22,6 +22,8 @@ public class LevelGenerator : MonoBehaviour
     //- while level is "loading", place objects in-place, and once ready, spawn, and start.
 
     public GameObject LevelPlane;
+
+    public SceneInjector sceneject;
     
     //Bounds variables: probs a better way to do this, but whatevs lol.
     private float minx;
@@ -70,6 +72,8 @@ public class LevelGenerator : MonoBehaviour
 
             GameObject roomy = Instantiate(room, randPos, LevelPlane.transform.rotation);
             roomy.transform.SetParent(LevelPlane.transform);
+            RoomManager trom = roomy.GetComponent<RoomManager>();
+            trom.AttachSceneject(sceneject);
         }
         //does not work for a repeat or something yet, but we'll fix it.
 

@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 1525598644620258982}
   - component: {fileID: 1328947837505225709}
   - component: {fileID: 1525598644620258976}
+  - component: {fileID: 5629399087967400923}
   - component: {fileID: 4090258524382756545}
   - component: {fileID: 343914928987182690}
   m_Layer: 10
@@ -489,7 +490,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585d36fb05a56514ba171d2c8bef9510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent: {fileID: 343914928987182690}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 512
@@ -510,6 +510,18 @@ MonoBehaviour:
   Intelligence: 5
   Constitution: 2
   lvl: 1
+--- !u!114 &5629399087967400923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525598644620258980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd11fa7d1a2c3447a7863d7cd3dc2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4090258524382756545
 Animator:
   serializedVersion: 3

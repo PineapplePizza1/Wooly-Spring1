@@ -11,9 +11,26 @@ public class BaseEnemy : MonoBehaviour
     private StatsManager myStats;
 
     
+
+    //Add Target, get Private set;
+    public Transform Target {get; private set;}
+    public LayerMask _enemyMask;
+    public NavMeshAgent _agent {get; private set;}
+
+    //Add State Machine
+    public AIStateMachine StateMachine;
+
+
+    //Animation
+    public Animator _anim;
+
+    
     private void Awake() {
         myStats = GetComponent<StatsManager>();
         _agent = GetComponent<NavMeshAgent>();
+        _anim = GetComponent<Animator>();
+        StateMachine = GetComponent<AIStateMachine>();
+
 
         InitializeStateMachine(StateMachine);
 
@@ -36,17 +53,8 @@ public class BaseEnemy : MonoBehaviour
         };
 
         _sm.SetStates(_states);
-        
+
     }
-
-
-    //Add Target, get Private set;
-    public Transform Target {get; private set;}
-    public LayerMask _enemyMask;
-    public NavMeshAgent _agent {get; private set;}
-
-    //Add State Machine
-    public AIStateMachine StateMachine => GetComponent<AIStateMachine>();
 
 
     //Fire
@@ -66,5 +74,10 @@ public class BaseEnemy : MonoBehaviour
 
     //Magic, similar to ranged, but likely, just take time to cast. but TBH, dunno if I'll get time for ranged.
 
+#region Attack Delegats
+    //List Attack Delegates here.
+    //Loadout Script attach here.
+
+#endregion
 
 }

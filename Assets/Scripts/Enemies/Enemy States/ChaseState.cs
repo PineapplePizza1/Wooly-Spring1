@@ -38,6 +38,11 @@ public class ChaseState : BaseState
             if (_baseEnemy._agent.remainingDistance <= 10f)
             {
                 //Attack animation.
+                //Debug.Log("AIChase: magnitude: " + _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
+                _baseEnemy._anim.SetFloat("Speed", _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
+                _baseEnemy._anim.SetFloat("Animation Speed", _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
+                _baseEnemy._anim.SetBool("Moving", true);
+                
             }
 
             return typeof(ChaseState);

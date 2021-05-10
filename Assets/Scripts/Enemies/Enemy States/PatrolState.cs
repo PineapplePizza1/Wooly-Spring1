@@ -31,12 +31,14 @@ public class PatrolState : BaseState
     {
             //Debug
             //return typeof(PatrolState);
+        _baseEnemy._anim.SetBool("Moving", false);
 
         Transform chaseTarget = CheckforAggro();
 
         if (chaseTarget != null)
         {
             _baseEnemy.SetTarget(chaseTarget.transform);
+            
             return typeof(ChaseState);
         }
         else{return typeof(PatrolState);}

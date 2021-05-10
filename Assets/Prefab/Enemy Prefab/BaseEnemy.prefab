@@ -432,10 +432,9 @@ GameObject:
   - component: {fileID: 1525598644620258981}
   - component: {fileID: 1525598644620258982}
   - component: {fileID: 1328947837505225709}
-  - component: {fileID: 1525598644620258983}
   - component: {fileID: 1525598644620258976}
-  - component: {fileID: 8157020174584296937}
   - component: {fileID: 4090258524382756545}
+  - component: {fileID: 343914928987182690}
   m_Layer: 10
   m_Name: BaseEnemy
   m_TagString: Enemy
@@ -490,32 +489,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585d36fb05a56514ba171d2c8bef9510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1525598644620258983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525598644620258980}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad33ce52cfdf6b439f97498ab8a8c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingPos: {fileID: 0}
-  groundCheck: {fileID: 1525598643176393088}
-  groundDistance: 0.4
-  groundMask:
+  _agent: {fileID: 343914928987182690}
+  _enemyMask:
     serializedVersion: 2
-    m_Bits: 256
-  turnSmoothTime: 0.1
-  cam: {fileID: 0}
-  baseSpeed: 6
-  sprintMod: 2
-  gravity: -9.81
-  jumpHeight: 3
-  velocity: {x: 0, y: 0, z: 0}
-  moveDir: {x: 0, y: 0, z: 0}
+    m_Bits: 512
 --- !u!114 &1525598644620258976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,19 +510,6 @@ MonoBehaviour:
   Intelligence: 5
   Constitution: 2
   lvl: 1
---- !u!114 &8157020174584296937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525598644620258980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8ad2ec2d430c440a10da178f03d230, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayAnimator: {fileID: 0}
 --- !u!95 &4090258524382756545
 Animator:
   serializedVersion: 3
@@ -565,6 +529,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!195 &343914928987182690
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525598644620258980}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0.91
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1525598644908009155
 GameObject:
   m_ObjectHideFlags: 0

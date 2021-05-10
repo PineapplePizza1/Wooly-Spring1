@@ -19,4 +19,22 @@ public class BaseEnemy : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
+
+
+    //Add Team? yes
+    //Add Visuals/Laser
+
+    //Add Target, get Private set;
+    public Transform Target {get; private set;}
+
+    //Add State Machine
+    public AIStateMachine StateMachine => GetComponent<AIStateMachine>();
+
+
+//Fire
+//Set Target (Public method)
+public void SetTarget(Transform target)
+{
+    Target = target;
+}
 }

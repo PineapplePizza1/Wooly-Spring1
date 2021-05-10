@@ -77,6 +77,18 @@ public class BaseEnemy : MonoBehaviour
 #region Attack Delegats
     //List Attack Delegates here.
     //Loadout Script attach here.
+    public void PrimOnHit()
+    {
+        
+    }
+    public void FootL()
+    {
+
+    }
+    public void FootR()
+    {
+
+    }
 
 #endregion
 

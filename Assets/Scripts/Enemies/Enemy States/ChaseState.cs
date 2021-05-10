@@ -8,14 +8,17 @@ public class ChaseState : BaseState
 {
     private BaseEnemy _baseEnemy;
 
+    private bool _attacking;
+
     public ChaseState(BaseEnemy _me) : base(_me.gameObject)
     {
         _baseEnemy = _me;
+        _attacking = false;
     }
     public Transform CheckforAggro()
     {
-       Collider[] hitEnemies = Physics.OverlapSphere(_baseEnemy.transform.position, 50f, _baseEnemy._enemyMask);
-        if (hitEnemies != null)
+       Collider[] hitEnemies = Physics.OverlapSphere(_baseEnemy.transform.position, 10f, _baseEnemy._enemyMask);
+        if (hitEnemies?.Length > 0)
         {
             return hitEnemies[0].transform;
         }
@@ -28,26 +31,58 @@ public class ChaseState : BaseState
     // Update is called once per frame
     public override Type Tick()
     {
-        Transform chaseTarget = CheckforAggro();
+        //Debug.Log("AIChase: Done Atk: " + _baseEnemy._anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"));
 
-        if (chaseTarget != null)
+        if(!_attacking)
         {
-            _baseEnemy._agent.SetDestination(_baseEnemy.Target.position);
+            Transform chaseTarget = CheckforAggro();
 
-            //if within distance, attack
-            if (_baseEnemy._agent.remainingDistance <= 10f)
+            if (chaseTarget != null)
             {
-                //Attack animation.
+                _baseEnemy._agent.SetDestination(_baseEnemy.Target.position);
+
                 //Debug.Log("AIChase: magnitude: " + _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
-                _baseEnemy._anim.SetFloat("Speed", _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
-                _baseEnemy._anim.SetFloat("Animation Speed", _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
-                _baseEnemy._anim.SetBool("Moving", true);
+                    _baseEnemy._anim.SetFloat("Speed", _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
+                    _baseEnemy._anim.SetFloat("Animation Speed", _baseEnemy._agent.velocity.magnitude/_baseEnemy._agent.speed);
+                    _baseEnemy._anim.SetBool("Moving", true);
+
+                //if within distance, attack
+                if (_baseEnemy._agent.remainingDistance <= _baseEnemy._agent.stoppingDistance) //NOTE: change to "Check Cone", for direction.
+                {
+                    
+                    //Attack animation.
+                    _baseEnemy._anim.SetTrigger("AtkTrigger");
+                    _baseEnemy._anim.SetBool("Moving", false);
+                    _baseEnemy._anim.SetFloat("Animation Speed", 1f); //Attack Speed
+                    _attacking =true;
+                    _baseEnemy._agent.isStopped = true;
+
+            
+                }
+
+                return typeof(ChaseState);
+            }else{
+                return typeof(PatrolState);
+            }
+        }
+        else//Attacking
+        {
+            Debug.Log("AIChase: Attacking");
+            if((_baseEnemy._anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))) //if it isn't attacking anymore,
+            {
                 
             }
+            else{
+                //start moving again.
+                _baseEnemy._anim.SetBool("Moving", true);
+                _attacking = false;
+                _baseEnemy._agent.isStopped = false;
+                return typeof(PatrolState);
+            }
+            
+
 
             return typeof(ChaseState);
-        }else{
-            return typeof(PatrolState);
         }
     }
 }

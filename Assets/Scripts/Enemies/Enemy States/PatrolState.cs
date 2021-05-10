@@ -16,8 +16,8 @@ public class PatrolState : BaseState
 
     public Transform CheckforAggro()
     {
-       Collider[] hitEnemies = Physics.OverlapSphere(_baseEnemy.transform.position, 50f, _baseEnemy._enemyMask);
-        if (hitEnemies != null)
+       Collider[] hitEnemies = Physics.OverlapSphere(_baseEnemy.transform.position, 10f, _baseEnemy._enemyMask);
+        if (hitEnemies?.Length > 0)
         {
             return hitEnemies[0].transform;
         }

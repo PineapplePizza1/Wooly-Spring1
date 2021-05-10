@@ -24,8 +24,8 @@ public class BaseMelee : BaseWeapon
     {
             //DEBUG: update the actual hit location, to hit a specific part
         Collider[] hitEnemies = Physics.OverlapSphere(dmg.Owner.transform.position, 10f, enemies); //position either from dmg, or from Swing attack up front.
-    
-        if (hitEnemies != null)
+
+        if (hitEnemies?.Length > 0)
         {
             foreach(Collider enemy in hitEnemies)
             {

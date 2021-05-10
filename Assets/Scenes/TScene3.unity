@@ -16637,6 +16637,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 36e66b1c063b72546824176c5379c620,
         type: 2}
+    - target: {fileID: 5315187765056134195, guid: 54b4620e963cd404daeb1fb6f4994795,
+        type: 3}
+      propertyPath: Prim.ActionSlot.m_Id
+      value: 0f6ed5db-9240-4520-90c0-799d08d281c3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315187765056134195, guid: 54b4620e963cd404daeb1fb6f4994795,
+        type: 3}
+      propertyPath: Prim.ActionSlot.m_Name
+      value: Action Slot
+      objectReference: {fileID: 0}
     - target: {fileID: 8989208179551890336, guid: 54b4620e963cd404daeb1fb6f4994795,
         type: 3}
       propertyPath: sceneject

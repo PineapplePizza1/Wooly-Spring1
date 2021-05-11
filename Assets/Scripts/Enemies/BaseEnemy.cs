@@ -53,7 +53,7 @@ public class BaseEnemy : MonoBehaviour
         InitializeStateMachine(StateMachine);
 
 
-        myStats.Death += EnemyDeath;
+        myStats.onDeath += EnemyDeath;
 
         //create attacks
         Prim = new Attack(this.gameObject);

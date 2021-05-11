@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Augment : MonoBehaviour
+public class Augment
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //specific type of Modifier that augments weapons/stats while attached.
+    //need to code status effects.
+    //post attack effect.
 }

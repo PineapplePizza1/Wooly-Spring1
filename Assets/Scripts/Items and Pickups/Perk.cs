@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Perk : MonoBehaviour
+public class Perk
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //Not yet implemented; This will hold the actual perk interactable, returns a modifier
+    public Modifier perkMod;
 }

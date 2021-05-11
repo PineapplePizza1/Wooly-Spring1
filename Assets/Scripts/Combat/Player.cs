@@ -95,7 +95,7 @@ private void Awake() {
 
         //Stats Subscription
         playerstat = this.GetComponent<StatsManager>(); //get player stats
-        playerstat.Death += PlayerDeath;
+        playerstat.onDeath += PlayerDeath;
         playerstat.HealthUpdate += UpdateHealth;
         playerstat.StatUpdate += UpdateStats;
 
@@ -201,7 +201,7 @@ private void Awake() {
 
     private void OnDisable() {
         playerInput.Disable();
-        playerstat.Death -= PlayerDeath;
+        playerstat.onDeath -= PlayerDeath;
 
     }
     

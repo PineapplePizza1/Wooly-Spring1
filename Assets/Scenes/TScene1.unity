@@ -15791,6 +15791,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3266304248833057239, guid: ec4b034df0383124b8040da44fd63ec1,
         type: 3}
+      propertyPath: sceneject
+      value: 
+      objectReference: {fileID: 1760552295}
+    - target: {fileID: 3266304248833057239, guid: ec4b034df0383124b8040da44fd63ec1,
+        type: 3}
       propertyPath: RoomPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 2216193887753034690, guid: b66d83bc1ed400e49862d8c64b484018,

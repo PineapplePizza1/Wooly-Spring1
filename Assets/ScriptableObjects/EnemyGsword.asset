@@ -17,6 +17,6 @@ MonoBehaviour:
     m_Bits: 512
   wepName: EGreatSword
   cooldown: 4
-  WeaponDamage: 25
+  WeaponDamage: 5
   WeaponType: 2
   AttackRadius: 1000

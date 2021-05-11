@@ -73,7 +73,7 @@ public class LevelGenerator : MonoBehaviour
             GameObject roomy = Instantiate(room, randPos, LevelPlane.transform.rotation);
             roomy.transform.SetParent(LevelPlane.transform);
             RoomManager trom = roomy.GetComponent<RoomManager>();
-            trom.AttachSceneject(sceneject);
+            trom.StartRoom(sceneject);
         }
         //does not work for a repeat or something yet, but we'll fix it.
 

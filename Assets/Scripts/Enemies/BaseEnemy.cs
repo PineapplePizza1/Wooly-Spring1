@@ -18,6 +18,8 @@ public class BaseEnemy : MonoBehaviour
     #endregion
     public StatsManager myStats{get; private set;}
 
+    public RoomManager _roomManage{get; private set;}
+
     
 
     //MELEE, probably remove/child for future implementations.
@@ -77,9 +79,19 @@ public class BaseEnemy : MonoBehaviour
         EnemyStart();
     }
 
+    public void AttachManager(RoomManager _in)
+    {
+        _roomManage = _in;
+        Debug.Log("BaseE: Room Manage: " + _roomManage.GetInstanceID());
+    }
+
     private void EnemyDeath() //Enemy Defeat method
     {
+        
         this.gameObject.SetActive(false);
+        //Debug.Log("BaseE: I was defeated!");
+            Debug.Log("BaseE: I was defeated!");
+            _roomManage.EnemyDefeat();
     }
 
     private void InitializeStateMachine(AIStateMachine _sm)

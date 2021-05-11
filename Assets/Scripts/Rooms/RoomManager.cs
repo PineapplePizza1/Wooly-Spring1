@@ -6,9 +6,14 @@ public class RoomManager : MonoBehaviour
 {
    //Scene INjector
    [SerializeField] private SceneInjector sceneject;
-
+   public ChallengeNeedle needle;
    public List<BaseEnemy> enemies;
 
+   private int EnemyCount;
+
+    private void Awake() {
+        EnemyCount = 999999;
+    }
 
    //main thing, to pass in injections. Otherwise, track # of enemies in area, and rewards.
 
@@ -16,21 +21,44 @@ public class RoomManager : MonoBehaviour
 
     //rewards
 
-    public void AttachSceneject(SceneInjector _sceneject)
+    public void StartRoom(SceneInjector _in)
+    {
+        AttachSceneject(_in);
+        InjectEnemies();
+    }
+
+    private void AttachSceneject(SceneInjector _sceneject)
     {
         sceneject = _sceneject;
     }
 
     //attach to enemies. get list of enemies?
 
-    public void InjectEnemies()
+    private void InjectEnemies()
     {
+        Debug.Log("RoomM: I injected!");
+
+        int tempCount = 0;
+
         foreach(BaseEnemy _enem in enemies)
         {
             _enem.AddInject(sceneject);
+            _enem.AttachManager(this);
             //_enem.gameObject.SetActive(true);
-
+            tempCount +=1;
             //remember to replace inject with requests.
+        }
+        EnemyCount = tempCount;
+
+    }
+    
+    public void EnemyDefeat()
+    {
+        EnemyCount -=1;
+        if(EnemyCount <= 0 )
+        {
+            Debug.Log("RoomM: I needled");
+            needle.CompleteNeedle();
         }
     }
 }

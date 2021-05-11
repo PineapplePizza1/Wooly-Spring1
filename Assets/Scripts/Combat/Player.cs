@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private DebugManager debugManager;
     public Pooler pooler{get; private set;}
 
+
     public void Injection(InjectionDict ID)
     {
         LM = ID.Inject<LevelManagement>();

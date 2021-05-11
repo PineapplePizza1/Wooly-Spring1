@@ -518,6 +518,11 @@ PrefabInstance:
       propertyPath: StartPos
       value: 
       objectReference: {fileID: 2066394403}
+    - target: {fileID: 7420801224551678513, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
+        type: 3}
+      propertyPath: debugMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7420801224551678524, guid: ea30f846b7b7de84a8a6fc43739ee8e3,
         type: 3}
       propertyPath: m_Name
@@ -3560,7 +3565,7 @@ PrefabInstance:
     - target: {fileID: 2995590285441924929, guid: 9c74ed28eb86b154fa42834f077407af,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.054653525
+      value: 0.05465353
       objectReference: {fileID: 0}
     - target: {fileID: 2995590286159255515, guid: 9c74ed28eb86b154fa42834f077407af,
         type: 3}

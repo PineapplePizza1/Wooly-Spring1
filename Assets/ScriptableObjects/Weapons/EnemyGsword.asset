@@ -19,4 +19,4 @@ MonoBehaviour:
   cooldown: 4
   WeaponDamage: 5
   WeaponType: 2
-  AttackRadius: 1000
+  AttackRadius: 10

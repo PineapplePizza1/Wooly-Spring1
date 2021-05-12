@@ -127,7 +127,7 @@ public class BaseEnemy : MonoBehaviour
 
     public void Primary()
     {
-        if (Prim ==null)
+        //if (Prim ==null)
             _loadout.LoadPrimary(Prim);
         Prim.Atk(this.transform.rotation.eulerAngles, this.transform);  //Note: Posibly use direct input, vs Player rotation
     }

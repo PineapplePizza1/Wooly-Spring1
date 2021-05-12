@@ -85,7 +85,7 @@ public class PlayerCombat : MonoBehaviour
         
             //LOADWEP returns null atm, might wanna make new attacks or something.
                 //really, the attacks should be here, just delegates triggered by the playercombat. but ??? shruggies.
-        if (Prim ==null)
+        //if (Prim ==null)
             pload.LoadPrimary(Prim);
         Prim.Atk(PM.playerMove.moveDir, this.transform);  //Note: Posibly use direct input, vs Player rotation
         pAnim.SetInteger("AtkType", 0);

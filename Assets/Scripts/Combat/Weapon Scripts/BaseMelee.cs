@@ -30,6 +30,7 @@ public class BaseMelee : BaseWeapon
     //cutland
     void Cut(Hit dmg)
     {
+        Debug.Log("BaseMelee: atk: " + AttackRadius);
             //DEBUG: update the actual hit location, to hit a specific part. And eventually, adjust radius
         Collider[] hitEnemies = Physics.OverlapSphere(AtkPoint.position, AttackRadius, enemies); //position either from dmg, or from Swing attack up front.
         //Debug.Log("BaseMelee: POS: " + AtkPoint.position); //Debug: OMg. Every weapon needs its own instance, holy shit. 

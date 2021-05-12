@@ -164,8 +164,8 @@ private void Awake() {
 
     void DebugModify()
     {
-        //playerstat.AttachModifier(DebugMod);
-        playerstat.ApplyStatus(DebugFX);
+        playerstat.AttachModifier(DebugMod);
+        //playerstat.ApplyStatus(DebugFX);
     }
 
 

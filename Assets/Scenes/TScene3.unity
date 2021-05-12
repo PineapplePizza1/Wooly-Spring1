@@ -464,7 +464,7 @@ PrefabInstance:
     - target: {fileID: 3819969658572891334, guid: b9ed8839bb63aea4dadaf64a5822fd2f,
         type: 3}
       propertyPath: CurrentMods.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3819969658572891334, guid: b9ed8839bb63aea4dadaf64a5822fd2f,
         type: 3}
@@ -482,7 +482,7 @@ PrefabInstance:
         type: 3}
       propertyPath: DebugMod
       value: 
-      objectReference: {fileID: 11400000, guid: 6f4be78a75ea09540b784c1b62c29e62,
+      objectReference: {fileID: 11400000, guid: 0137bdee519badd48bfe2acc3fbfc29c,
         type: 2}
     - target: {fileID: 3819969658572891335, guid: b9ed8839bb63aea4dadaf64a5822fd2f,
         type: 3}

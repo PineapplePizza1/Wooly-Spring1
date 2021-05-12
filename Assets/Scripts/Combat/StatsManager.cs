@@ -263,16 +263,17 @@ public class StatsManager : MonoBehaviour
     {
         switch(inStat.StatType)
         {
-            case "Strength":
+            //Eventually, add to all Stats.
+            case "STR":
                 Strength.Amt += inStat.Amt;
                 break;
-            case "Intelligence":
+            case "INT":
                 Intelligence.Amt += inStat.Amt;
                 break;
-            case "Dexterity":
+            case "DEX":
                 Dexterity.Amt += inStat.Amt;
                 break;
-            case "Constitution":
+            case "CON":
                 Constitution.Amt += inStat.Amt;
                 break;
             default:

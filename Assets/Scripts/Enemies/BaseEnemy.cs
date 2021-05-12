@@ -68,6 +68,7 @@ public class BaseEnemy : MonoBehaviour
         //load weapon.
         _loadout.StartEnemyLoadout();
         _loadout.LoadPrimary(Prim);
+        myStats.InitiateStats();
         
     }
 

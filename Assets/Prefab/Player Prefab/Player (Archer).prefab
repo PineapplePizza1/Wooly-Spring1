@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneject: {fileID: 0}
+  debugMode: 0
 --- !u!114 &4819282097673912200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,11 +141,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e159cc9204b6834dab427c8fd2380e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Strength: 2
-  Dexterity: 3
-  Intelligence: 5
-  Constitution: 2
+  health: 80
+  maxHealth: 80
+  XP: 0
   lvl: 1
+  Strength:
+    StatType: Strength
+    Amt: 5
+  Dexterity:
+    StatType: Dexterity
+    Amt: 3
+  Intelligence:
+    StatType: Intelligence
+    Amt: 3
+  Constitution:
+    StatType: Constitution
+    Amt: 5
+  _otherStats: []
+  hitType: 1
+  modifiers: []
+  CurrentEffects: []
 --- !u!114 &8638684338463246365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,12 +174,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prim:
+    ActionSlot:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
     Cooldown: 0
   Seco:
+    ActionSlot:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
     Cooldown: 0
   Util:
+    ActionSlot:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
     Cooldown: 0
   Move:
+    ActionSlot:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
     Cooldown: 0
 --- !u!114 &8638684338463246364
 MonoBehaviour:
@@ -177,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053e95fbb42816e4ba82485879f0227d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePoint: {fileID: 0}
   primW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
   secoW: {fileID: 11400000, guid: 1df580bdf041a314b89ed95f5615d5b5, type: 2}
   utilW: {fileID: 11400000, guid: a73931f670d560245b6444ef72129986, type: 2}

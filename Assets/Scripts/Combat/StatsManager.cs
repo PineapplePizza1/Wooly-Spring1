@@ -35,9 +35,17 @@ public class StatsManager : MonoBehaviour
         public int Amt;
     }
 
-    //Player Stats
-    //RPG
-    //public int BaseDamage {get; private set;}
+
+    //Overall health
+    public float health;
+    public float maxHealth;
+
+        //LevelStats
+    public int XP;
+
+    //public int XPtoNext;
+    public int lvl;
+
 
     #region Base Stats
     public RPStat Strength;
@@ -50,17 +58,12 @@ public class StatsManager : MonoBehaviour
     #endregion 
     public List<RPStat> _otherStats;
 
+
+    public AtkType hitType;
+    public Hit hitStats;
+
     //Luck
     //Charisma?
-
-    //Overall health
-    public float health;
-    public float maxHealth;
-
-    //LevelStats
-    public int XP;
-    public int lvl;
-
     //NOTE: need something to add status effects; will have to make a class probs, and more events? careful of event abuse.
 
     //augments and perks; applicable to all stats.
@@ -69,6 +72,8 @@ public class StatsManager : MonoBehaviour
     //public List<Twists> twists;
 
 #region Character Action Delegates
+
+
     public event Action<StatsManager> onSpawn;
     public void callSpawn()
     {
@@ -87,6 +92,15 @@ public class StatsManager : MonoBehaviour
     {
         if (onAttack!=null)
             onAttack(this);
+    }
+
+    public event Action<StatsManager> AttachDmgStats;
+    public void callDmgStats()
+    {
+        if (AttachDmgStats!=null)
+        {
+            AttachDmgStats(this);
+        }
     }
     public event Action<StatsManager> onDMG;
     public void callDMG()
@@ -152,7 +166,17 @@ public class StatsManager : MonoBehaviour
 
 #endregion
 
-    void InitiateStats()
+    public List<StatusEffects> CurrentEffects;
+#region Status Effects
+
+
+    public event Action<StatsManager> EffectTick; 
+    public event Action<StatsManager> onBeginEffect;
+    public event Action<StatsManager> onEndEffect;
+    
+
+#endregion
+    public void InitiateStats()
     {
         initHealth();
         callSpawn();//SpawnDelegate
@@ -164,16 +188,21 @@ public class StatsManager : MonoBehaviour
     void Update()
     {
         callUpdate();
+        TickFX();
+        
     }
+
+
 
     #region Set Stats Functions
     private void initHealth()
     {
         //Base 80;
         maxHealth = 80f;
-        health = maxHealth;
+        
 
         maxHealth += 5f * Constitution.Amt;
+        health = maxHealth;
 
         UpdateHealth();
     }
@@ -222,7 +251,7 @@ public class StatsManager : MonoBehaviour
                     if (_otherStats[i].StatType == inStat.StatType)
                     {
                         temptrack = i;
-                        break;
+                        i = _otherStats.Count;
                     }
                 }
 
@@ -253,26 +282,33 @@ public class StatsManager : MonoBehaviour
         health = health + heal;
         callHeal();
     }
-    public float GetDamage(float wepDmg, AtkType wepType) //change to work with playercombat and weapons. Base Damage.
+    public Hit GetHitStats(float wepDmg, AtkType wepType) //change to work with playercombat and weapons. Base Damage.
     {
+        //TODO: Update, to return a full Hitstats.
+        //update movespeed and attack speed soon.
+
+        hitStats = new Hit();
+        hitStats.Owner = this.gameObject;
+        hitStats.atkType = hitType;
+        callDmgStats();
 
         //Apply perks, twists, and events.
 
-        float atkDMG = 0;
         switch (wepType)
         {
             case AtkType.Magic:
-                atkDMG= wepDmg + (Intelligence.Amt * lvl); 
-                return atkDMG;
+                hitStats.Dmg= wepDmg + (Intelligence.Amt * lvl); 
+                return hitStats;
             case AtkType.Range:
-                atkDMG= wepDmg + (Dexterity.Amt * lvl);
-                return atkDMG;
+                hitStats.Dmg= wepDmg + (Dexterity.Amt * lvl);
+                return hitStats;
             case AtkType.Melee:
-                atkDMG= wepDmg + (Strength.Amt * lvl);
-                return atkDMG;
+                hitStats.Dmg= wepDmg + (Strength.Amt * lvl);
+                return hitStats;
             default:
                 Debug.Log("STAT: Attack of no type");
-                return atkDMG;
+                hitStats.Dmg = wepDmg;
+                return hitStats;
         }
     }
 
@@ -280,11 +316,20 @@ public class StatsManager : MonoBehaviour
     {
         Damaged(hit);
     }
+
+    public void Rawdamage(float dmg)
+    {
+        health -= dmg;
+        UpdateHealth();
+        if (health <= 0)
+            Died();
+    }
     private void Damaged(Hit hit) //takes hit
     {
         callDMG();//Delegate
 
         float dmg = hit.Dmg;
+        Debug.Log("STAT: Took dmg of :" + dmg);
         switch (hit.atkType)
         {
             case AtkType.Magic:
@@ -306,9 +351,48 @@ public class StatsManager : MonoBehaviour
         if (health <= 0)
             Died();
     }
+
+    
     #endregion
 
+    #region Status Effect Methods
+    public void TickFX()
+    {
+        foreach(StatusEffects fx in CurrentEffects)
+        {
+            fx.Tick(this);
+        }
+    }
+    public void ApplyStatus(List<StatusEffects> infx)
+    {
+        foreach(StatusEffects _in in infx)
+        {
+            bool tempeh = false;
+            for(int i = 0; i<CurrentEffects.Count; i++)
+            {
+                if(CurrentEffects[i].EffectName == _in.EffectName)
+                {
+                    CurrentEffects[i] = _in;
+                    tempeh = true;
+                    i = CurrentEffects.Count;
+                }
+            }
 
+            if (!tempeh)
+            {
+                CurrentEffects.Add(_in);
+            }
+        }
+    }
+
+    public void RemoveEffect(StatusEffects staty)
+    {
+        CurrentEffects.Remove(staty);
+    }
+
+
+
+    #endregion 
 
 /*
     public void GenerateStats()

@@ -113,6 +113,7 @@ private void Awake() {
     {
         playercomb.StartCombat();
         playerMove.InitMovement(MainCam);
+        playerstat.InitiateStats();
         //Start Loadout in Combat
     }
 

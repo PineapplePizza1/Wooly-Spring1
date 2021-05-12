@@ -27,4 +27,8 @@ public class StatPoint : Modifier
         //called on attach.
         StatBoost();
     }
+    public override void Remove(StatsManager inStats)
+    {
+        _modTarget = null;
+    }
 }

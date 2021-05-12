@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c9a07735828c1b41b79e0bc944e553a, type: 3}
-  m_Name: Fireish
+  m_Script: {fileID: 11500000, guid: eb3da28ff453cb44d930ee5efee65f1c, type: 3}
+  m_Name: ConAdd
   m_EditorClassIdentifier: 
-  EffectName: Fire
+  ModName: ConAdd
   icon: {fileID: 0}
-  Duration: 10
-  damageTick: 5
-  dmgInterval: 1
+  TargetStat:
+    StatType: Constitution
+    Amt: 100

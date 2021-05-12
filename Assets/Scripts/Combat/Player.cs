@@ -27,7 +27,12 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+#region DEBUG
     public bool debugMode;
+    public Modifier DebugMod;
+
+    public StatusEffects DebugFX;
+    #endregion
 
     //DEBUG: Could probably inject this, but hey, this also works, and is basically injection, soooo
     public Transform MainCam {get; private set;}
@@ -79,7 +84,7 @@ private void Awake() {
         
         playerInput = new PlayerControls();
         playerInput.Debug.DieBind.performed += _ => PlayerDeath();
-        playerInput.Debug.DBGdmg.performed += _ => DebugDMG();
+        playerInput.Debug.DBGdmg.performed += _ => DebugModify();
         playerInput.MovementMK.Interact.performed += _ => Interact();
 
     //DEBUG: originally in  onenable, but the spawn method is a little odd to be sure.
@@ -157,14 +162,10 @@ private void Awake() {
         
     }
 
-    void DebugDMG()
+    void DebugModify()
     {
-        
-        Hit debug = new Hit();
-        debug.atkType = StatsManager.AtkType.Base;
-        debug.Dmg = 50f;
-        playerstat.TakeAttack(debug);
-        debugManager.DebugGUI("Player Health: " + playerstat.health, 1f, "Player");
+        //playerstat.AttachModifier(DebugMod);
+        playerstat.ApplyStatus(DebugFX);
     }
 
 

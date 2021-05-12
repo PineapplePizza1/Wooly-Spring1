@@ -46,7 +46,8 @@ public abstract class StatusEffects : ScriptableObject
     public virtual void AddEffect(StatsManager stats)
     {
         fxManage = stats;
-        //Attach whatever methods you need, but remember to remove.
+        //For non-tick status effects, Attach whatever methods you need, but remember to remove. //temp stats, how?
+        //call damage, and affect speed in delegate methods. but make sure you call damage every attack now. affect x delegates.
     }
     public virtual void RemoveEffect(StatsManager stats)
     {

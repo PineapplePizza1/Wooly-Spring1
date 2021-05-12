@@ -12,6 +12,7 @@ public abstract class Modifier :ScriptableObject
     public string ModName;
     public Sprite icon;
 
-    public abstract void Attach(StatsManager inStats);
+    public abstract void Attach(StatsManager inStats); //one offs can be called in attach.
+    public abstract void Remove(StatsManager inStats);
 
 }

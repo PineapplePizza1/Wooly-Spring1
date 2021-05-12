@@ -48,10 +48,14 @@ public class StatsManager : MonoBehaviour
 
 
     #region Base Stats
-    public RPStat Strength;
-    public RPStat Dexterity;
-    public RPStat Intelligence;
-    public RPStat Constitution;
+    public int BaseStr;
+    private RPStat Strength;
+     public int BaseDex;
+    private RPStat Dexterity;
+    public int BaseInt;
+    private RPStat Intelligence;
+    public int BaseCon;
+    private RPStat Constitution;
 
     //implement dictionary in future.
 
@@ -67,7 +71,7 @@ public class StatsManager : MonoBehaviour
     //NOTE: need something to add status effects; will have to make a class probs, and more events? careful of event abuse.
 
     //augments and perks; applicable to all stats.
-    public List<Modifier> modifiers;
+    public List<Modifier> CurrentMods;
 
     //public List<Twists> twists;
 
@@ -149,12 +153,12 @@ public class StatsManager : MonoBehaviour
     public event Action StatUpdate;
     
 
-    private void UpdateHealth()
+    private void onUpdateHealth()
     {
         if (HealthUpdate != null)
             HealthUpdate();
     }
-    private void UpdateStats()
+    private void onUpdateStats()
     {
         if (StatUpdate != null)
             StatUpdate();
@@ -179,6 +183,8 @@ public class StatsManager : MonoBehaviour
     public void InitiateStats()
     {
         initHealth();
+        initStats();
+        LoadAllMods();
         callSpawn();//SpawnDelegate
         //Debug
         //BaseDamage = 5;
@@ -198,30 +204,58 @@ public class StatsManager : MonoBehaviour
     private void initHealth()
     {
         //Base 80;
-        maxHealth = 80f;
-        
-
-        maxHealth += 5f * Constitution.Amt;
+        UpdateHealth();
         health = maxHealth;
 
-        UpdateHealth();
+        onUpdateHealth();
+    }
+    private void initStats()
+    {
+        Strength.StatType = "STR";
+        Strength.Amt = BaseStr;
+
+        Dexterity.StatType = "DEX";
+        Dexterity.Amt = BaseDex;
+
+        Intelligence.StatType = "INT";
+        Intelligence.Amt = BaseInt;
+
+        Constitution.StatType = "CON";
+        Constitution.Amt = BaseCon;
     }
     public void LevelUp()
     {
-        UpdateStats();
+        onUpdateStats();
     }
 
+    private void UpdateHealth()
+    {
+        maxHealth = 80f;
+        maxHealth += 5f * Constitution.Amt;
+    }
+
+    private void UpdateStats()
+    {
+        
+    }
     #endregion
 
     #region Modifier methods
     private void LoadAllMods()
     {
-
+        //refresh all mods; probably need some other option for effective vs total stats.
+        foreach(Modifier startmod in CurrentMods)
+        {
+            startmod.Remove(this);
+            startmod.Attach(this);
+        }
     }
     public void AttachModifier(Modifier inmod)
     {
         //Modifier Implementation Attaches script
-        inmod.Attach(this);
+        Modifier tempy = Instantiate(inmod);
+        tempy.Attach(this);
+        CurrentMods.Add(tempy);
         callAttachMod(); //only used for event when attaching any mod.
     }
 
@@ -320,7 +354,7 @@ public class StatsManager : MonoBehaviour
     public void Rawdamage(float dmg)
     {
         health -= dmg;
-        UpdateHealth();
+        onUpdateHealth();
         if (health <= 0)
             Died();
     }
@@ -347,7 +381,7 @@ public class StatsManager : MonoBehaviour
         }
 
         health -= dmg;
-        UpdateHealth();
+        onUpdateHealth();
         if (health <= 0)
             Died();
     }
@@ -358,30 +392,37 @@ public class StatsManager : MonoBehaviour
     #region Status Effect Methods
     public void TickFX()
     {
-        foreach(StatusEffects fx in CurrentEffects)
+        for(int i = 0; i<CurrentEffects.Count; i++)
         {
-            fx.Tick(this);
+            CurrentEffects[i].Tick(this);
+        }
+    }
+
+    public void ApplyStatus(StatusEffects infx)
+    {
+        StatusEffects tempy = Instantiate(infx);
+        tempy.AddEffect(this);
+        bool tempeh = false;
+        for(int i = 0; i<CurrentEffects.Count; i++)
+        {
+            if(CurrentEffects[i].EffectName == infx.EffectName)
+            {
+                CurrentEffects[i] = tempy;
+                tempeh = true;
+                i = CurrentEffects.Count;
+            }
+        }
+
+        if (!tempeh)
+        {
+            CurrentEffects.Add(tempy);
         }
     }
     public void ApplyStatus(List<StatusEffects> infx)
     {
         foreach(StatusEffects _in in infx)
         {
-            bool tempeh = false;
-            for(int i = 0; i<CurrentEffects.Count; i++)
-            {
-                if(CurrentEffects[i].EffectName == _in.EffectName)
-                {
-                    CurrentEffects[i] = _in;
-                    tempeh = true;
-                    i = CurrentEffects.Count;
-                }
-            }
-
-            if (!tempeh)
-            {
-                CurrentEffects.Add(_in);
-            }
+            ApplyStatus(_in);
         }
     }
 

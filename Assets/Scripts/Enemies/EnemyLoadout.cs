@@ -41,9 +41,8 @@ public class EnemyLoadout : Loadout
         if (_stats == null)
             _stats = _me.myStats; //redundant, probably see if there's an easy injectable fix?
 
-        loadtk.dmgStats.Dmg = _stats.GetDamage(primW.WeaponDamage, primW.WeaponType);
+        loadtk.dmgStats = _stats.GetHitStats(primW.WeaponDamage, primW.WeaponType);
         loadtk.Cooldown = primW.cooldown;
-        loadtk.dmgStats.Owner = this.gameObject;
 
         //TEMP_DEBUG: Weapon Load Pool
         if(primW is BaseGun)

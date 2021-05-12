@@ -83,4 +83,6 @@ public class Hit //call damage data?
 
     public GameObject Owner;
     //Transfer hit and effects to statshandler to process.
+
+    public List<StatusEffects> fx;
 }

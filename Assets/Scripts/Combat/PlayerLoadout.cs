@@ -51,9 +51,8 @@ public class PlayerLoadout : Loadout
         if (pstats == null)
             pstats = PM.playerstat; //redundant, probably see if there's an easy injectable fix?
 
-        loadtk.dmgStats.Dmg = pstats.GetDamage(primW.WeaponDamage, primW.WeaponType);
-        loadtk.Cooldown = primW.cooldown;
-        loadtk.dmgStats.Owner = this.gameObject;
+        loadtk.dmgStats = pstats.GetHitStats(primW.WeaponDamage, primW.WeaponType); //change to return Hit.
+        loadtk.Cooldown = primW.cooldown; //implement.
 
         //TEMP_DEBUG: Weapon Load Pool
         if(primW is BaseGun)

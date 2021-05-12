@@ -9,10 +9,15 @@ public class RoomManager : MonoBehaviour
    public ChallengeNeedle needle;
    public List<BaseEnemy> enemies;
 
+   //Bounding Collider
+   public Collider roomBox;
+
    private int EnemyCount;
 
     private void Awake() {
-        EnemyCount = 999999;
+        EnemyCount = 999999; //Debug: prevents needle from activating prematurely.
+
+        roomBox = GetComponent<Collider>();
     }
 
    //main thing, to pass in injections. Otherwise, track # of enemies in area, and rewards.

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    //Change to Level Applicator?
+
     //Bosstime
     //DEBUG: This version is just to randomize a small set of level chunks; A more legit version will need more logic,
         //seeding, and a better way to pull level prefabs, probably.
@@ -45,55 +47,28 @@ public class LevelGenerator : MonoBehaviour
         maxz = max.z;
         centY = PlaneBounds.max.y + .1f; //Using max to stop the zfighting for now, hopefully
 
-        
-
     }
 
-    private void Start() {
-        //DEBUG: Ideally, the LevelManager should handle the generation, but yknow what? meh for now.
 
-        GenerateLevel(0);
-        ActivateLevel();
-    }
-
-    public void GenerateLevel(int Seed) //Called on loading the game, to generate random seeds. //Seed = 0 to debug.
+    public void ActivateLevel(World.RoomData[] inRooms)
     {
-        //{pick a random order of the 3 challenges.}
-
-        //pick 3 random locations to spawn em.
-        foreach(GameObject room in RoomPrefabs)
+        foreach(World.RoomData roomy in inRooms)
         {
-            float randx = Random.Range(minx, maxx);
-            float randz = Random.Range(minz, maxz);
-            Vector3 randPos = new Vector3(randx, centY, randz);
-
-            //CHECK FOR OVERLAP, AND THEN REDO IF IT DOES
-                //BUT FOR THIS MOMENT, I LITERALLY DO NOT CARE YET, AND HEY, MAYBE IT'S KINDA COOL
-
-            GameObject roomy = Instantiate(room, randPos, LevelPlane.transform.rotation);
-            roomy.transform.SetParent(LevelPlane.transform);
-            RoomManager trom = roomy.GetComponent<RoomManager>();
+            roomy.prefab.SetActive(true);
+            RoomManager trom = roomy.prefab.GetComponent<RoomManager>();
             trom.StartRoom(sceneject);
         }
-        //does not work for a repeat or something yet, but we'll fix it.
-
-        //go go go
-    }
-
-    public void ActivateLevel()
-    {
-        //get the rest of the level objects, and set it all active.
-        //this Script should be active on the general "Level" Object.
-
         LevelPlane.SetActive(true);
-        
-        //probably some sorta event, though might have levelMan take over for that.
+        //Drop shadow.
     }
 
-    public void DeactivateLevel()
+    public void DeactivateLevel(World.RoomData[] inRooms)
     {
         //Deactivate Level
-
+        foreach(World.RoomData roomy in inRooms)
+        {
+            roomy.prefab.SetActive(false);
+        }
         LevelPlane.SetActive(false);
 
         //Don't need to deactivate each roo

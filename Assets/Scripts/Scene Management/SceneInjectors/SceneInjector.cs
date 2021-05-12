@@ -37,9 +37,9 @@ public class SceneInjector : MonoBehaviour
         SceneScripts = new InjectionDict();
 
         //GameManager Reg
-            if (dbg_g == null) {  dbg_g = GameManager.Instance.RegisterInjection<DebugGlobal>(); }
-            if (DiskJockey == null) {  DiskJockey = GameManager.Instance.RegisterInjection<AudioManager>(); }
-        //Add Scripts to Dict
+            if (dbg_g == null) {  dbg_g = GMInject.Instance.RegisterInjection<DebugGlobal>(); }
+            if (DiskJockey == null) {  DiskJockey = GMInject.Instance.RegisterInjection<AudioManager>(); }
+        //Add GM Scripts to Dict
             SceneScripts.Add<DebugGlobal>(dbg_g);
             SceneScripts.Add<AudioManager>(DiskJockey);
 

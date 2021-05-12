@@ -19,7 +19,7 @@ public class TotalGenerator : MonoBehaviour
 
     public bool randomizeSeed = true;
 
-    public int roomsInWorld = 3;
+    public int roomsPerLevel = 3;
     public int itemsPerRoom = 3;
     public int charsPerLoop = 3;
     public int defaultLoops = 3;
@@ -64,8 +64,25 @@ public class TotalGenerator : MonoBehaviour
     #region Chara Gen
     public GameObject[] CharaPrefabs;
 
+    private World genWorld;
+    private float genProgress;
+
+    private int totalCount;
+    private int currentCount;
+    
+
+    public bool Generating;
+    private bool LevelsDone;
+    private bool CharasDone;
+    private bool TotalGenDone;
+
 
     #endregion
+
+    void Awake()
+    {
+        Generating = false;
+    }
 
     //consistent generation also relies on a consistent order of requests, so will probably consolidate all generation to the same script :(
         //Level, Item, Player. Need it as a whole ass file, basically. maybe a World class?
@@ -90,25 +107,246 @@ public class TotalGenerator : MonoBehaviour
 
    
 
-    public World GenerateWorld()
+    public void GenerateWorld()
+    {
+        if (!Generating)
+        {
+            Debug.Log("TotGen: I'm generatin over here!");
+
+            Generating = true;
+            Random.InitState(Seed);
+
+            genWorld = new World(defaultLoops);
+
+            currentCount = 0;
+
+            LevelsDone = false;
+            TotalGenDone = false;
+
+            totalCount = (defaultLoops * roomsPerLevel) + (charsPerLoop);
+
+            
+            StartCoroutine("GenerateLevel");
+            StartCoroutine("WorldGenProgress");
+            StartCoroutine("GenerateCharacter");
+
+        }
+
+    }
+
+    public void WorldGenComplete()
     {
 
-        Random.InitState(Seed);
+    }
 
-        World genWorld = new World(defaultLoops);
+   IEnumerator WorldGenProgress()
+    {
+        genProgress = currentCount/totalCount;
 
-        //declare world type.
+        while (!LevelsDone)
+        {
+            yield return null;
+            
+        }
+
+
+        Debug.Log("TotGen: Gen complete!");
+        TotalGenDone = true;
+        Generating = false;
+        WorldGenComplete();
+
+        yield break;
+        
+    }
+    IEnumerator GenerateCharacter()
+    {
+        //Debug.Log("TotGen: is this working?");
+        yield return null;
+    }
+
+    IEnumerator GenerateLevel()
+    {
         for(int j = 0; j<defaultLoops; j++)
         {
-            genWorld.levels[j] = GenerateLevel();
-            //genWorld.loopChars[j] = generateCharacters();
-                GenerateCharacters();
-            //Place each into a structure.
-        }
-        //return world info.
+            
+            genWorld.levels[j] = new World.RoomData[roomsPerLevel];
 
-        return genWorld;
+            for(int i = 0; i<roomsPerLevel; i++)
+            {
+            //Pick Room.
+            GameObject tempRoom = RoomPrefabs[Random.Range(0,RoomPrefabs.Length)];
+            World.RoomData _tempy = new World.RoomData();
+            
+
+            //can random rotate around y.
+            Vector3 GenPos = new Vector3(-100, testY, -100);
+            Quaternion rotato = Quaternion.Euler(Quaternion.identity.eulerAngles.x, Random.Range(0,360), Quaternion.identity.eulerAngles.z); 
+            _tempy.Room = Instantiate(tempRoom, GenPos, rotato);//single time. Maybe instantiate far away? then jump. Farpoint, lol.
+
+            //generate items.
+            //tempLevel[i].itemList = GenerateItems();
+            GenerateItems();
+            genWorld.levels[j][i] = _tempy;
+                
+
+
+            //Get room deets/bounds.
+            RoomManager t_RM = genWorld.levels[j][i].Room.GetComponent<RoomManager>();
+            Bounds roombnd = t_RM.roomBox.bounds;
+
+            
+            Collider[] roomChecks = null;
+            Vector3 randPos = Vector3.one;
+
+            do
+            {
+                float randx = Random.Range(0, xRange);
+                float randz = Random.Range(0, zRange);
+                randPos = new Vector3(randx, testY, randz);
+
+                //check room bounding box, get reference. if case, redo.
+                roomChecks = Physics.OverlapBox(randPos, roombnd.extents, Quaternion.identity, roomMask); //fudge.
+
+                Debug.Log("TotGen: Did a Level Check: " + roomChecks.Length);
+
+                /*
+                foreach(Collider please in roomChecks)
+                {
+                    if (please.gameObject != genWorld.levels[j][i].Room)
+                    { 
+                        yield return null;
+                    }
+                }
+                */
+                yield return null;
+                
+            }while(roomChecks.Length >1);
+
+            Debug.Log("TotGen: Confirmed a Level! at: " + randPos);
+            genWorld.levels[j][i].Room.transform.position = randPos;
+            genWorld.levels[j][i].xPerc = randPos.x/xRange;
+            genWorld.levels[j][i].zPerc = randPos.z/zRange;
+
+
+
+
+            currentCount +=1;
+
+            }
+
+            foreach(World.RoomData preffy in genWorld.levels[j])
+            {
+                preffy.Room.SetActive(false);
+                yield return null;
+            }
+            yield return null;
+        }
     }
+
+
+
+    #region Old Methods
+/*
+    IEnumerator GenerateLevel()
+    {
+        Debug.Log("TotGen: Running Level Coroutine");
+
+        //check jcount
+        //check iCount
+        if (jCount!=jP)
+        {
+
+            jP = jCount;
+            genWorld.levels[jCount] = new World.RoomData[roomsPerLevel];
+
+            if (jCount >= defaultLoops)
+            {
+                Debug.Log("TotGen: Completed Level Gen!");
+                LevelsDone = true;
+                yield break;
+            }
+        }
+
+        if(iCount != iP)
+        {
+            iP = iCount;
+            LevelConfirm = false;
+
+        World.RoomData _tempy = new World.RoomData();
+
+        //Pick Room.
+        GameObject tempRoom = RoomPrefabs[Random.Range(0,RoomPrefabs.Length)];
+
+        Vector3 GenPos = new Vector3(-100, testY, -100);
+
+        //can random rotate around y.
+        Quaternion rotato = Quaternion.Euler(Quaternion.identity.eulerAngles.x, Random.Range(0,360), Quaternion.identity.eulerAngles.z); 
+        _tempy.prefab = Instantiate(tempRoom, GenPos, rotato);//single time. Maybe instantiate far away? then jump. Farpoint, lol.
+
+        
+
+        //generate items.
+        //tempLevel[i].itemList = GenerateItems();
+        GenerateItems();
+        
+        genWorld.levels[jCount][iCount] = _tempy;
+
+        yield return null;
+
+        }
+
+        
+        if (!LevelConfirm)
+        {
+
+        //Get room deets/bounds.
+        RoomManager t_RM = genWorld.levels[jCount][iCount].prefab.GetComponent<RoomManager>();
+        Bounds roombnd = t_RM.roomBox.bounds;
+
+        float randx = Random.Range(0, xRange);
+        float randz = Random.Range(0, zRange);
+        Vector3 randPos = new Vector3(randx, testY, randz);
+
+        //check room bounding box, get reference. if case, redo.
+        Collider[] roomChecks = Physics.OverlapBox(randPos, roombnd.extents, Quaternion.identity, roomMask); //fudge.
+        
+        if(roomChecks!=null)
+        {
+            foreach(Collider please in roomChecks)
+            {
+                if (please.gameObject != genWorld.levels[jCount][iCount].prefab)
+                {
+                    Debug.Log("TotGen: Did a Level Check");
+                yield return null;
+                }
+            }
+            
+        }
+
+        Debug.Log("TotGen: Confirmed a Level!");
+
+        genWorld.levels[jCount][iCount].prefab.transform.position = randPos;
+        //set up roomdata. //Redundant for now, but might use to simplify later.
+        genWorld.levels[jCount][iCount].xPerc = randPos.x/xRange;
+        genWorld.levels[jCount][iCount].zPerc = randPos.z/zRange;
+
+        
+        LevelConfirm = true;
+        iCount +=1;
+            if (iCount >= roomsPerLevel)
+            {
+                //_tempy.prefab.SetActive(false);
+                iCount = 0;
+                jCount += 1;
+            }
+                
+        }
+
+        //coroutine section that's only for rechecks. don't Update iCount.
+
+        yield return null;
+    }
+    
     public World.RoomData[] GenerateLevel()
     {
         //declare level Array
@@ -116,6 +354,8 @@ public class TotalGenerator : MonoBehaviour
 
         for(int i = 0; i<roomsInWorld; i++)
         {
+            Debug.Log("TotGen: Room #: " + i );
+            
             //Pick Room.
             GameObject tempRoom = RoomPrefabs[Random.Range(0,RoomPrefabs.Length)];
 
@@ -159,6 +399,8 @@ public class TotalGenerator : MonoBehaviour
             //tempLevel[i].itemList = GenerateItems();
             GenerateItems();
 
+            
+
         }
 
         //Possible: add boss.
@@ -168,28 +410,24 @@ public class TotalGenerator : MonoBehaviour
         {
             //roomy.prefab.SetActive(false);
         }
+        
 
         return tempLevel;
     }
+    */
     //NOTE: prebuild the 3 different loops. use same level plane, but deactivate all rooms afterwards.
             //Single room, but damn, if it isn't literally the easiest, holy crap. 
             //UI loading update when done.
 
          //Place worlds, then drop.
 
-    
+    #endregion
     public void GenerateItems()
     {
         
     }
 
-    public void GenerateCharacters()
-    {
-        for(int i = 0; i<charsPerLoop; i++)
-        {
 
-        }
-    }
 
     public void GenNewloops()
     {

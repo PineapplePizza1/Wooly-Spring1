@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public void InitWorld()
     {
         //set level plane?
-        currentWorld = _gen.GenerateWorld();
+        _gen.GenerateWorld();
     }
 
 }

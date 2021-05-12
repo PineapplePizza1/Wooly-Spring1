@@ -60,8 +60,8 @@ public class LevelGenerator : MonoBehaviour
             
 
 
-            roomy.prefab.SetActive(true);
-            RoomManager trom = roomy.prefab.GetComponent<RoomManager>();
+            roomy.Room.SetActive(true);
+            RoomManager trom = roomy.Room.GetComponent<RoomManager>();
             trom.StartRoom(sceneject);
         }
         LevelPlane.SetActive(true);
@@ -73,7 +73,7 @@ public class LevelGenerator : MonoBehaviour
         //Deactivate Level
         foreach(World.RoomData roomy in inRooms)
         {
-            roomy.prefab.SetActive(false);
+            roomy.Room.SetActive(false);
         }
         LevelPlane.SetActive(false);
 

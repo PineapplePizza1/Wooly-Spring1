@@ -323,7 +323,6 @@ public class StatsManager : MonoBehaviour
         float outSpeed = 0;
         outSpeed = inSpeed * (Dexterity.Amt/3f);
         if (outSpeed == 0) outSpeed = -5 * inSpeed;
-        Debug.Log("STATM: os:" + outSpeed);
         return outSpeed;
     }
     public Hit GetHitStats(float wepDmg, AtkType wepType) //change to work with playercombat and weapons. Base Damage.

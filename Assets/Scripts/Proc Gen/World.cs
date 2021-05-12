@@ -28,7 +28,7 @@ public class World
 
     public struct RoomData
     {
-        public GameObject prefab;
+        public GameObject Room;
         public float xPerc;
         public float zPerc;
 

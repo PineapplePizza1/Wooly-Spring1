@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     //init stuff.
     private TotalGenerator _gen;
 
+    private World currentWorld;
+
     
 
     private void Awake() {
@@ -24,6 +26,12 @@ public class GameManager : MonoBehaviour
         _gen = GMtrack.RegisterInjection<TotalGenerator>();
 
         _gen.initGenerators();
+    }
+
+    public void InitWorld()
+    {
+        //set level plane?
+        currentWorld = _gen.GenerateWorld();
     }
 
 }

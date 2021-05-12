@@ -13,6 +13,7 @@ public class DebugManager : MonoBehaviour
     [SerializeField] private SceneInjector sceneJect = null;
     //Injectables
     private DebugGlobal dbg_g = null;
+    [SerializeField] private GameManager _gm = null;
 
     //Debug Panel
     [SerializeField] private GameObject DebugPanel = null;
@@ -37,6 +38,7 @@ public class DebugManager : MonoBehaviour
         playerInput = new PlayerControls();
         playerInput.Debug.ToggleUI.performed += ctx => ToggleUI();
         playerInput.Debug.Reset.performed += ContextMenu => ResetGame();
+        playerInput.Debug.DieBind.performed += _ => DBGGenLevel();
 
         sceneJect.SceneJect += Injection;
 
@@ -49,6 +51,7 @@ public class DebugManager : MonoBehaviour
     {
         //Injection
         dbg_g = ID.Inject<DebugGlobal>();
+        _gm = ID.Inject<GameManager>();
     }
     #endregion
 
@@ -56,6 +59,11 @@ public class DebugManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void DBGGenLevel()
+    {
+        _gm.InitWorld();
     }
 
     void ToggleUI()

@@ -83,8 +83,8 @@ private void Awake() {
         //Input
         
         playerInput = new PlayerControls();
-        playerInput.Debug.DieBind.performed += _ => PlayerDeath();
-        playerInput.Debug.DBGdmg.performed += _ => DebugModify();
+        //playerInput.Debug.DieBind.performed += _ => PlayerDeath();
+        //playerInput.Debug.DBGdmg.performed += _ => DebugModify();
         playerInput.MovementMK.Interact.performed += _ => Interact();
 
     //DEBUG: originally in  onenable, but the spawn method is a little odd to be sure.

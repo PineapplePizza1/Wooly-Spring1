@@ -48,12 +48,9 @@ public class TotalGenerator : MonoBehaviour
     public GameObject[] RoomPrefabs;
 
     public LayerMask roomMask;
-    public GameObject LevelPlane; //Needs, so that any overlaps can recacluate.
-    private float minx;
-    private float maxx;
-    private float minz;
-    private float maxz;
-    private float centY;
+    public float xRange = 200;
+    public float zRange = 200;
+    private float testY = -100;
 
     #endregion
 
@@ -88,25 +85,14 @@ public class TotalGenerator : MonoBehaviour
     //vis tip: generate world, then drop the reveal, with distaff.
         //So, instead of just space, make it full space box.
 
-    public void SetLevelPlane(GameObject _inPlane) {
 
-        Bounds PlaneBounds = _inPlane.GetComponent<Collider>().bounds;
-        Vector3 max = PlaneBounds.max;
-        Vector3 min = PlaneBounds.min;
-        minx = min.x;
-        maxx = max.x;
-        minz = min.z;
-        maxz = max.z;
-        centY = PlaneBounds.max.y + .1f; //Using max to stop the zfighting for now, hopefully
-
-
-    }
 
 
    
 
-    public void GenerateWorld()
+    public World GenerateWorld()
     {
+
         Random.InitState(Seed);
 
         World genWorld = new World(defaultLoops);
@@ -120,6 +106,8 @@ public class TotalGenerator : MonoBehaviour
             //Place each into a structure.
         }
         //return world info.
+
+        return genWorld;
     }
     public World.RoomData[] GenerateLevel()
     {
@@ -133,13 +121,13 @@ public class TotalGenerator : MonoBehaviour
 
 
             //pretest Instantaite
-            float randx = Random.Range(minx, maxx);
-            float randz = Random.Range(minz, maxz);
-            Vector3 randPos = new Vector3(randx, centY, randz);
+            float randx = Random.Range(0, xRange);
+            float randz = Random.Range(0, zRange);
+            Vector3 randPos = new Vector3(randx, testY, randz);
 
             //can random rotate around y.
-
-            tempLevel[i].prefab = Instantiate(tempRoom, randPos, LevelPlane.transform.rotation);//single time. Maybe instantiate far away? then jump. Farpoint, lol.
+            Quaternion rotato = Quaternion.Euler(Quaternion.identity.eulerAngles.x, Random.Range(0,360), Quaternion.identity.eulerAngles.z); 
+            tempLevel[i].prefab = Instantiate(tempRoom, randPos, rotato);//single time. Maybe instantiate far away? then jump. Farpoint, lol.
             
             //Get room deets/bounds.
             RoomManager t_RM = tempRoom.GetComponent<RoomManager>();
@@ -151,9 +139,9 @@ public class TotalGenerator : MonoBehaviour
             while (roomChecks!=null)
             {
                 
-                randx = Random.Range(minx, maxx);
-                randz = Random.Range(minz, maxz);
-                randPos = new Vector3(randx, centY, randz);
+                randx = Random.Range(0, xRange);
+                randz = Random.Range(0, zRange);
+                randPos = new Vector3(randx, testY, randz);
 
 
                 tempLevel[i].prefab.transform.position = randPos;
@@ -164,8 +152,8 @@ public class TotalGenerator : MonoBehaviour
             }
 
             //set up roomdata. //Redundant for now, but might use to simplify later.
-            tempLevel[i].xCord = randPos.x;
-            tempLevel[i].xCord = randPos.z;
+            tempLevel[i].xPerc = randPos.x/xRange;
+            tempLevel[i].zPerc = randPos.z/zRange;
 
             //generate items.
             //tempLevel[i].itemList = GenerateItems();
@@ -178,7 +166,7 @@ public class TotalGenerator : MonoBehaviour
         //Deactivate all after done.
         foreach(World.RoomData roomy in tempLevel)
         {
-            roomy.prefab.SetActive(false);
+            //roomy.prefab.SetActive(false);
         }
 
         return tempLevel;

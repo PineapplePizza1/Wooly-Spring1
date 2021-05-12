@@ -26,18 +26,19 @@ public class LevelGenerator : MonoBehaviour
     public GameObject LevelPlane;
 
     public SceneInjector sceneject;
-    
-    //Bounds variables: probs a better way to do this, but whatevs lol.
+
     private float minx;
     private float maxx;
     private float minz;
     private float maxz;
     private float centY;
 
-
-    public List<GameObject> RoomPrefabs;
-
+    public GameObject GetLevelPlane()
+    {
+        return LevelPlane;
+    }
     private void Awake() {
+
         Bounds PlaneBounds = LevelPlane.GetComponent<Collider>().bounds;
         Vector3 max = PlaneBounds.max;
         Vector3 min = PlaneBounds.min;
@@ -46,14 +47,19 @@ public class LevelGenerator : MonoBehaviour
         minz = min.z;
         maxz = max.z;
         centY = PlaneBounds.max.y + .1f; //Using max to stop the zfighting for now, hopefully
-
     }
-
 
     public void ActivateLevel(World.RoomData[] inRooms)
     {
         foreach(World.RoomData roomy in inRooms)
         {
+            //set y and scale coords //min  + range*perc.
+            float scalex = minx + roomy.xPerc*(maxx - minx);
+            float scalez = minz + roomy.zPerc*(maxz - minz);
+            Vector3 ScaledPos = new Vector3(scalex,centY,scalez);
+            
+
+
             roomy.prefab.SetActive(true);
             RoomManager trom = roomy.prefab.GetComponent<RoomManager>();
             trom.StartRoom(sceneject);

@@ -29,8 +29,8 @@ public class World
     public struct RoomData
     {
         public GameObject prefab;
-        public float xCord;
-        public float ZCord;
+        public float xPerc;
+        public float zPerc;
 
         public Modifier[] itemlist; //Idea: generation delegate to add a item? or just, add item in
     }

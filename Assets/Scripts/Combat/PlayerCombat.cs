@@ -33,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
     private Pooler pooler;
 
     private Animator pAnim;
+    private StatsManager pStats;
 
     public Attack Prim;
     public Attack Seco;
@@ -53,6 +54,8 @@ public class PlayerCombat : MonoBehaviour
 
         PM = GetComponent<Player>();
         pAnim = GetComponentInChildren<Animator>();
+        pStats = GetComponent<StatsManager>();
+        
 
 
         //create attacks
@@ -90,6 +93,7 @@ public class PlayerCombat : MonoBehaviour
         Prim.Atk(PM.playerMove.moveDir, this.transform);  //Note: Posibly use direct input, vs Player rotation
         pAnim.SetInteger("AtkType", 0);
         pAnim.SetTrigger("AtkTrigger");
+        pAnim.SetFloat("Animation Speed", pStats.GetSpeed(1f));
         
     }
 

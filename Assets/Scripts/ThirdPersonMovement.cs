@@ -16,6 +16,8 @@ public class ThirdPersonMovement : MonoBehaviour
         //Animations
     private Animator pAnim;
 
+    private StatsManager pStats;
+
 
    
 //Cam vars
@@ -26,6 +28,7 @@ public class ThirdPersonMovement : MonoBehaviour
      //Speed vars
     public float baseSpeed = 6f;
     public float sprintMod = 2f;
+    public float buffSpeed;
     float currSpeed = 6f;
     //Jump
     public float gravity = -9.81f;
@@ -47,6 +50,8 @@ public class ThirdPersonMovement : MonoBehaviour
     public void InitMovement(Transform incam) //Fill out later, but follows after Player initialization.
     {
         cam = incam;
+        pStats = GetComponent<StatsManager>();
+        buffSpeed = pStats.GetSpeed(baseSpeed);
     }
     private bool started;
 
@@ -120,7 +125,7 @@ public class ThirdPersonMovement : MonoBehaviour
             
             //Anim: Speed
             pAnim.SetFloat("Speed", moveDir.magnitude/baseSpeed);
-            pAnim.SetFloat("Animation Speed", moveDir.magnitude/baseSpeed);
+            pAnim.SetFloat("Animation Speed", pStats.GetSpeed(baseSpeed)/baseSpeed);
         }
         else
         {

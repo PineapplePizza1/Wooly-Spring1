@@ -16,4 +16,4 @@ MonoBehaviour:
   icon: {fileID: 0}
   TargetStat:
     StatType: CON
-    Amt: 100
+    Amt: 1

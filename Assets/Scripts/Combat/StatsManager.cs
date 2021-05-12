@@ -317,6 +317,13 @@ public class StatsManager : MonoBehaviour
         health = health + heal;
         callHeal();
     }
+
+    public float GetSpeed(float inSpeed)
+    {
+        float outSpeed = 0;
+        outSpeed = inSpeed * Dexterity.Amt/3f;
+        return outSpeed;
+    }
     public Hit GetHitStats(float wepDmg, AtkType wepType) //change to work with playercombat and weapons. Base Damage.
     {
         //TODO: Update, to return a full Hitstats.

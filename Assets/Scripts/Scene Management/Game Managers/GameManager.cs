@@ -34,4 +34,18 @@ public class GameManager : MonoBehaviour
         _gen.GenerateWorld();
     }
 
+    public World GetWorld()
+    {
+        return _gen.GetWorld();
+    }
+    public World.RoomData[] GetLevel()
+    {
+        World temp = _gen.GetWorld();
+        int indy = temp.completions;
+        if(temp.completions >= temp.levels.Length){
+            return temp.levels[indy];
+        }
+            else return null; //Add victory level.
+    }
+
 }

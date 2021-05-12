@@ -27,6 +27,15 @@ public class LevelGenerator : MonoBehaviour
 
     public SceneInjector sceneject;
 
+    public void Injection(InjectionDict ID)
+    {
+        GM = ID.Inject<GameManager>();
+        
+    }
+
+    private GameManager GM;
+    private TotalGenerator TG;
+
     private float minx;
     private float maxx;
     private float minz;
@@ -47,6 +56,15 @@ public class LevelGenerator : MonoBehaviour
         minz = min.z;
         maxz = max.z;
         centY = PlaneBounds.max.y + .1f; //Using max to stop the zfighting for now, hopefully
+
+        sceneject.SceneJect += Injection;
+        sceneject.FixedSceneLoad += StartLevel;
+    }
+
+
+    public void StartLevel()
+    {
+        ActivateLevel(GM.GetWorld().levels[0]);
     }
 
     public void ActivateLevel(World.RoomData[] inRooms)
@@ -58,12 +76,14 @@ public class LevelGenerator : MonoBehaviour
             float scalez = minz + roomy.zPerc*(maxz - minz);
             Vector3 ScaledPos = new Vector3(scalex,centY,scalez);
             
+            roomy.Room.transform.position = ScaledPos;
 
 
             roomy.Room.SetActive(true);
             RoomManager trom = roomy.Room.GetComponent<RoomManager>();
             trom.StartRoom(sceneject);
         }
+
         LevelPlane.SetActive(true);
         //Drop shadow.
     }

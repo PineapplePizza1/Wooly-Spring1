@@ -19,6 +19,8 @@ public class TotalGenerator : MonoBehaviour
 
     public bool randomizeSeed = true;
 
+    public int DefaultLives = 5;
+
     public int roomsPerLevel = 3;
     public int itemsPerRoom = 3;
     public int charsPerLoop = 3;
@@ -64,7 +66,7 @@ public class TotalGenerator : MonoBehaviour
     #region Chara Gen
     public GameObject[] CharaPrefabs;
 
-    private World genWorld;
+    public World genWorld;
     private float genProgress;
 
     private int totalCount;
@@ -117,6 +119,8 @@ public class TotalGenerator : MonoBehaviour
             Random.InitState(Seed);
 
             genWorld = new World(defaultLoops);
+            genWorld.lives = DefaultLives;
+
 
             currentCount = 0;
 
@@ -134,9 +138,32 @@ public class TotalGenerator : MonoBehaviour
 
     }
 
+    public World GetWorld()
+    {
+        if (genWorld != null) GenerateWorld();
+        return genWorld;
+    }
+
     public void WorldGenComplete()
     {
 
+    }
+    public void RunDelete()
+    {
+        StartCoroutine("DeleteWorld");
+    }
+    IEnumerator DeleteWorld()
+    {
+        foreach(World.RoomData[] jstep in genWorld.levels)
+        {
+            for(int i = 0; i<jstep.Length;i++)
+            {
+                Destroy(jstep[i].Room);
+                yield return null;
+            }
+        }
+
+        genWorld = null;
     }
 
    IEnumerator WorldGenProgress()
@@ -187,7 +214,8 @@ public class TotalGenerator : MonoBehaviour
             //tempLevel[i].itemList = GenerateItems();
             GenerateItems();
             genWorld.levels[j][i] = _tempy;
-                
+            //SetParent
+            genWorld.levels[j][i].Room.transform.SetParent(this.gameObject.transform);
 
 
             //Get room deets/bounds.
@@ -209,7 +237,7 @@ public class TotalGenerator : MonoBehaviour
 
                 Debug.Log("TotGen: Did a Level Check: " + roomChecks.Length);
 
-                /*
+                
                 foreach(Collider please in roomChecks)
                 {
                     if (please.gameObject != genWorld.levels[j][i].Room)
@@ -217,7 +245,7 @@ public class TotalGenerator : MonoBehaviour
                         yield return null;
                     }
                 }
-                */
+                
                 yield return null;
                 
             }while(roomChecks.Length >1);

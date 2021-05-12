@@ -53,6 +53,7 @@ public class World
     {
         levels = new RoomData[Worlds][];
         loopChars = new GameObject[Worlds][];
+        completions = 0;
     }
 
     

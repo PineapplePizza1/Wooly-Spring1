@@ -125,6 +125,8 @@ public class ThirdPersonMovement : MonoBehaviour
             
             //Anim: Speed
             pAnim.SetFloat("Speed", moveDir.magnitude/baseSpeed);
+            float statSpeed = pStats.GetSpeed(baseSpeed);
+            
             pAnim.SetFloat("Animation Speed", pStats.GetSpeed(baseSpeed)/baseSpeed);
         }
         else

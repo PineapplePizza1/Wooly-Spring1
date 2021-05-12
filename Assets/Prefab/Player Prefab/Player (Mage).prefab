@@ -2017,6 +2017,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneject: {fileID: 0}
   debugMode: 0
+  DebugMod: {fileID: 0}
+  DebugFX: {fileID: 0}
 --- !u!114 &8989208179551890342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2039,6 +2041,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   baseSpeed: 6
   sprintMod: 2
+  buffSpeed: 0
   gravity: -9.81
   jumpHeight: 3
   velocity: {x: 0, y: 0, z: 0}
@@ -2059,21 +2062,13 @@ MonoBehaviour:
   maxHealth: 80
   XP: 0
   lvl: 1
-  Strength:
-    StatType: Strength
-    Amt: 5
-  Dexterity:
-    StatType: Dexterity
-    Amt: 3
-  Intelligence:
-    StatType: Intelligence
-    Amt: 3
-  Constitution:
-    StatType: Constitution
-    Amt: 5
+  BaseStr: 3
+  BaseDex: 4
+  BaseInt: 3
+  BaseCon: 3
   _otherStats: []
   hitType: 2
-  modifiers: []
+  CurrentMods: []
   CurrentEffects: []
 --- !u!114 &5315187765056134195
 MonoBehaviour:

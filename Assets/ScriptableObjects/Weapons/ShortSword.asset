@@ -17,6 +17,6 @@ MonoBehaviour:
     m_Bits: 1024
   wepName: ShortSword
   cooldown: 4
-  WeaponDamage: 250
+  WeaponDamage: 25
   WeaponType: 2
   AttackRadius: 1

@@ -105,6 +105,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b47c00c-66be-435f-aabf-a6516b04b7cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -272,6 +280,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2a13ab8-50d8-4afe-8b94-669d1d665d88"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -417,6 +436,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_MovementMK_Utility = m_MovementMK.FindAction("Utility", throwIfNotFound: true);
         m_MovementMK_Ability = m_MovementMK.FindAction("Ability", throwIfNotFound: true);
         m_MovementMK_Interact = m_MovementMK.FindAction("Interact", throwIfNotFound: true);
+        m_MovementMK_Reset = m_MovementMK.FindAction("Reset", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_Quit = m_Debug.FindAction("Quit", throwIfNotFound: true);
@@ -484,6 +504,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_MovementMK_Utility;
     private readonly InputAction m_MovementMK_Ability;
     private readonly InputAction m_MovementMK_Interact;
+    private readonly InputAction m_MovementMK_Reset;
     public struct MovementMKActions
     {
         private @PlayerControls m_Wrapper;
@@ -499,6 +520,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Utility => m_Wrapper.m_MovementMK_Utility;
         public InputAction @Ability => m_Wrapper.m_MovementMK_Ability;
         public InputAction @Interact => m_Wrapper.m_MovementMK_Interact;
+        public InputAction @Reset => m_Wrapper.m_MovementMK_Reset;
         public InputActionMap Get() { return m_Wrapper.m_MovementMK; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -541,6 +563,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnInteract;
+                @Reset.started -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_MovementMKActionsCallbackInterface.OnReset;
             }
             m_Wrapper.m_MovementMKActionsCallbackInterface = instance;
             if (instance != null)
@@ -578,6 +603,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
             }
         }
     }
@@ -678,6 +706,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnUtility(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

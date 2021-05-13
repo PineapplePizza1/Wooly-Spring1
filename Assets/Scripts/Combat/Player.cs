@@ -85,8 +85,9 @@ private void Awake() {
         
         playerInput = new PlayerControls();
         //playerInput.Debug.DieBind.performed += _ => PlayerDeath();
-        //playerInput.Debug.DBGdmg.performed += _ => DebugModify();
+        playerInput.Debug.DBGdmg.performed += _ => DebugModify();
         playerInput.MovementMK.Interact.performed += _ => Interact();
+        playerInput.MovementMK.Reset.performed += ctx => Quit();
 
     //DEBUG: originally in  onenable, but the spawn method is a little odd to be sure.
         playerInput.Enable();
@@ -126,6 +127,16 @@ private void Awake() {
         playerMove.InitMovement(MainCam);
         playerstat.InitiateStats();
         //Start Loadout in Combat
+    }
+    void Quit()
+    {
+        
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+        
     }
 
     //DEBUG: Putting player interaction here for now, cuz I can't come up with anythign right now I'll split it later if needed

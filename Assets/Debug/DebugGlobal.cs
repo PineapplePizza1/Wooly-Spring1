@@ -10,7 +10,7 @@ public class DebugGlobal : MonoBehaviour
     void Awake()
     {
         playerInput = new PlayerControls();
-        playerInput.Debug.Quit.performed += ctx => DebugQuit();
+        playerInput.MovementMK.Reset.performed += ctx => DebugQuit();
     }
 
     
@@ -29,10 +29,16 @@ public class DebugGlobal : MonoBehaviour
     void DebugQuit()
     {
         PrintDebugString("DBG_G: Debug Quit");
-        Application.Quit();
+
+        
+
+        
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
         #endif
+        
     }
     
     public static void PrintDebugString(string val)

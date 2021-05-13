@@ -7,7 +7,7 @@ public class RoomManager : MonoBehaviour
    //Scene INjector
    [SerializeField] private SceneInjector sceneject;
    public ChallengeNeedle needle;
-   public List<BaseEnemy> enemies;
+   public List<EnemySpawner> enSpawns;
 
    //Bounding Collider
    public BoxCollider roomBox;
@@ -45,11 +45,10 @@ public class RoomManager : MonoBehaviour
 
         int tempCount = 0;
 
-        foreach(BaseEnemy _enem in enemies)
+        foreach(EnemySpawner _enem in enSpawns)
         {
-            _enem.AddInject(sceneject);
-            _enem.AttachManager(this);
-            //_enem.gameObject.SetActive(true);
+            _enem.SpawnEnemy(sceneject, this);
+            
             tempCount +=1;
             //remember to replace inject with requests.
         }

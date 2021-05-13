@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1910796150481953043
 Transform:
   m_ObjectHideFlags: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 1525598644620258980, guid: 1c5689a37733f254da90e0609031ae77,
     type: 3}
+  Gfx: {fileID: 377512872999724370}
 --- !u!1 &5860062623409869149
 GameObject:
   m_ObjectHideFlags: 0

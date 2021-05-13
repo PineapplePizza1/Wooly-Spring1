@@ -13900,10 +13900,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneject: {fileID: 0}
   needle: {fileID: 3955179290033144581}
-  eneSpawns:
-  - {fileID: 7632716986658415552}
-  - {fileID: 9160255303869328799}
-  - {fileID: 2563331024818810964}
+  enSpawns:
+  - {fileID: 9141461622879079409}
+  - {fileID: 7507473001584739758}
+  - {fileID: 3792843138303760485}
   roomBox: {fileID: 3634353014406639352}
 --- !u!65 &3634353014406639352
 BoxCollider:
@@ -14062,9 +14062,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9d56ffc627559b4c8103a49ada039d3, type: 3}
---- !u!114 &2563331024818810964 stripped
+--- !u!114 &3792843138303760485 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1849916340266107837, guid: b9d56ffc627559b4c8103a49ada039d3,
+  m_CorrespondingSourceObject: {fileID: 1052747600644483980, guid: b9d56ffc627559b4c8103a49ada039d3,
     type: 3}
   m_PrefabInstance: {fileID: 4197072142355969001}
   m_PrefabAsset: {fileID: 0}
@@ -14170,9 +14170,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7400534273813671458}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9160255303869328799 stripped
+--- !u!114 &7507473001584739758 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1849916340266107837, guid: b9d56ffc627559b4c8103a49ada039d3,
+  m_CorrespondingSourceObject: {fileID: 1052747600644483980, guid: b9d56ffc627559b4c8103a49ada039d3,
     type: 3}
   m_PrefabInstance: {fileID: 7400534273813671458}
   m_PrefabAsset: {fileID: 0}
@@ -14272,9 +14272,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8088714197256233085}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7632716986658415552 stripped
+--- !u!114 &9141461622879079409 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1849916340266107837, guid: b9d56ffc627559b4c8103a49ada039d3,
+  m_CorrespondingSourceObject: {fileID: 1052747600644483980, guid: b9d56ffc627559b4c8103a49ada039d3,
     type: 3}
   m_PrefabInstance: {fileID: 8088714197256233085}
   m_PrefabAsset: {fileID: 0}

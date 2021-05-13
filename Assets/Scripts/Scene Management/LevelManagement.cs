@@ -74,7 +74,6 @@ public class LevelManagement : MonoBehaviour
 
     public void LoadCharacter()
     {
-        Debug.Log("Goof???");
         if(!HubMode) nextChar = GM.nextChar;
 
         nextChar.SetActive(true);

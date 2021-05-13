@@ -86,9 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useStringSeed: 0
-  Seed: 1000
+  Seed: 69
   randomizeSeed: 0
-  DefaultLives: 5
   roomsPerLevel: 3
   itemsPerRoom: 3
   charsPerLoop: 3
@@ -97,7 +96,7 @@ MonoBehaviour:
   - {fileID: 2216193887753034690, guid: b66d83bc1ed400e49862d8c64b484018, type: 3}
   - {fileID: 1563211881350198413, guid: 8e257685e31a81041b760c22254ddc55, type: 3}
   - {fileID: 1694004981771672260, guid: d9e2561ca8a6a914095232d241c704cf, type: 3}
-  - {fileID: 3278348206184020479, guid: ec65b97c126cb224ca6f9ba4fe09b4fd, type: 3}
+  - {fileID: 1694004981771672260, guid: d9e2561ca8a6a914095232d241c704cf, type: 3}
   roomMask:
     serializedVersion: 2
     m_Bits: 4096
@@ -112,7 +111,6 @@ MonoBehaviour:
   - {fileID: 3819969658572891330, guid: b9ed8839bb63aea4dadaf64a5822fd2f, type: 3}
   - {fileID: 4819282097673912203, guid: c260e7f3a6592174892b2f078b0f6e3f, type: 3}
   - {fileID: 3819969658572891330, guid: bcdf88ec1525ae643bc2897b02f5aefd, type: 3}
-  - {fileID: 8989208179551890341, guid: 54b4620e963cd404daeb1fb6f4994795, type: 3}
   Generating: 0
 --- !u!114 &1396564262
 MonoBehaviour:
@@ -127,3 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GMtrack: {fileID: 5789433375371718115}
+  GameOverScene: 5
+  VictoryScene: 4
+  HubWorldScene: 2
+  nextChar: {fileID: 0}

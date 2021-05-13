@@ -82,7 +82,6 @@ public class TotalGenerator : MonoBehaviour
     void Awake()
     {
         Generating = false;
-        GenerateWorld();
     }
 
     //consistent generation also relies on a consistent order of requests, so will probably consolidate all generation to the same script :(

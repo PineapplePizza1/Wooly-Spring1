@@ -7,6 +7,8 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     //Scene manager, include
+    
+    public SceneInjector sceneInjector;
 
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject settingsPanel;
@@ -31,6 +33,12 @@ public class MainMenu : MonoBehaviour
     public void enableMM()
     {
         mainPanel.SetActive(true);
+    }
+
+    public void StartGen()
+    {
+        TotalGenerator gt = sceneInjector.Request<TotalGenerator>();
+        gt.GenerateWorld();
     }
 
 

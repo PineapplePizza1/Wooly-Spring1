@@ -61,6 +61,7 @@ public class LevelManagement : MonoBehaviour
         */
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
         sceneject.SceneJect += Injection;
@@ -68,9 +69,12 @@ public class LevelManagement : MonoBehaviour
         
 =======
 >>>>>>> parent of c254aa2... Finally, full instantiate!
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
     }
 
 
+<<<<<<< HEAD
     public void LoadCharacter()
     {
         Debug.Log("Goof???");
@@ -89,6 +93,8 @@ public class LevelManagement : MonoBehaviour
     }
     
 
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
     private void EndGame()
     {
         //Should load main menu

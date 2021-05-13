@@ -48,6 +48,7 @@ public class LevelGenerator : MonoBehaviour
         maxz = max.z;
         centY = PlaneBounds.max.y + .1f; //Using max to stop the zfighting for now, hopefully
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         sceneject.SceneJect += Injection;
         sceneject.FixedSceneLoad += StartLevel;
@@ -58,6 +59,8 @@ public class LevelGenerator : MonoBehaviour
     {
         int loops = GM.GetWorld().completions;
         ActivateLevel(GM.GetWorld().levels[loops]);
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
 =======
 >>>>>>> parent of c254aa2... Finally, full instantiate!
     }

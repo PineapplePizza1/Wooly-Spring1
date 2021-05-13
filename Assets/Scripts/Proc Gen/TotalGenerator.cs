@@ -143,6 +143,7 @@ public class TotalGenerator : MonoBehaviour
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public World GetWorld()
     {
         return genWorld;
@@ -150,10 +151,13 @@ public class TotalGenerator : MonoBehaviour
 
 =======
 >>>>>>> parent of c254aa2... Finally, full instantiate!
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
     public void WorldGenComplete()
     {
 
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void RunDelete()
     {
@@ -173,6 +177,8 @@ public class TotalGenerator : MonoBehaviour
 
         genWorld = null;
     }
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
 =======
 >>>>>>> parent of c254aa2... Finally, full instantiate!
 

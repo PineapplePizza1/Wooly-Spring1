@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public World GetWorld()
     {
         return _gen.GetWorld();
@@ -85,6 +86,8 @@ public class GameManager : MonoBehaviour
         
     }
 
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
 =======
 >>>>>>> parent of c254aa2... Finally, full instantiate!
 }

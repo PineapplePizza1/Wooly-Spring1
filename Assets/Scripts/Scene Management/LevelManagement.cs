@@ -12,6 +12,7 @@ using Cinemachine;
 public class LevelManagement : MonoBehaviour
 {
     [SerializeField]private SceneInjector sceneject;
+    public GameManager GM;
 
     public bool debugMode;
 
@@ -60,21 +61,17 @@ public class LevelManagement : MonoBehaviour
         play.InstantiatePlayer(sceneject, MainCam);
         */
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 
         sceneject.SceneJect += Injection;
         sceneject.FixedSceneLoad += LoadCharacter;
         
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
     }
 
+    public void Injection(InjectionDict id)
+    {
+        GM = id.Inject<GameManager>();
+    }
 
-<<<<<<< HEAD
     public void LoadCharacter()
     {
         Debug.Log("Goof???");
@@ -93,8 +90,6 @@ public class LevelManagement : MonoBehaviour
     }
     
 
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
     private void EndGame()
     {
         //Should load main menu

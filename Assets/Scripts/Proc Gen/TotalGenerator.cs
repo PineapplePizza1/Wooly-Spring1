@@ -64,7 +64,7 @@ public class TotalGenerator : MonoBehaviour
     #region Chara Gen
     public GameObject[] CharaPrefabs;
 
-    private World genWorld;
+    public World genWorld;
     private float genProgress;
 
     private int totalCount;
@@ -142,23 +142,17 @@ public class TotalGenerator : MonoBehaviour
 
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     public World GetWorld()
     {
         return genWorld;
     }
 
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
+
     public void WorldGenComplete()
     {
 
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     public void RunDelete()
     {
         StartCoroutine("DeleteWorld");
@@ -177,10 +171,6 @@ public class TotalGenerator : MonoBehaviour
 
         genWorld = null;
     }
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
 
    IEnumerator WorldGenProgress()
     {
@@ -218,7 +208,7 @@ public class TotalGenerator : MonoBehaviour
             }
             yield return null;
         }
-        
+        CharasDone = true;
     }
 
     IEnumerator GenerateLevel()
@@ -240,6 +230,8 @@ public class TotalGenerator : MonoBehaviour
             Quaternion rotato = Quaternion.Euler(Quaternion.identity.eulerAngles.x, Random.Range(0,360), Quaternion.identity.eulerAngles.z); 
             _tempy.Room = Instantiate(tempRoom, GenPos, rotato);//single time. Maybe instantiate far away? then jump. Farpoint, lol.
 
+
+
             //generate items.
             Modifier[] _items = new Modifier[itemsPerRoom];
 
@@ -252,6 +244,7 @@ public class TotalGenerator : MonoBehaviour
 
 
             genWorld.levels[j][i] = _tempy;
+            genWorld.levels[j][i].Room.transform.SetParent(this.gameObject.transform);
                 
 
 

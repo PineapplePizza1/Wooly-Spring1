@@ -26,6 +26,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject LevelPlane;
 
     public SceneInjector sceneject;
+    public GameManager GM;
 
     private float minx;
     private float maxx;
@@ -37,6 +38,11 @@ public class LevelGenerator : MonoBehaviour
     {
         return LevelPlane;
     }
+
+    public void Injection(InjectionDict ID)
+    {
+        GM = ID.Inject<GameManager>();
+    }
     private void Awake() {
 
         Bounds PlaneBounds = LevelPlane.GetComponent<Collider>().bounds;
@@ -47,8 +53,6 @@ public class LevelGenerator : MonoBehaviour
         minz = min.z;
         maxz = max.z;
         centY = PlaneBounds.max.y + .1f; //Using max to stop the zfighting for now, hopefully
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         sceneject.SceneJect += Injection;
         sceneject.FixedSceneLoad += StartLevel;
@@ -59,10 +63,6 @@ public class LevelGenerator : MonoBehaviour
     {
         int loops = GM.GetWorld().completions;
         ActivateLevel(GM.GetWorld().levels[loops]);
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
-=======
->>>>>>> parent of c254aa2... Finally, full instantiate!
     }
 
     public void ActivateLevel(World.RoomData[] inRooms)
@@ -75,7 +75,7 @@ public class LevelGenerator : MonoBehaviour
             Vector3 ScaledPos = new Vector3(scalex,centY,scalez);
             
 
-
+            roomy.Room.transform.position = ScaledPos;
             roomy.Room.SetActive(true);
             RoomManager trom = roomy.Room.GetComponent<RoomManager>();
             trom.StartRoom(sceneject);

@@ -219,11 +219,12 @@ private void Awake() {
     }
 
 */
-
+/*
     private void OnDisable() {
         playerInput.Disable();
         playerstat.onDeath -= PlayerDeath;
 
     }
+    */
     
 }

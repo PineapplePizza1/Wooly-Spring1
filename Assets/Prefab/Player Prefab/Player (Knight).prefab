@@ -1023,8 +1023,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneject: {fileID: 0}
   debugMode: 0
-  DebugMod: {fileID: 0}
-  DebugFX: {fileID: 0}
+  DebugMod: {fileID: 11400000, guid: f4caf928d3b44e94086b79490da72a2c, type: 2}
+  DebugFX: {fileID: 11400000, guid: faa43337c25b87143830071f03f31bdc, type: 2}
 --- !u!114 &3819969658572891329
 MonoBehaviour:
   m_ObjectHideFlags: 0

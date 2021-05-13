@@ -163,6 +163,7 @@ private void Awake() {
                     break;
                 case "Needle":
                     ChallengeNeedle cn = focus as ChallengeNeedle;
+                    Debug.Log("Player: Needlework:" + cn.name);
                     cn.UseNeedle(playerstat);
                     break;
             }

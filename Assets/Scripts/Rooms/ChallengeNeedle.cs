@@ -44,6 +44,7 @@ public class ChallengeNeedle : Interactable
             //Activate UI, only if needle complete.
             //let Room Manager track if 
             _inStats.AttachModifier(outMod);
+
             NeedleIncomplete();
         }
         

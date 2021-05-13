@@ -1191,6 +1191,7 @@ GameObject:
   - component: {fileID: 8290120801712828994}
   - component: {fileID: 6830523666810380928}
   - component: {fileID: 4860123225783104510}
+  - component: {fileID: 3648448256835594109}
   m_Layer: 0
   m_Name: Needle
   m_TagString: Untagged
@@ -1241,8 +1242,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298d812e32dacd847997e4a8f8bf0d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 3
   NeedleComplete: 0
+  ItemPrefabs:
+  - {fileID: 11400000, guid: 6f4be78a75ea09540b784c1b62c29e62, type: 2}
+  - {fileID: 11400000, guid: c2da3118dde62b14c8e033281071763e, type: 2}
+  - {fileID: 11400000, guid: f4caf928d3b44e94086b79490da72a2c, type: 2}
+  - {fileID: 11400000, guid: e435c3bdd3c482646b6f0a3c101e75cd, type: 2}
+  - {fileID: 11400000, guid: 0137bdee519badd48bfe2acc3fbfc29c, type: 2}
   NeedleFX: {fileID: 8985006066743516621}
+--- !u!65 &3648448256835594109
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235307971974555959}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.173306, y: 5.397209, z: 2.2371657}
+  m_Center: {x: 0, y: -0.6193123, z: 0}
 --- !u!1 &4896135773082963438
 GameObject:
   m_ObjectHideFlags: 0

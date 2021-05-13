@@ -59,7 +59,7 @@ public class TotalGenerator : MonoBehaviour
 
     #region Item Gen
 
-    public GameObject[] ItemPrefabs;
+    public Modifier[] ItemPrefabs;
     
     #endregion
 
@@ -84,6 +84,7 @@ public class TotalGenerator : MonoBehaviour
     void Awake()
     {
         Generating = false;
+        GenerateWorld();
     }
 
     //consistent generation also relies on a consistent order of requests, so will probably consolidate all generation to the same script :(
@@ -105,7 +106,7 @@ public class TotalGenerator : MonoBehaviour
         //So, instead of just space, make it full space box.
 
 
-
+    
 
    
 
@@ -116,6 +117,12 @@ public class TotalGenerator : MonoBehaviour
             Debug.Log("TotGen: I'm generatin over here!");
 
             Generating = true;
+
+            if (randomizeSeed)
+            {
+            Seed = Random.Range(100000, 1000000); //Six Digit Seed.
+            }
+
             Random.InitState(Seed);
 
             genWorld = new World(defaultLoops);
@@ -125,6 +132,7 @@ public class TotalGenerator : MonoBehaviour
             currentCount = 0;
 
             LevelsDone = false;
+            CharasDone = false;
             TotalGenDone = false;
 
             totalCount = (defaultLoops * roomsPerLevel) + (charsPerLoop);
@@ -140,7 +148,6 @@ public class TotalGenerator : MonoBehaviour
 
     public World GetWorld()
     {
-        if (genWorld != null) GenerateWorld();
         return genWorld;
     }
 
@@ -158,6 +165,7 @@ public class TotalGenerator : MonoBehaviour
         {
             for(int i = 0; i<jstep.Length;i++)
             {
+                Debug.Log("TotGen: Gen'd a Char");
                 Destroy(jstep[i].Room);
                 yield return null;
             }
@@ -170,7 +178,7 @@ public class TotalGenerator : MonoBehaviour
     {
         genProgress = currentCount/totalCount;
 
-        while (!LevelsDone)
+        while (!LevelsDone || !CharasDone)
         {
             yield return null;
             
@@ -187,8 +195,22 @@ public class TotalGenerator : MonoBehaviour
     }
     IEnumerator GenerateCharacter()
     {
-        //Debug.Log("TotGen: is this working?");
-        yield return null;
+        for(int l = 0; l<defaultLoops; l++)
+        {
+            genWorld.loopChars[l] = new GameObject[charsPerLoop];
+            for(int m = 0; m<charsPerLoop; m++)
+            {
+                Vector3 GenPos = new Vector3(-100, testY, -100);
+                GameObject tempChar = Instantiate(CharaPrefabs[Random.Range(0,CharaPrefabs.Length)], GenPos, Quaternion.identity);
+                tempChar.transform.SetParent(this.gameObject.transform);
+                genWorld.loopChars[l][m] = tempChar;
+                genWorld.loopChars[l][m].SetActive(false);
+
+                yield return null;
+            }
+            yield return null;
+        }
+        
     }
 
     IEnumerator GenerateLevel()
@@ -211,8 +233,16 @@ public class TotalGenerator : MonoBehaviour
             _tempy.Room = Instantiate(tempRoom, GenPos, rotato);//single time. Maybe instantiate far away? then jump. Farpoint, lol.
 
             //generate items.
-            //tempLevel[i].itemList = GenerateItems();
-            GenerateItems();
+            Modifier[] _items = new Modifier[itemsPerRoom];
+
+            for(int k = 0; k<_items.Length; k++)
+            {
+                _items[k] = Instantiate(ItemPrefabs[Random.Range(0, ItemPrefabs.Length)]);
+                yield return null;
+            }
+            genWorld.levels[j][i].itemlist = _items;
+
+
             genWorld.levels[j][i] = _tempy;
             //SetParent
             genWorld.levels[j][i].Room.transform.SetParent(this.gameObject.transform);
@@ -250,7 +280,7 @@ public class TotalGenerator : MonoBehaviour
                 
             }while(roomChecks.Length >1);
 
-            Debug.Log("TotGen: Confirmed a Level! at: " + randPos);
+            //Debug.Log("TotGen: Confirmed a Level! at: " + randPos);
             genWorld.levels[j][i].Room.transform.position = randPos;
             genWorld.levels[j][i].xPerc = randPos.x/xRange;
             genWorld.levels[j][i].zPerc = randPos.z/zRange;
@@ -268,6 +298,33 @@ public class TotalGenerator : MonoBehaviour
                 yield return null;
             }
             yield return null;
+        }
+
+        LevelsDone = true;
+
+    }
+
+public void unloadAll()
+{
+    StartCoroutine("DespawnAll");
+}
+    IEnumerator DespawnAll()
+    {
+        foreach(World.RoomData[] jstep in genWorld.levels)
+        {
+            for(int i = 0; i<jstep.Length;i++)
+            {
+                jstep[i].Room.SetActive(false);
+                yield return null;
+            }
+        }
+        foreach(GameObject[] kstep in genWorld.loopChars)
+        {
+            for(int i = 0; i<kstep.Length;i++)
+            {
+                kstep[i].SetActive(false);
+                yield return null;
+            }
         }
     }
 

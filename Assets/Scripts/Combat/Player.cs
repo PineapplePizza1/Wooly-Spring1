@@ -71,6 +71,7 @@ private void Awake() {
         playerMove = this.GetComponent<ThirdPersonMovement>();
         InstantiatePlayer(sceneject, playerMove.cam);
     }
+
 }
 
     public void InstantiatePlayer(SceneInjector passject, Transform incam)
@@ -91,8 +92,12 @@ private void Awake() {
         playerInput.Enable();
 
         //Injection
-        sceneject.SceneJect += Injection;
-        sceneject.FixedSceneLoad += PlayerStart;
+        //sceneject.SceneJect += Injection;
+        //sceneject.FixedSceneLoad += PlayerStart;
+        
+        LM = sceneject.Request<LevelManagement>();
+        pooler = sceneject.Request<Pooler>();
+        debugManager = sceneject.Request<DebugManager>();
 
         //DEBUG: input state set, just for now. Eventually, legitimate start.
             inputState = InputState.Move;
@@ -111,6 +116,7 @@ private void Awake() {
         playercomb = this.GetComponent<PlayerCombat>();
         playerload = this.GetComponent<PlayerLoadout>();
 
+        PlayerStart();
     }
 
     //Fixed Scene start to Player
@@ -144,11 +150,23 @@ private void Awake() {
         {
             focus = target;
             Debug.Log("PLY: I focused on " + focus.gameObject.name); //find a better way to do this. 
-            if (focus.tag == "Distaff")
+
+            switch(focus.tag)
             {
-                 DistaffInteractable dsf = focus as DistaffInteractable;
+                case "Distaff":
+                DistaffInteractable dsf = focus as DistaffInteractable;
                  dsf.ActivateStaff();
+                    break;
+                case "Spectral":
+                    SpectralDoor sp = focus as SpectralDoor;
+                    sp.CompleteLevel(playerstat);
+                    break;
+                case "Needle":
+                    ChallengeNeedle cn = focus as ChallengeNeedle;
+                    cn.UseNeedle(playerstat);
+                    break;
             }
+
         }
 
     }
@@ -190,6 +208,7 @@ private void Awake() {
         //Game over.
         LM.GameOver();
             //CAUTION: Where do I handle Lives? either this script, stats handler, or LevelMan. Probably Stats handler.
+            
     }
 
 

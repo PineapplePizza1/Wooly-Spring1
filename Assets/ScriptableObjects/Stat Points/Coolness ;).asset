@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb3da28ff453cb44d930ee5efee65f1c, type: 3}
-  m_Name: intAdd
+  m_Name: Coolness ;)
   m_EditorClassIdentifier: 
-  ModName: +1 Intelligence
+  ModName: +100 Coolness ;)
   icon: {fileID: 0}
   TargetStat:
-    StatType: INT
-    Amt: 1
+    StatType: Kewl
+    Amt: 100

@@ -88,7 +88,8 @@ MonoBehaviour:
   useStringSeed: 0
   Seed: 1000
   randomizeSeed: 0
-  roomsInWorld: 3
+  DefaultLives: 5
+  roomsPerLevel: 3
   itemsPerRoom: 3
   charsPerLoop: 3
   defaultLoops: 3
@@ -100,12 +101,19 @@ MonoBehaviour:
   roomMask:
     serializedVersion: 2
     m_Bits: 4096
-  ItemPrefabs: []
+  xRange: 200
+  zRange: 200
+  ItemPrefabs:
+  - {fileID: 11400000, guid: 6f4be78a75ea09540b784c1b62c29e62, type: 2}
+  - {fileID: 11400000, guid: f4caf928d3b44e94086b79490da72a2c, type: 2}
+  - {fileID: 11400000, guid: e435c3bdd3c482646b6f0a3c101e75cd, type: 2}
+  - {fileID: 11400000, guid: 0137bdee519badd48bfe2acc3fbfc29c, type: 2}
   CharaPrefabs:
   - {fileID: 3819969658572891330, guid: b9ed8839bb63aea4dadaf64a5822fd2f, type: 3}
   - {fileID: 4819282097673912203, guid: c260e7f3a6592174892b2f078b0f6e3f, type: 3}
   - {fileID: 3819969658572891330, guid: bcdf88ec1525ae643bc2897b02f5aefd, type: 3}
   - {fileID: 8989208179551890341, guid: 54b4620e963cd404daeb1fb6f4994795, type: 3}
+  Generating: 0
 --- !u!114 &1396564262
 MonoBehaviour:
   m_ObjectHideFlags: 0

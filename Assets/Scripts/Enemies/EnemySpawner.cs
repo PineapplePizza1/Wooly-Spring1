@@ -10,13 +10,13 @@ public class EnemySpawner : MonoBehaviour
     //in the future, take twists.
     public GameObject PrepEnemy(SceneInjector inject, RoomManager _in)
     {
-        
-        BaseEnemy EnScript = EnemyPrefab.GetComponent<BaseEnemy>();
+        GameObject nuMeat = Instantiate(EnemyPrefab, this.transform.position, this.transform.rotation);
+        BaseEnemy EnScript = nuMeat.GetComponent<BaseEnemy>();
 
         EnScript.AddInject(inject);
         EnScript.AttachManager(_in);
+        Debug.Log("EnemSpawn: Spawnered: " + nuMeat.name);
 
-        GameObject nuMeat = Instantiate(EnemyPrefab, this.transform.position, this.transform.rotation);
         nuMeat.transform.SetParent(_in.gameObject.transform);
 
         return nuMeat;

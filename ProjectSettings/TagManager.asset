@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Distaff
   - Enemy
+  - Spectral
+  - Needle
   layers:
   - Default
   - TransparentFX

@@ -64,7 +64,8 @@ public class LevelGenerator : MonoBehaviour
 
     public void StartLevel()
     {
-        ActivateLevel(GM.GetWorld().levels[0]);
+        int loops = GM.GetWorld().completions;
+        ActivateLevel(GM.GetWorld().levels[loops]);
     }
 
     public void ActivateLevel(World.RoomData[] inRooms)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3da28ff453cb44d930ee5efee65f1c, type: 3}
   m_Name: dexAdd
   m_EditorClassIdentifier: 
-  ModName: DexAdd
+  ModName: +1 Dexterity
   icon: {fileID: 0}
   TargetStat:
     StatType: DEX

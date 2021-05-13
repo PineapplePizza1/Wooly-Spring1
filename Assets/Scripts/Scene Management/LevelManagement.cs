@@ -12,14 +12,6 @@ using Cinemachine;
 public class LevelManagement : MonoBehaviour
 {
     [SerializeField]private SceneInjector sceneject;
-    private LevelGenerator levStart;
-    private GameManager GM;
-    public void Injection(InjectionDict ID)
-    {
-        levStart = ID.Inject<LevelGenerator>(); 
-        GM = ID.Inject<GameManager>();
-        
-    }
 
     public bool debugMode;
 
@@ -33,8 +25,6 @@ public class LevelManagement : MonoBehaviour
     public CinemachineFreeLook freeCam;
 
     public Transform MainCam;
-
-    
 
 
     #region Level Events
@@ -70,11 +60,14 @@ public class LevelManagement : MonoBehaviour
         play.InstantiatePlayer(sceneject, MainCam);
         */
         }
+<<<<<<< HEAD
 
 
         sceneject.SceneJect += Injection;
         sceneject.FixedSceneLoad += LoadCharacter;
         
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
     }
 
 
@@ -94,8 +87,6 @@ public class LevelManagement : MonoBehaviour
         Player play = nextChar.GetComponent<Player>();
         play.InstantiatePlayer(sceneject, MainCam);
     }
-    
-
     
 
     private void EndGame()

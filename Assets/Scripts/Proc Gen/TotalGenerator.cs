@@ -19,8 +19,6 @@ public class TotalGenerator : MonoBehaviour
 
     public bool randomizeSeed = true;
 
-    public int DefaultLives = 5;
-
     public int roomsPerLevel = 3;
     public int itemsPerRoom = 3;
     public int charsPerLoop = 3;
@@ -66,7 +64,7 @@ public class TotalGenerator : MonoBehaviour
     #region Chara Gen
     public GameObject[] CharaPrefabs;
 
-    public World genWorld;
+    private World genWorld;
     private float genProgress;
 
     private int totalCount;
@@ -126,8 +124,6 @@ public class TotalGenerator : MonoBehaviour
             Random.InitState(Seed);
 
             genWorld = new World(defaultLoops);
-            genWorld.lives = DefaultLives;
-
 
             currentCount = 0;
 
@@ -146,15 +142,19 @@ public class TotalGenerator : MonoBehaviour
 
     }
 
+<<<<<<< HEAD
     public World GetWorld()
     {
         return genWorld;
     }
 
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
     public void WorldGenComplete()
     {
 
     }
+<<<<<<< HEAD
     public void RunDelete()
     {
         StartCoroutine("DeleteWorld");
@@ -173,6 +173,8 @@ public class TotalGenerator : MonoBehaviour
 
         genWorld = null;
     }
+=======
+>>>>>>> parent of c254aa2... Finally, full instantiate!
 
    IEnumerator WorldGenProgress()
     {
@@ -244,8 +246,7 @@ public class TotalGenerator : MonoBehaviour
 
 
             genWorld.levels[j][i] = _tempy;
-            //SetParent
-            genWorld.levels[j][i].Room.transform.SetParent(this.gameObject.transform);
+                
 
 
             //Get room deets/bounds.
@@ -267,7 +268,7 @@ public class TotalGenerator : MonoBehaviour
 
                 Debug.Log("TotGen: Did a Level Check: " + roomChecks.Length);
 
-                
+                /*
                 foreach(Collider please in roomChecks)
                 {
                     if (please.gameObject != genWorld.levels[j][i].Room)
@@ -275,7 +276,7 @@ public class TotalGenerator : MonoBehaviour
                         yield return null;
                     }
                 }
-                
+                */
                 yield return null;
                 
             }while(roomChecks.Length >1);

@@ -83,6 +83,7 @@ public class BaseEnemy : MonoBehaviour
     public void AttachManager(RoomManager _in)
     {
         _roomManage = _in;
+        Debug.Log("BaseE: Room Manage: " + _roomManage.GetInstanceID());
     }
 
     private void EnemyDeath() //Enemy Defeat method
